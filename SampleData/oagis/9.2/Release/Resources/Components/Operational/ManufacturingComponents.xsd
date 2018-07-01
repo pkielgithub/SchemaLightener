@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Components/Operational/ManufacturingComponents.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Common/Components.xsd"/>
+        <xsd:element name="FinishedGoodItem" type="ManufacturingItemType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the finished good en item. In the case that the Item is raw material or sub-compoenent. This identifies the finished good that it is for. For example in case of Manufacturing an airplane and the compenents used must be tracked.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:group name="LotSizeGroup">
+                <xsd:sequence>
+                        <xsd:element ref="MaximumLotSizeQuantity" minOccurs="0"/>
+                        <xsd:element ref="MinimumLotSizeQuantity" minOccurs="0"/>
+                        <xsd:element ref="LotSizeMultipler" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:complexType name="ManufacturingItemBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemInstanceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Lot" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Type" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ExecutionTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="FixedQuantityIndicator" minOccurs="0"/>
+                                        <xsd:group ref="LotSizeGroup" minOccurs="0"/>
+                                        <xsd:element ref="LeadTimeDuration" minOccurs="0"/>
+                                        <xsd:element ref="RequiredPercent" minOccurs="0"/>
+                                        <xsd:choice>
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Idicates if the Item is reported theoretically (back-flushed) or if the ITEM is reported directly (actual)</xsd:documentation>
+                                                </xsd:annotation>
+                                                <xsd:element ref="BackFlushedIndicator" minOccurs="0"/>
+                                                <xsd:element ref="ActualIndicator" minOccurs="0"/>
+                                        </xsd:choice>
+                                        <xsd:element ref="TrackingIndicator" minOccurs="0"/>
+                                        <xsd:element ref="ScrapIndicator" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ManufacturingItemType">
+                <xsd:complexContent>
+                        <xsd:extension base="ManufacturingItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="ManufacturingItem" type="ManufacturingItemType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the manufacturing view of an Item where the complete detail of an Item is represented by the MasterItem.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:group name="OperationGroup">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Group of Operation elements that occur together in the Operation and QualifiedResource.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="BatchSizeQuantity" minOccurs="0"/>
+                        <xsd:element ref="PerishedInOperationQuantity" minOccurs="0"/>
+                        <xsd:element ref="PerishedBetweenOperationsQuantity" minOccurs="0"/>
+                        <xsd:element ref="TransferLotQuantity" minOccurs="0"/>
+                        <xsd:element ref="SetupTimeDuration" minOccurs="0"/>
+                        <xsd:element ref="WaitTimeDuration" minOccurs="0"/>
+                        <xsd:element ref="RunTimeDuration" minOccurs="0"/>
+                        <xsd:element ref="TearDownDuration" minOccurs="0"/>
+                        <xsd:element ref="BatchDuration" minOccurs="0"/>
+                        <xsd:element ref="QueueDuration" minOccurs="0"/>
+                        <xsd:element ref="MoveDuration" minOccurs="0"/>
+                        <xsd:element ref="FixedDuration" minOccurs="0"/>
+                        <xsd:element ref="RejectPercent" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:complexType name="OperationType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="BOMReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RouteReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Type" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is used to indicate how the rates are specified. </xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CostType" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the.methodology by which the value of an item is determined.
+
+Values are:
+Standard
+Moving Average
+LIFO - last in first out.
+FIFO - first in first out.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ContainerType" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the type of container used to place the items that result from the operation.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="DepartmentID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the department in which the operation is performed.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CostAmount" minOccurs="0"/>
+                                        <xsd:element ref="ProcessCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is a process code used for grouping like operations.
+Possible examples are:  Heat Treat, Dyeing</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="MachineSetupDependencyCodes" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether the machine can be setup for the operation early or whether setup must happen at a specific time depending upon conditions.
+
+Possible values:
+- Early	
+- NotDelayed	
+- DelayedByPredicessor
+- DelayedByMaterial</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="MaximumParallelTeamsFactor" minOccurs="0"/>
+                                        <xsd:element ref="FixedRejectQuantity" minOccurs="0"/>
+                                        <xsd:element ref="RejectedQuantity" minOccurs="0"/>
+                                        <xsd:group ref="OperationGroup" minOccurs="0"/>
+                                        <xsd:element ref="Site" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Location that the work is done.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="MultipleRunSaveTimeIndicator" minOccurs="0"/>
+                                        <xsd:element ref="TrackingIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether the operation should be tracked.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether the operation should be tracked.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="QualifiedResource" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Charge" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Step" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="QualifiedResourceType">
+                <xsd:sequence>
+                        <xsd:element ref="ResourceUseCode" minOccurs="0"/>
+                        <xsd:element ref="WorkCenterID" minOccurs="0"/>
+                        <xsd:group ref="OperationGroup" minOccurs="0"/>
+                        <xsd:element ref="CapacityPercent" minOccurs="0"/>
+                        <xsd:element ref="Duration" minOccurs="0"/>
+                        <xsd:element ref="EmployeesRequiredQuantity" minOccurs="0"/>
+                        <xsd:element ref="ToolsRequiredQuantity" minOccurs="0"/>
+                        <xsd:element ref="AllocatedResources" minOccurs="0"/>
+                        <xsd:element ref="ActualResources" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="StepType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Type" minOccurs="0"/>
+                                        <xsd:element ref="SequenceCode" minOccurs="0"/>
+                                        <xsd:element ref="Site" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DepartmentID" minOccurs="0"/>
+                                        <xsd:element ref="QualifiedResource" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Charge" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="Operation" type="OperationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that describes the operation to be performed. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Step" type="StepType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information specific to the steps specified to perform the operation.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="QualifiedResource" type="QualifiedResourceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that describes the resources to perform the specified resource usage for the operation and/or the step that is defined by the preceding Operation or Step.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ScheduleHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="RespondingScheduleReference" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="DateCode" minOccurs="0"/>
+                                        <xsd:element ref="ScheduleType" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ShipToParty" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ScheduleLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="LineType" minOccurs="0"/>
+                                        <xsd:element ref="RespondingScheduleReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ManufacturingItem" minOccurs="0"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="EngineeringChangeDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ActualDeliveryDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ReceivedDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ShipmentDateTime" minOccurs="0"/>
+                                        <xsd:element ref="LastShipmentDateTime" minOccurs="0"/>
+                                        <xsd:element ref="LastShipmentReceivedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="LastReceivingDateTime" minOccurs="0"/>
+                                        <xsd:element ref="DeliveredQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ItemQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ReceivedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ShippedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="AuthorizationID" minOccurs="0"/>
+                                        <xsd:element ref="CommodityClassification" minOccurs="0"/>
+                                        <xsd:element ref="LoadingLocation" minOccurs="0"/>
+                                        <xsd:element ref="HazardousMaterial" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="KanbanNumber" minOccurs="0"/>
+                                        <xsd:element ref="Packaging" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Represents the secondary packing code used to further identify the package of the product. Hmmm, where is the primary packing code?</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="PriorityCode" minOccurs="0"/>
+                                        <xsd:element ref="ProjectReference" minOccurs="0"/>
+                                        <xsd:element ref="LastDeliveryReference" minOccurs="0"/>
+                                        <xsd:element ref="LastShipmentReference" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ShipToParty" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ScheduleExceptionType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ActionCodes" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ExceptionCodes" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ReasonCode" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="ScheduleException" type="ScheduleExceptionType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Exception detail for Detail or Lline information.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RespondingScheduleReference" type="DocumentReferenceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the previously received plan schedule that this new schedule is responding to as a reference.  The typical scenario is a supplier uses a Sync PlanningSchedule or Sync ShipmentSchedule to respond to a customer demand schedule, and this will identify the customer demand schedule that this supplier previously received.  The date and time is also used in identifying the previously received plan schedule that the new plan schedule is responding to.  Note that the combination of document id, document date, and revision number can uniquely identify a plan schedule.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">DateType indicates whether the dates specified on the schedule are delivery based or shipment based.  Dates specified on the schedule include FromDateTime and ToDateTime at Header and Line levels.
+ScheduleType indicates whether the PlanningSchedule is a demand schedule from a customer or a supply schedule from a supplier.
+For the supplier schedule to respond to the original demand schedule, the RespondingScheduleReference is used to identify the customer's original demand schedule that it is responding to.
+</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ResourceType">
+                <xsd:complexContent>
+                        <xsd:extension base="ResourceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                                <xsd:attribute name="type" type="ResourceTypeCodeContentType"/>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ResourcesType">
+                <xsd:sequence>
+                        <xsd:element ref="Resource" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Tool" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Machine" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Labour" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ManufacturingItem" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="LabourType">
+                <xsd:complexContent>
+                        <xsd:extension base="ResourceBaseType">
+                                <xsd:sequence>
+                                        <xsd:group ref="EmployeeGroup" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="MachineBaseType" abstract="true">
+                <xsd:complexContent>
+                        <xsd:extension base="ResourceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="FixedAssetCode" minOccurs="0"/>
+                                        <xsd:element ref="Status" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="MachineType">
+                <xsd:complexContent>
+                        <xsd:extension base="MachineBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ToolBaseType" abstract="true">
+                <xsd:complexContent>
+                        <xsd:extension base="ResourceBaseType"/>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ToolType">
+                <xsd:complexContent>
+                        <xsd:extension base="ToolBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="Labour" type="LabourType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Labour needed for a given task.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Machine" type="MachineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Idenitifies a machine.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Tool" type="ToolType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the tool needed for a given task.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Resource" type="ResourceType"/>
+        <xsd:element name="Resources" type="ResourcesType"/>
+        <xsd:group name="ResourceAllocationGroup">
+                <xsd:sequence>
+                        <xsd:element ref="UnitCost" minOccurs="0"/>
+                        <xsd:element ref="RequiredQuantity" minOccurs="0"/>
+                        <xsd:element ref="RequiredDuration" minOccurs="0"/>
+                        <xsd:element ref="TotalCostAmount" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:complexType name="AllocationType">
+                <xsd:sequence>
+                        <xsd:element ref="Resource" minOccurs="0"/>
+                        <xsd:group ref="ResourceAllocationGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="InventoryAllocationType">
+                <xsd:sequence>
+                        <xsd:element ref="Item" minOccurs="0"/>
+                        <xsd:group ref="ResourceAllocationGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="LabourAllocationType">
+                <xsd:sequence>
+                        <xsd:element ref="Labour" minOccurs="0"/>
+                        <xsd:group ref="ResourceAllocationGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MachineAllocationType">
+                <xsd:sequence>
+                        <xsd:element ref="Machine" minOccurs="0"/>
+                        <xsd:group ref="ResourceAllocationGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="OperationAllocationType">
+                <xsd:sequence>
+                        <xsd:element ref="OperationReference" minOccurs="0"/>
+                        <xsd:group ref="ResourceAllocationGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ToolAllocationType">
+                <xsd:sequence>
+                        <xsd:element ref="Tool" minOccurs="0"/>
+                        <xsd:group ref="ResourceAllocationGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="Allocation" type="AllocationType"/>
+        <xsd:element name="InventoryAllocation" type="InventoryAllocationType"/>
+        <xsd:element name="LabourAllocation" type="LabourAllocationType"/>
+        <xsd:element name="MachineAllocation" type="MachineAllocationType"/>
+        <xsd:element name="OperationAllocation" type="OperationAllocationType"/>
+        <xsd:element name="ToolAllocation" type="ToolAllocationType"/>
+        <xsd:complexType name="AllocatedResourcesType">
+                <xsd:sequence>
+                        <xsd:element ref="Allocation" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="InventoryAllocation" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="LabourAllocation" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="MachineAllocation" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="OperationAllocation" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ToolAllocation" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="AllocatedResources" type="AllocatedResourcesType"/>
+        <xsd:element name="EstimatedResourceRequirements" type="AllocatedResourcesType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies resources that are required to perform the maintenance operation. Resource Requirements can be specified for the entire maintenance order or for each operation within the order</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:group name="ActualResourceGroup">
+                <xsd:sequence>
+                        <xsd:element ref="UnitCost" minOccurs="0"/>
+                        <xsd:element ref="Quantity" minOccurs="0"/>
+                        <xsd:element ref="TotalCostAmount" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:complexType name="ActualType">
+                <xsd:sequence>
+                        <xsd:element ref="Resource" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ActualResourceGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="InventoryActualType">
+                <xsd:sequence>
+                        <xsd:element ref="Item" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ActualResourceGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MachineActualType">
+                <xsd:sequence>
+                        <xsd:element ref="Machine" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ActualResourceGroup" minOccurs="0"/>
+                        <xsd:element ref="DownTimeDuration" minOccurs="0"/>
+                        <xsd:element ref="DownTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="OperationActualType">
+                <xsd:sequence>
+                        <xsd:element ref="OperationReference" minOccurs="0"/>
+                        <xsd:group ref="ActualResourceGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ToolActualType">
+                <xsd:sequence>
+                        <xsd:element ref="Tool" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ActualResourceGroup" minOccurs="0"/>
+                        <xsd:element ref="DownTimeDuration" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="Actual" type="ActualType"/>
+        <xsd:element name="InventoryActual" type="InventoryActualType"/>
+        <xsd:element name="MachineActual" type="MachineActualType"/>
+        <xsd:element name="OperationActual" type="OperationActualType"/>
+        <xsd:element name="ToolActual" type="ToolActualType"/>
+        <xsd:complexType name="ActualResources">
+                <xsd:sequence>
+                        <xsd:element ref="Actual" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="InventoryActual" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="LabourActual" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="MachineActual" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="OperationActual" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ToolActual" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="ActualResources" type="ActualResources"/>
+        <xsd:complexType name="WIPHeaderBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ReasonCode" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="WIPEventHeaderBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="WIPHeaderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ProductionOrderReference" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="WIPEventHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="WIPEventHeaderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="WIPDistributedEventHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="WIPEventHeaderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Distribution" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="MoveFromOperation" type="OperationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the Work-In-Process Operation in which the items are being moved from.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="MoveToOperation" type="OperationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the Work-In-Process Operation in which the items are being moved to.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="LabourActualType">
+                <xsd:sequence>
+                        <xsd:element ref="Labour" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ActualResourceGroup" minOccurs="0"/>
+                        <xsd:element ref="BreakTimeDuration" minOccurs="0"/>
+                        <xsd:element ref="WorkTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="LabourActual" type="LabourActualType"/>
+        <xsd:complexType name="SegmentResponseBaseType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="ParentID" minOccurs="0"/>
+                        <xsd:element ref="ProcessSegmentID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ProductSegmentID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ActualTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="RequiredByRequestedSegmentResponseCode" minOccurs="0"/>
+                        <xsd:element ref="ResponseStateCode" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="MaterialActual" type="ManufacturingMaterialType"/>
+        <xsd:element name="ManufacturingMaterial" type="ManufacturingMaterialType"/>
+        <xsd:complexType name="ManufacturingMaterialType">
+                <xsd:sequence>
+                        <xsd:element ref="Classification" minOccurs="0"/>
+                        <xsd:element ref="MaterialLotID" minOccurs="0"/>
+                        <xsd:element ref="MaterialSubLotID" minOccurs="0"/>
+                        <xsd:element name="MaterialUseCode" type="CodeType" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="RequiredByRequestedSegmentResponseCode" minOccurs="0"/>
+                        <xsd:element ref="InventoryActual" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="EquipmentType">
+                <xsd:sequence>
+                        <xsd:element ref="EquipmentClassID" minOccurs="0"/>
+                        <xsd:element ref="EquipmentID" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="RequiredByRequestedSegmentResponseCode" minOccurs="0"/>
+                        <xsd:choice>
+                                <xsd:element ref="MachineActual" minOccurs="0"/>
+                                <xsd:element ref="ToolActual" minOccurs="0"/>
+                        </xsd:choice>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="Equipment" type="EquipmentType"/>
+        <xsd:element name="SegmentResponse" type="SegmentResponseType"/>
+        <xsd:complexType name="SegmentResponseType">
+                <xsd:complexContent>
+                        <xsd:extension base="SegmentResponseBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ProductionData" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PersonnelActual" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EquipmentActual" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="MaterialActual" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="PersonnelActual" type="ManufacturingPersonnelType"/>
+        <xsd:complexType name="ProductionDataType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="ParentID" minOccurs="0"/>
+                        <xsd:element name="Value" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                        <xsd:complexContent>
+                                                <xsd:extension base="PropertyType">
+                                                        <xsd:sequence>
+                                                                <xsd:element ref="Key" minOccurs="0"/>
+                                                        </xsd:sequence>
+                                                </xsd:extension>
+                                        </xsd:complexContent>
+                                </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element ref="RequiredByRequestedSegmentResponseCode" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="ProductionData" type="ProductionDataType"/>
+        <xsd:element name="EquipmentActual" type="EquipmentType"/>
+        <xsd:complexType name="ManufacturingPersonnelType">
+                <xsd:sequence>
+                        <xsd:element ref="PersonnelClassID" minOccurs="0"/>
+                        <xsd:element ref="PersonID" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="Location" minOccurs="0"/>
+                        <xsd:element ref="RequiredByRequestedSegmentResponseCode" minOccurs="0"/>
+                        <xsd:element ref="LabourActual" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="ManufacturingPersonnel" type="ManufacturingPersonnelType"/>
+        <xsd:element name="DownTimePeriod" type="TimePeriodType"/>
+</xsd:schema>

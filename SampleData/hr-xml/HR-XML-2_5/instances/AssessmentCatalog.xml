@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssessmentCatalog xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentCatalog.xsd">
+  <ProviderId>
+    <IdValue>PSI_Example_Only</IdValue>
+  </ProviderId>
+  <CatalogQueryStatus>
+    <Status>Match Found</Status>
+    <Details>3 matching assessment packges found.</Details>
+  </CatalogQueryStatus>
+  <AssessmentPackage validFrom="2004-01-01" validTo="2006-01-01">
+    <PackageId>
+      <IdValue>EAS1</IdValue>
+    </PackageId>
+    <PackageGroupId>
+      <IdValue>EAS</IdValue>
+    </PackageGroupId>
+    <Name>Employee Aptitude Survey Test #1 - Verbal Comprehension</Name>
+    <Description><![CDATA[Employee Aptitude Survey Test #1 - Verbal Comprehension measures the ability to understand written words and the ideas associated with them. The test taker selects the synonym for a designated word from the four possibilities presented. This test is comprised of 30 multiple choice items and has a 5 minute time limit. It is designed to assess verbal ability. 
+
+Employee Aptitude Survey Test #1 - Verbal Comprehension, Employee Aptitude Survey, and EAS are copyrights and marks owned by Psychological Services Inc.
+]]></Description>
+    <AdministrationInfo>
+      <AdministrationNotes>Notes for administering the assessment</AdministrationNotes>
+      <IsProctored>true</IsProctored>
+      <TimeEnforcement>Complete</TimeEnforcement>
+      <EstimatedTime>10</EstimatedTime>
+      <AssessmentDelivery schedulingRequired="true">online</AssessmentDelivery>
+      <AssessmentDelivery schedulingRequired="true">telephone</AssessmentDelivery>
+    </AdministrationInfo>
+    <ResultInfo>
+      <ResultProfile>EAS1 Profile</ResultProfile>
+      <Description>Results for the EAS1</Description>
+      <ResultLanguage>en-US</ResultLanguage>
+    </ResultInfo>
+    <Applicability>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="2004-01-01" validTo="2004-01-01" idOwner="Vendor">
+          <IdValue name="A1">A1</IdValue>
+          <IdValue>A2</IdValue>
+        </CompetencyId>
+        <CompetencyName>Verbal Comprehension</CompetencyName>
+      </CompetencyAssessed>
+      <AssessmentLanguage>en-US</AssessmentLanguage>
+      <AssessmentLanguage>fr-CA</AssessmentLanguage>
+      <AssessmentLanguage>es-MX</AssessmentLanguage>
+      <ApplicableRegion>U.S.A.</ApplicableRegion>
+      <ApplicableRegion>Canada</ApplicableRegion>
+      <ApplicableRegion>Mexico</ApplicableRegion>
+      <AssessmentTarget>skills</AssessmentTarget>
+      <AssessmentJobCategory>Sales</AssessmentJobCategory>
+      <AssessmentJobLevel>Management</AssessmentJobLevel>
+    </Applicability>
+  </AssessmentPackage>
+  <AssessmentPackage validFrom="2004-01-01" validTo="2006-01-01">
+    <PackageId>
+      <IdValue>PET</IdValue>
+    </PackageId>
+    <Name>Professional Employment Test</Name>
+    <Description><![CDATA[The Professional Employment Test (PET) is designed to assess the cognitive abilities that are important for the successful performance of work behaviors in professional occupations. It is comprised of 40 multiple choice items with an 80 minute time limit. Questions on the PET focus upon data interpretation, reasoning, quantitative problem solving, and reading comprehension. The PET is intended for use in the selection of personnel for professional, administrative, and managerial occupations.
+
+Professional Employment Test (PET) is a copyright and mark owned by Psychological Services Inc.
+]]></Description>
+    <AdministrationInfo>
+      <AdministrationNotes>This is a time enforced assessment</AdministrationNotes>
+      <IsProctored>false</IsProctored>
+      <TimeEnforcement>Complete</TimeEnforcement>
+      <EstimatedTime>10</EstimatedTime>
+      <AssessmentDelivery schedulingRequired="false">online</AssessmentDelivery>
+      <AssessmentDelivery schedulingRequired="true">fax</AssessmentDelivery>
+    </AdministrationInfo>
+    <ResultInfo>
+      <ResultProfile>PET Profile 1</ResultProfile>
+      <Description>Results for the PET</Description>
+      <ResultLanguage>fr-FR</ResultLanguage>
+    </ResultInfo>
+    <Applicability>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="notKnown" validTo="2006-01-01">
+          <IdValue name="C1">C1</IdValue>
+          <IdValue name="C2">C2</IdValue>
+        </CompetencyId>
+        <ProficencyLevel>Medium</ProficencyLevel>
+        <CompetencyName>Verbal Comprehension</CompetencyName>
+      </CompetencyAssessed>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="2004-01-01" validTo="2006-01-01" idOwner="Vendor">
+          <IdValue>E1</IdValue>
+          <IdValue>E2</IdValue>
+        </CompetencyId>
+        <ProficencyLevel>High</ProficencyLevel>
+        <CompetencyName>Quantitative Problem Solving</CompetencyName>
+      </CompetencyAssessed>
+      <AssessmentLanguage>es-MX</AssessmentLanguage>
+      <ApplicableRegion>Mexico</ApplicableRegion>
+      <AssessmentTarget>skills</AssessmentTarget>
+      <AssessmentJobCategory>Professional</AssessmentJobCategory>
+      <AssessmentJobLevel>Senior</AssessmentJobLevel>
+    </Applicability>
+  </AssessmentPackage>
+  <AssessmentPackage validFrom="2004-01-01" validTo="2006-01-01">
+    <PackageId>
+      <IdValue>SureHire</IdValue>
+    </PackageId>
+    <Name>SureHire</Name>
+    <Description><![CDATA[ SureHire® is an instrument that is specifically designed to measure the competencies necessary for job success in a retail environment. Comprised of 50 multiple-choice items, it can be completed by most applicants in 25 minutes or less. SureHire® affords a broad understanding of potential employees by assessing both problem solving skills (such as making change and following written procedures) as well as attitudes toward work and customer service.
+
+SureHire® identifies job applicants' willingness to succeed, their ability to perform, and their key attitudes toward customers, co-workers, and supervisors. As a result, the SureHire® helps employers to identify high-quality, conscientious, and service-oriented employees. SureHire® is a copyright and mark owned by Psychological Services Inc.
+]]></Description>
+    <AdministrationInfo>
+      <AdministrationNotes>This assessment does not require a proctor.</AdministrationNotes>
+      <IsProctored>false</IsProctored>
+      <TimeEnforcement>Complete</TimeEnforcement>
+      <EstimatedTime>10</EstimatedTime>
+      <AssessmentDelivery schedulingRequired="true">online</AssessmentDelivery>
+      <AssessmentDelivery schedulingRequired="true">fax</AssessmentDelivery>
+    </AdministrationInfo>
+    <ResultInfo>
+      <ResultProfile>SureHire Result Profile</ResultProfile>
+      <ResultLanguage>fr-FR</ResultLanguage>
+    </ResultInfo>
+    <Applicability>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="notApplicable" validTo="notApplicable" idOwner="Vendor">
+          <IdValue name="F1">F1</IdValue>
+        </CompetencyId>
+        <CompetencyName>Problem Solving</CompetencyName>
+      </CompetencyAssessed>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="notApplicable" validTo="notApplicable" idOwner="Vendor">
+          <IdValue name="G1">G1</IdValue>
+        </CompetencyId>
+        <CompetencyName>Work Orientation</CompetencyName>
+      </CompetencyAssessed>
+      <AssessmentLanguage>en-US</AssessmentLanguage>
+      <ApplicableRegion>France</ApplicableRegion>
+      <ApplicableRegion>U.S.A.</ApplicableRegion>
+      <AssessmentTarget>skills</AssessmentTarget>
+      <AssessmentJobCategory>Retail</AssessmentJobCategory>
+      <AssessmentJobLevel>Hourly</AssessmentJobLevel>
+    </Applicability>
+  </AssessmentPackage>
+</AssessmentCatalog>

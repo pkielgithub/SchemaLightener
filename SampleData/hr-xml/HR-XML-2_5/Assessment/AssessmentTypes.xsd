@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Chuck Allen (HR-XML Consortium, Inc.) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ns.hr-xml.org/2007-04-15" targetNamespace="http://ns.hr-xml.org/2007-04-15" elementFormDefault="qualified" version="2007-04-15">
+	<xsd:annotation>
+		<xsd:documentation>
+"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org"
+Name: AssessmentStatus.xsd
+Status: Recommendation
+Date this version: 2007-04-15
+Author(s): Assessment  Work Group
+Documentation: Assessments.html
+
+Terms of license can be found in license.txt.
+
+</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../CPO/DateTimeDataTypes.xsd"/>
+	<xsd:include schemaLocation="../CPO/EntityIdType.xsd"/>
+	<xsd:include schemaLocation="../CPO/CompetencyTypes.xsd"/>
+	<xsd:include schemaLocation="../CPO/PersonName.xsd"/>
+	<xsd:include schemaLocation="../CPO/UserArea.xsd"/>
+	<xsd:include schemaLocation="../CPO/ContactMethod.xsd"/>
+	<xsd:include schemaLocation="../CPO/PersonDescriptors.xsd"/>
+	<xsd:complexType name="AssessmentStatusType">
+		<xsd:sequence>
+			<xsd:element name="Status">
+				<xsd:annotation>
+					<xsd:documentation>The name of the assessment status. It has to be chosen among the list of possible status</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="Pending"/>
+						<xsd:enumeration value="Error"/>
+						<xsd:enumeration value="Acknowledged"/>
+						<xsd:enumeration value="Scheduled"/>
+						<xsd:enumeration value="In Progress"/>
+						<xsd:enumeration value="Cancelled"/>
+						<xsd:enumeration value="Declined"/>
+						<xsd:enumeration value="Completed"/>
+						<xsd:enumeration value="x:Deferred"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Details" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A textual description that provides additional details</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="StatusDate" type="LocalDateNaType">
+				<xsd:annotation>
+					<xsd:documentation>The date the status last changed</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentRequestType">
+		<xsd:sequence>
+			<xsd:element name="ClientId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies a client for the 3rd party vendor (assessor). It is up to the vendor to provide the client its identifier.The client id is mandatory for all messages going from a customer to an assessment vendor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProviderId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies An assessment provider for the customer. It is up to the client to provide the provider its identifier.The provider id should be filled for all messages going from a customer to an assessment vendor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ClientOrderId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier, for the client, to identify the order.There can be multiple order id for one request (e.g. PO #, department)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier supplied by the assessment provider that will allow the client to know how to request updates</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentCompetencyReferenceType">
+		<xsd:complexContent>
+			<xsd:extension base="SpecifiedCompetencyReferenceType">
+				<xsd:sequence>
+					<xsd:element name="CompetencyName" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AdministrationInfoType">
+		<xsd:sequence>
+			<xsd:element name="AdministrationNotes" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Notes concerning the administration of this assessment package. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="IsProctored" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Indicates if the assessment package should be administered in a proctored environment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="TimeEnforcement">
+				<xsd:annotation>
+					<xsd:documentation>Indicates if all or part of the assessment package will enforce a time limit on its completion.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="None"/>
+						<xsd:enumeration value="Partial"/>
+						<xsd:enumeration value="Complete"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="EstimatedTime" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Estimated time to complete the assessment package, possibly for UI display to the subject.  String type for flexibiliy and to discourage use in enforcing timing.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentDelivery" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Identifies or describes how the assessment is delivered, what environment the assessment is occurring in</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="AssessmentDeliveryTypes">
+							<xsd:attribute name="schedulingRequired" type="xsd:boolean"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ResultInfoType">
+		<xsd:sequence>
+			<xsd:element name="ResultProfile" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Lists the AssessmentResult scoring profies generated for this assessment package.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Description of the Assessment Result Profile or specific Report available.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ResultLanguage" type="xsd:language" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The language in which reports on assessment results are available.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="validTo" type="xsd:date" use="optional"/>
+		<xsd:attribute name="validFrom" type="xsd:date" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="IsTimeEnforcedType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:boolean">
+				<xsd:attribute name="maxTimeAllowed" type="xsd:duration" use="optional"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="AssessmentDeliveryTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="online"/>
+			<xsd:enumeration value="telephone"/>
+			<xsd:enumeration value="mail"/>
+			<xsd:enumeration value="fax"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- Types for Assessment Package -->
+	<xsd:complexType name="AssessmentPackageType">
+		<xsd:annotation>
+			<xsd:documentation>AssessmentPackageType represents the broader data model for 
+an Assessment Package. This is used in AssessmentCatalog.xsd
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PackageId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>The assessment providers' unique identifier for a an assessment package.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PackageGroupId" type="EntityIdType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier for the group to which the package belongs. Groups of packages and any dependencies or relationships between them would be established by the assessment provider.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Name" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The name or title of the assessment package, possibly for UI display to aid selection.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A longer description of the assessment package, possibly for UI display to aid selection.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PricingInfo" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Estimated cost of assessment package levied by the assessment vendor.  String type for unit flexibility and to discourage use in monetary calculations.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AdministrationInfo" type="AdministrationInfoType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Elements about how the assessment is administered to a subject</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ResultInfo" type="ResultInfoType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Applicability" type="AssessmentApplicabilityType"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="validFrom" type="AnyDateTimeNkNaType" use="optional"/>
+		<xsd:attribute name="validTo" type="AnyDateTimeNkNaType" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentPackageReferenceType">
+		<xsd:annotation>
+			<xsd:documentation>AssessmentPackageReferenceType is an interoperable subset of the broader AssessmentPackageType.  The intention is for this type to adhere to the overall data model for an Assessment Package, but omit elements that would not be relevant in Schemas such as AssessmentContent.xsd  The intention is
+to reference the same AssessmentPackage object, but to only bring in the particular elements required by the context.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="PackageId" type="EntityIdType"/>
+			<xsd:element name="Name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="AdministrationInfo" type="AdministrationInfoType" minOccurs="0"/>
+			<xsd:element name="ResultInfo" type="ResultInfoType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentSubjectType">
+		<xsd:sequence>
+			<xsd:element name="SubjectId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>Customer subject's identifier</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="PersonName" minOccurs="0"/>
+			<xsd:element name="ContactMethod" type="ContactMethodType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AssessmentPersonDescriptors" type="AssessmentPersonDescriptorsType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentApplicabilityType">
+		<xsd:sequence>
+			<xsd:element name="CompetencyAssessed" type="AssessmentCompetencyReferenceType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>References the competencies the assessment assesses.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentLanguage" type="xsd:language" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The language in which the assessment is available.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ApplicableRegion" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Defines any geographic restrictions to the use of this assessment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentTarget" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Identifies or describes what the assessment is intended to target. For example, knowledge, skills, psychometrics, etc. This would usually be a high-level description. Speciific competencies could be specified within CompetencyAssessed.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentJobCategory" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Identifies or describes the job family to which the assessment is related or is designed to assess.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentJobLevel" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Identifies or describes the job level to which the assessment is related or is designed to assess.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentPersonDescriptorsType">
+		<xsd:sequence>
+			<xsd:element name="LegalIdentifiers" type="AssessmentLegalIdentifiersType" minOccurs="0"/>
+			<xsd:element name="DemographicDescriptors" type="AssessmentDemographicDescriptorsType" minOccurs="0"/>
+			<xsd:element name="BiologicalDescriptors" type="AssessmentBiologicalDescriptorsType" minOccurs="0"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentLegalIdentifiersType">
+		<xsd:sequence>
+			<xsd:element name="PersonLegalId" type="PersonLegalIdType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MilitaryStatus" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="type" type="xsd:string"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentDemographicDescriptorsType">
+		<xsd:sequence>
+			<xsd:element name="Race" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Ethnicity" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="Nationality" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PrimaryLanguage" type="LanguageCodeType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentBiologicalDescriptorsType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="DateOfBirth" type="xsd:date" minOccurs="0"/>
+				<!-- was LocalDateNkNaType -->
+				<xsd:element name="MonthDayOfBirth" type="xsd:gMonthDay" minOccurs="0"/>
+				<!-- made into xsd type -->
+			</xsd:choice>
+			<xsd:element name="Age" minOccurs="0">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="AgeNumeric" type="xsd:nonNegativeInteger"/>
+						<xsd:element name="AgeBand"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GenderCode" type="GenderCodeType" minOccurs="0"/>
+			<xsd:element name="DisabilityInfo" type="DisabilityInfoType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

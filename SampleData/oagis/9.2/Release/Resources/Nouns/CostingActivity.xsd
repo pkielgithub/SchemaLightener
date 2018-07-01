@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/CostingActivity.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="CostingActivity" type="CostingActivityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">For Dual Cycle accounting applications, ACTIVITY is used to communicate the details of the activities in the Manufacturing Application that caused the entries in the Journal</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SourceActivity" type="SourceActivityType"/>
+        <xsd:element name="ActualActivity" type="ActualActivityType"/>
+        <xsd:complexType name="CostingActivityType">
+                <xsd:sequence>
+                        <xsd:element ref="GLEntityID" minOccurs="0"/>
+                        <xsd:element ref="DocumentDateTime" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">DateTime stamp in which this document recording the activity was created.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="LastModificationDateTime" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date and time the document was last modified. This is not the date and time that the BOD message was sent.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ActivityDateTime" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the date the activity was recorded</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="SourceActivity" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="SourceActivityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Type describes the type of activity produced by a cost center in an operation and indicates whether an activity is measured in time or quantity. Current possible values are:Time, Quantity</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="CostCenterID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">An accumulator of cost information that may be an organizational unit or area of responsibility.  It is an organization code that allows a grouping of expenses and costs.SYNONYMS:	Stocking Location,	Work Group</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ProfitCenterID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Accumulator of revenue information that may be an organizational unit or area of responsibility.  A profit center can be used for internal management control.  Profit centers can calculate operating profit using the cost-of-sales accounting and/or period accounting methods.SYNONYMS:	Sales Region</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ProjectReference" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies a set of tasks with the following attributes: a singular purpose, a start and end date, those that accumulate costs, and those that may have materials and overhead.SYNONYMS: Job, Process Model, 	Program,	Work Breakdown Structure (WBS) element</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="Item" minOccurs="0"/>
+                        <xsd:element ref="SalesOrderReference" minOccurs="0"/>
+                        <xsd:element ref="ActualActivity" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="NormalizedStringType"/>
+        </xsd:complexType>
+        <xsd:complexType name="ActualActivityType">
+                <xsd:sequence>
+                        <xsd:element ref="CostCenterID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">An accumulator of cost information that may be an organizational unit or area of responsibility.  It is an organization code that allows a grouping of expenses and costs.SYNONYMS:	Stocking Location,	Work Group</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ProfitCenterID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Accumulator of revenue information that may be an organizational unit or area of responsibility.  A profit center can be used for internal management control.  Profit centers can calculate operating profit using the cost-of-sales accounting and/or period accounting methods.SYNONYMS:	Sales Region</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="ProjectReference" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies a set of tasks with the following attributes: a singular purpose, a start and end date, those that accumulate costs, and those that may have materials and overhead.SYNONYMS: Job, Process Model, 	Program,	Work Breakdown Structure (WBS) element</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="Item" minOccurs="0"/>
+                        <xsd:element ref="Quantity" minOccurs="0"/>
+                        <xsd:element ref="SalesOrderReference" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

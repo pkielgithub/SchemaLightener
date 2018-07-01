@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd"/>
+  <xsd:element name="CostSupportCreditResponse" type="CostSupportCreditResponseType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description/>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditResponseType">
+    <xsd:sequence>
+      <xsd:element ref="Header"/>
+      <xsd:element ref="CostSupportCreditResponseBody"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" type="cidxToken" use="required" fixed="4.0"/>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditResponseBody" type="CostSupportCreditResponseBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandard Body Structure. Contains the message-specific metadata in up-to three sections: Properties, Partners, and Details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditResponseBodyType">
+    <xsd:sequence>
+      <xsd:element ref="CostSupportCreditResponseProperties"/>
+      <xsd:element ref="CostSupportCreditResponsePartners"/>
+      <xsd:element ref="CostSupportCreditResponseDetails"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditResponseDetails" type="CostSupportCreditResponseDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Details Structure. It contains the remainder of the message data which was not covered under "Properties" (the message 'metadata' or common data) and "Partners" (the information about the parties involved).</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditResponseDetailsType">
+    <xsd:sequence>
+      <xsd:element ref="CreditResponseStatusInformation"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditResponsePartners" type="CostSupportCreditResponsePartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Partners Structure. It contains the information about the parties involved in the data exchange.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditResponsePartnersType">
+    <xsd:sequence>
+      <xsd:element ref="Distributor"/>
+      <xsd:element ref="SoldBy"/>
+      <xsd:element ref="Supplier"/>
+      <xsd:element ref="SoldTo"/>
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditResponseProperties" type="CostSupportCreditResponsePropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Properties Structure. It contains the message 'metadata' or common data.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditResponsePropertiesType">
+    <xsd:sequence>
+      <xsd:element ref="CostSupportAgreementNumber"/>
+      <xsd:element ref="RequestForCreditReferenceNumber"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CreditRequestApprovalNumber" type="CreditRequestApprovalNumberType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Unique number or identifier for approval of a Request for Credit in a Supplier system.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CreditRequestApprovalNumberType">
+    <xsd:sequence>
+      <xsd:element ref="DocumentIdentifier"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CreditResponseStatusInformation" type="CreditResponseStatusInformationType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The acceptance or rejection status of a cost support credit request.</Description>
+          <Comments>There is an existing Status Information structure that could be used for this. It would have to be expanded to include a date time and the sematics describing how to interpret it would have to be included.</Comments>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CreditResponseStatusInformationType">
+    <xsd:sequence>
+      <xsd:element ref="Status"/>
+      <xsd:element ref="ResponseIssuedDate" minOccurs="0"/>
+      <xsd:element ref="CreditRequestApprovalNumber" minOccurs="0"/>
+      <xsd:element ref="StatusReason" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ResponseIssuedDate" type="ResponseIssuedDateType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Date upon which a response was created or deemed to have been issued.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ResponseIssuedDateType">
+    <xsd:sequence>
+      <xsd:element ref="DateTime"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

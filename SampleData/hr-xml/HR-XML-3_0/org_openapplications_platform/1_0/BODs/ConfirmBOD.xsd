@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+
+
+
+   Schema agency: 	Open Applications Group 
+
+
+   OAGIS® Revision:    9.3  
+   Date:               11 August 2008 
+   Copyright 1997-2008, All Rights Reserved 
+
+  	
+   Copyright (C) Open Applications Group (1997-2008). All Rights Reserved.
+  
+  
+   This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+   License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+   For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+   XML Schema 
+     
+    Name: /OAGi-BPI-Platform/org_openapplications_platform/1_0/BODs/ConfirmBOD.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Nouns/BOD.xsd"/>
+        <xsd:element name="ConfirmBOD" type="ConfirmBODType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The ConfirmBOD may be returned for a given BOD, depending upon the value that the sender of the BOD set in the Confirmation field in sender. One NounOutcome component will be provided for each Noun Instance in the original BOD. Summary BOD-level information is reported in the Header, with noun-specific errors or warnings reported for each noun instance are reported in the NounOutcome component again one per occurance of the Noun Instance.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ConfirmBODType">
+                <xsd:complexContent>
+                        <xsd:extension base="BusinessObjectDocumentType">
+                                <xsd:sequence>
+                                        <xsd:element name="DataArea" type="ConfirmBODDataAreaType">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is where the information that the BOD message carries is provided, in this case ConfirmBOD. The information consists of a Verb and one or more Nouns. The verb (Confirm) indicates the action to be performed on the Noun (BOD).</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ConfirmBODDataAreaType">
+                <xsd:sequence>
+                        <xsd:element ref="Confirm"/>
+                        <xsd:element ref="BOD" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

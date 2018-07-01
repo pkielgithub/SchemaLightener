@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Chuck Allen (HR-XML Consortium, Inc.) -->
+<xsd:schema xmlns="http://www.hr-xml.org/3" xmlns:udt="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ccts="urn:un:unece:uncefact:documentation:1.1" xmlns:qdt="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" targetNamespace="http://www.hr-xml.org/3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hrxmlconsortium.org"
+Name: 
+Status: Draft
+Date this version: 
+Purpose: 
+Author(s): 
+Prior Version Documentation:  
+Terms of license can be found in license.txt.
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/QualifiedDataTypes.xsd"/>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/UnqualifiedDataTypes.xsd"/>
+	<xsd:include schemaLocation="../Common/Fields.xsd"/>
+	<xsd:element name="HRSystemActorCatalogue" type="HRSystemActorCatalogueType"/>
+	<xsd:complexType name="HRSystemActorCatalogueType">
+		<xsd:sequence>
+			<xsd:element ref="HRSystemActorCategory" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="EffectiveDateAttributeGroup"/>
+	</xsd:complexType>
+	<xsd:element name="HRSystemActorCategory" type="HRSystemActorCategoryType"/>
+	<xsd:complexType name="HRSystemActorCategoryType">
+		<xsd:complexContent>
+			<xsd:extension base="HRCategoryType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="HREventCatalogue" type="HREventCatalogueType"/>
+	<xsd:complexType name="HREventCatalogueType">
+		<xsd:sequence>
+			<xsd:element ref="HREventCategory" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="EffectiveDateAttributeGroup"/>
+	</xsd:complexType>
+	<xsd:element name="HREventCategory" type="HREventCategoryType"/>
+	<xsd:complexType name="HREventCategoryType">
+		<xsd:complexContent>
+			<xsd:extension base="HRCategoryType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="HRXMLNounCatalogue" type="HRXMLNounCatalogueType"/>
+	<xsd:complexType name="HRXMLNounCatalogueType">
+		<xsd:sequence>
+			<xsd:element ref="Noun" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Noun" type="NounType"/>
+	<xsd:complexType name="NounType">
+		<xsd:complexContent>
+			<xsd:extension base="HRCategoryType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="HRCategoryType">
+		<xsd:sequence>
+			<xsd:element ref="ID" minOccurs="0"/>
+			<xsd:element ref="ParentGroupID" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="Name" minOccurs="0"/>
+			<xsd:element ref="Description" minOccurs="0"/>
+			<xsd:element ref="TypeCode" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="EffectiveDateAttributeGroup"/>
+	</xsd:complexType>
+	<xsd:element name="HRXMLPackageCatalogue" type="HRXMLPackageCatalogueType"/>
+	<xsd:complexType name="HRXMLPackageCatalogueType">
+		<xsd:sequence>
+			<xsd:element name="HRPackage" type="HRPackageType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="HRPackageType">
+		<xsd:sequence>
+			<xsd:element ref="ID" minOccurs="0"/>
+			<xsd:element ref="Name" minOccurs="0"/>
+			<xsd:element ref="Description" minOccurs="0"/>
+			<xsd:element name="Diagram" type="xsd:normalizedString" minOccurs="0"/>
+			<xsd:element name="BOD" type="xsd:normalizedString" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="Related" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RelatedType">
+		<xsd:sequence>
+			<xsd:element ref="Name" minOccurs="0"/>
+			<xsd:element ref="URI" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Related" type="RelatedType"/>
+</xsd:schema>

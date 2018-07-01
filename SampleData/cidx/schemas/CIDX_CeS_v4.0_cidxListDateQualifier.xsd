@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="cidxListDateQualifier">
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="After" />
+      <xsd:enumeration value="Before" />
+      <xsd:enumeration value="On" />
+      <xsd:enumeration value="OnOrAfter" />
+      <xsd:enumeration value="OnOrBefore" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

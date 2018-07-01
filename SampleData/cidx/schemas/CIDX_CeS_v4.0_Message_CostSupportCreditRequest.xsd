@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd"/>
+  <xsd:element name="CostSupportCreditRequest" type="CostSupportCreditRequestType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description/>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditRequestType">
+    <xsd:sequence>
+      <xsd:element ref="Header"/>
+      <xsd:element ref="CostSupportCreditRequestBody"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" type="cidxToken" use="required" fixed="4.0"/>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditRequestBody" type="CostSupportCreditRequestBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandard Body Structure. Contains the message-specific metadata in up-to three sections: Properties, Partners, and Details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditRequestBodyType">
+    <xsd:sequence>
+      <xsd:element ref="CostSupportCreditRequestProperties"/>
+      <xsd:element ref="CostSupportCreditRequestPartners"/>
+      <xsd:element ref="CostSupportCreditRequestDetails"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditRequestDetails" type="CostSupportCreditRequestDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Details Structure. It contains the remainder of the message data which was not covered under "Properties" (which is the message 'meta-data' or 'common data') and "Partners" (which is the information about the parties involved).</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditRequestDetailsType">
+    <xsd:sequence>
+      <xsd:element ref="ProductIdentification" maxOccurs="unbounded"/>
+      <xsd:element ref="SupportedSales" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditRequestPartners" type="CostSupportCreditRequestPartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Partners Structure. It contains the information about the parties involved in the data exchange.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditRequestPartnersType">
+    <xsd:sequence>
+      <xsd:element ref="Distributor"/>
+      <xsd:element ref="SoldBy"/>
+      <xsd:element ref="Supplier"/>
+      <xsd:element ref="SoldTo"/>
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportCreditRequestProperties" type="CostSupportCreditRequestPropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Properties Structure. It contains the message 'meta-data' or 'common data'.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportCreditRequestPropertiesType">
+    <xsd:sequence>
+      <xsd:element ref="CostSupportAgreementNumber"/>
+      <xsd:element ref="RequestForCreditReferenceNumber"/>
+      <xsd:element ref="RequestIssuedDate"/>
+      <xsd:element ref="TotalCreditRequested"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportPerUnit" type="CostSupportPerUnitType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The approved cost support per unit.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportPerUnitType">
+    <xsd:sequence>
+      <xsd:element ref="MonetaryAmount"/>
+      <xsd:element ref="PriceBasis"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="NetDistributorCost" type="NetDistributorCostType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Structure that defines the distributor's net cost for the product.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="NetDistributorCostType">
+    <xsd:sequence>
+      <xsd:element ref="Pricing"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SupportedSales" type="SupportedSalesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Structure that defines sales to a customer that qualify for cost support.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="SupportedSalesType">
+    <xsd:sequence>
+      <xsd:element ref="LineNumber" minOccurs="0"/>
+      <xsd:element ref="InvoiceNumber"/>
+      <xsd:element ref="ShipDate"/>
+      <xsd:element ref="ProductQuantity"/>
+      <xsd:element ref="SupportedSellingPrice"/>
+      <xsd:element ref="NetDistributorCost" minOccurs="0"/>
+      <xsd:element ref="CostSupportPerUnit"/>
+      <xsd:element ref="LineItemTotal"/>
+      <xsd:element ref="PurchaseOrderNumber" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="SupportedSellingPrice" type="SupportedSellingPriceType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The selling price as agreed upon in the cost support request, but is not inclusive of other upcharges for things such as services rendered by the distributor.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="SupportedSellingPriceType">
+    <xsd:sequence>
+      <xsd:element ref="Pricing"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="TotalCreditRequested" type="TotalCreditRequestedType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Structure that defines the total amount of credit requested. Expression of the MonetaryValue amount contains two decimal places.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="TotalCreditRequestedType">
+    <xsd:sequence>
+      <xsd:element ref="MonetaryAmount"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

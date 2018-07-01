@@ -1,0 +1,183 @@
+<project name="TranformXml" default="TransformAll">
+	<target name="temp">
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentResult.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentResult.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+	</target>
+	<target name="TransformAll" depends="xslt2-cidx40"/>
+	<target name="xslt2-cidx40" depends="xslt2-hrxml25">
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_AcceptanceNotification.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_AcceptanceNotification.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_AcceptanceNotification.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_AcceptanceNotification.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CarrierWeights.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CarrierWeights.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CertificateOfAnalysis.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CertificateOfAnalysis.xsd"/> 
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportCreditRequest.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportCreditRequest.xsd"/> 
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportCreditResponse.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportCreditResponse.xsd"/> 
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportRequest.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportRequest.xsd"/> 
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportRequestChange.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportRequestChange.xsd"/> 
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportResponse.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CostSupportResponse.xsd"/> 
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CustomerSpecificCatalogUpdate.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_CustomerSpecificCatalogUpdate.xsd"/> 
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+		<xslt in="../SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_DeliveryReceipt.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/cidx/Schemas/CIDX_CeS_v4.0_Message_DeliveryReceipt.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-cidx40/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+	</target>
+	<target name="xslt2-hrxml25" depends="xslt2-oag92">
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentCancelRequest.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentCancelRequest.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentCatalog.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentCatalog.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentCatalogQuery.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentCatalogQuery.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentOrderAcknowledgement.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentOrderAcknowledgement.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentOrderRequest.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentOrderRequest.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentResult.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentResult.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentStatusRequest.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/hr-xml/HR-XML-2_5/Assessment/AssessmentStatusRequest.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-hrxml25/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+	</target>
+	<target name="xslt2-oag92" depends="xslt2-star514">
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeAllocateResource.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeAllocateResource.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeConfirmWIP.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeConfirmWIP.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCostingActivity.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCostingActivity.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCredit.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCredit.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCreditStatus.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCreditStatus.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCreditTransfer.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCreditTransfer.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCreditTransferIST.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeCreditTransferIST.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeDebitTransfer.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeDebitTransfer.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeDebitTransferIST.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeDebitTransferIST.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeDispatchList.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/oagis/9.2/Release/BODs/Developer/AcknowledgeDispatchList.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-oag92/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		
+	</target>
+	<target name="xslt2-star514">
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeCreditApplication.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeCreditApplication.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeCreditContractResponse.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeCreditContractResponse.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeCreditDecision.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeCreditDecision.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeFinancialStatement.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeFinancialStatement.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeLaborOperations.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgeLaborOperations.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsActivity.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsActivity.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsInventory.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsInventory.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsInvoice.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsInvoice.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsMaster.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsMaster.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+		<xslt in="../SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsOrder.xsd" out="log.txt" style="../SchemaFlattener.xslt" force="true"><classpath location="saxon9.jar"/>
+			<param name="sourcePathAndFileName" expression="SampleData/STAR/Rev5.1.4/BODs/Developer/AcknowledgePartsOrder.xsd"/>
+			<param name="resultBasePath" expression="results/temp-flatten-star514/"/><factory name="net.sf.saxon.TransformerFactoryImpl"/>
+		</xslt>
+	</target>
+	
+</project>

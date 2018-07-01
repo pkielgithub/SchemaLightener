@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: AcknowledgeAssessmentCatalog.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentCatalog.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="AcknowledgeAssessmentCatalog" type="AcknowledgeAssessmentCatalogType"/> 
+       	<xsd:complexType name="AcknowledgeAssessmentCatalogType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       AcknowledgeAssessmentCatalog conveys the result of a ProcessAssessmentCatalog request. 
+
+       AssessmentCatalog  Contains a set of information about assessment services or tests available to a customer. Enables the discovery of &quot;Package IDs&quot; which are necessary to place an order using HR-XML's assessment order specification. A &quot;Package&quot; may consist of one or more assessment instruments. An &quot;assessment package&quot; is the marketable unit of assessment or testing services that may be ordered. 
+
+       Acknowledge is a "Response Verb". Response Expressions represent and communicate actions taken by the receiver. 
+       XPath is the default expression language. The actionCode attribute (Accepted, Modified, Rejected  
+       specifies the action taken by the receiver. ChangeStatus allows detailed change and state information to be returned.
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="AcknowledgeAssessmentCatalogDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances. </xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="AcknowledgeAssessmentCatalogDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Acknowledge"/> 
+       			<xsd:element ref="AssessmentCatalog" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

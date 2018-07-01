@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd" />
+  <xsd:element name="DemandPlan" type="DemandPlanType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description />
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandPlanType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="Header" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandPlanBody" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+    <xsd:attribute name="Version" use="required" type="cidxToken" fixed="4.0" />
+  </xsd:complexType>
+  <xsd:element name="DemandPlanBody" type="DemandPlanBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>High level element containing demand plan properties, partners, and details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandPlanBodyType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="DemandPlanProperties" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandPlanPartners" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandPlanDetails" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandPlanDetails" type="DemandPlanDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Mid level element containing demand plan line items including product, time horizon, and plan details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandPlanDetailsType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="DemandPlanLineItem" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandPlanPartners" type="DemandPlanPartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Defines the buyer and the seller between which the transaction takes place</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandPlanPartnersType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="Buyer" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="Seller" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandPlanProperties" type="DemandPlanPropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Mid level element containing demand plan properties details for language and reference numbers.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandPlanPropertiesType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="LanguageCode" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandPlanIdentifier" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="ContractInformation" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="MarketPlaceInformation" minOccurs="0" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

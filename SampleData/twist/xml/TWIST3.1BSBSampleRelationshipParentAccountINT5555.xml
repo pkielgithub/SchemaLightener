@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Twist xmlns="http://www.twiststandards.org/3.1/ElectronicBilling" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.twiststandards.org/3.1/ElectronicBilling ../schemas/TWIST3.1.Billing.TwistMsgElectronicBilling.200609.xsd" xsi:type="ElectronicBillingMsg">
+		<header>
+			<messageId messageIdScheme="http://www.altova.com">normalizedString</messageId>
+			<inReplyTo messageIdScheme="http://www.altova.com">normalizedString</inReplyTo>
+			<sentBy id="ID000005">
+				<typedPartyId>
+					<partyId>String</partyId>
+					<partyIdType>String</partyIdType>
+				</typedPartyId>
+			</sentBy>
+			<creationTimestamp>2001-12-17T09:30:47.0Z</creationTimestamp>
+		</header>
+		<electronicStatement>
+			<statementHeader>
+				<stmtSender>
+					<name>TWIST Bank Inc </name>
+					<legalName>Not in spec sample</legalName>
+					<contactInfo uri="String" id="String" name="London Branch">
+						<postAddress>
+							<addressLine>123 Street</addressLine>
+							<city>London</city>
+							<country>United Kingdom</country>
+							<postCode>TW1 ST</postCode>
+						</postAddress>
+					</contactInfo>
+					<individualContact>
+						<name>Steve Chittenden</name>
+						<contactInfo>
+							<email>info@twiststandards.org</email>
+							<fax>00442075554321</fax>
+							<phoneNumber>00442075551234</phoneNumber>
+							<postAddress>
+								<city>London</city>
+								<country>United Kingdom</country>
+							</postAddress>
+						</contactInfo>
+					</individualContact>
+				</stmtSender>
+				<stmtReceiver>
+					<name>ABC West LLC</name>
+					<legalName>Not in spec sample</legalName>
+					<contactInfo uri="String" id="String" name="The Treasurer">
+						<postAddress>
+							<floor>Floor 25</floor>
+							<addressLine>1 Alpha Place West</addressLine>
+							<buildingName>International Customer House</buildingName>
+							<city>London</city>
+							<country>United Kingdom</country>
+							<postCode>AB1 2CD</postCode>
+						</postAddress>
+					</contactInfo>
+				</stmtReceiver>
+			</statementHeader>
+			<statement>
+				<account>
+					<accountLevel>Intermediate</accountLevel>
+					<bban>INT5555</bban>
+					<statementStartDate>2005-02-01</statementStartDate>
+					<statementEndDate>2005-02-28</statementEndDate>
+					<statementProductionDate>2005-03-08</statementProductionDate>
+					<accountName>ABC Western Region</accountName>
+					<compensationMethod>DelayedDebit</compensationMethod>
+					<debitAccount>123-5555</debitAccount>
+					<delayedDebitDate>2005-03-17</delayedDebitDate>
+					<settlementAdvice>In reimbursement</settlementAdvice>
+					<accountBalanceCurrencyCode>EUR</accountBalanceCurrencyCode>
+				</account>
+				<compensation>
+					<compensationIdentifier>ChargesAndTaxes-NetDueThisStmnt</compensationIdentifier>
+					<compensationValue>
+						<amount>1120.90</amount>
+						<currency>EUR</currency>
+					</compensationValue>
+				</compensation>
+				<compensation>
+					<compensationIdentifier>Non-BalCompensableServices</compensationIdentifier>
+					<compensationValue>
+						<amount>800.90</amount>
+						<currency>EUR</currency>
+					</compensationValue>
+				</compensation>
+				<compensation>
+					<compensationIdentifier>SettleChargeTtl-CurrentPeriod</compensationIdentifier>
+					<compensationValue>
+						<amount>420.00</amount>
+						<currency>EUR</currency>
+					</compensationValue>
+				</compensation>
+			</statement>
+		</electronicStatement>
+</Twist>

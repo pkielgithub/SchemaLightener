@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+The notices below are provided with respect to licensed content incorporated herein:
+Copyright The HR-XML Consortium. All Rights Reserved. http://www.hrxmlconsortium.org 
+Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved 
+-->
+<xsd:schema xmlns="http://www.hr-xml.org/3" xmlns:udt="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ccts="urn:un:unece:uncefact:documentation:1.1" xmlns:qdt="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" targetNamespace="http://www.hr-xml.org/3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+Name:  AssessmentCatalog.xsd
+Status: DRAFT
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/QualifiedDataTypes.xsd"/>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/UnqualifiedDataTypes.xsd"/>
+	<xsd:include schemaLocation="../Common/Components.xsd"/>
+	<xsd:element name="AssessmentCatalog" type="AssessmentCatalogType"/>
+	<xsd:complexType name="AssessmentCatalogType">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.hr-xml.org" xml:lang="en">
+				<ccts:DictionaryEntryName>Assessment Order. Details</ccts:DictionaryEntryName>
+				<ccts:DefinitionText>Defines an assessment catalog, which is intended to support discovery of descriptive information about assessments available to a customer and the discovery of "Package IDs" which are necessary to place an order using HR-XML's assessment order specification. A "Package" may consist of one or more assessment instruments. The "Package" is the marketable unit that may be ordered.</ccts:DefinitionText>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="DocumentIDGroup" minOccurs="0"/>
+			<xsd:element ref="DocumentSequence" minOccurs="0"/>
+			<xsd:element ref="SupplierPartyDetails" minOccurs="0"/>
+			<xsd:element ref="AssessmentPackageDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="languageCode" type="LanguageCodeContentType" use="optional"/>
+		<xsd:attributeGroup ref="EffectiveDateAttributeGroup"/>
+	</xsd:complexType>
+</xsd:schema>

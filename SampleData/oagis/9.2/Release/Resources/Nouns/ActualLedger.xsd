@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/ActualLedger.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="ActualLedger" type="ActualLedgerType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Ledger Actual  represents actual amounts by account within ledger within company or business area.  Actual amounts may be generated in a source application and then loaded to a specific ledger within the enterprise general ledger or budget application.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ActualLedgerType">
+                <xsd:sequence>
+                        <xsd:element ref="LedgerID" minOccurs="0"/>
+                        <xsd:element ref="DocumentDateTime" minOccurs="0"/>
+                        <xsd:element ref="AccountingDate" minOccurs="0"/>
+                        <xsd:group ref="LedgerEntryContent" minOccurs="0"/>
+                        <xsd:element ref="GLDestinationEntityID" minOccurs="0"/>
+                        <xsd:element ref="SourceDocumentReference" minOccurs="0"/>
+                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                        <xsd:element ref="TransactionAnalysisCode" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

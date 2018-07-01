@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/Catalog.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/OrderManagementComponents.xsd"/>
+        <xsd:complexType name="CatalogType">
+                <xsd:sequence>
+                        <xsd:element ref="CatalogHeader" minOccurs="0"/>
+                        <xsd:element ref="ClassificationScheme" minOccurs="0"/>
+                        <xsd:element ref="CatalogLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="CatalogHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies header information about the Catalog. This information applies to all the lines in the Catalog. PartyReferences in the Header are defaults that apply to all the Catalog lines, if there is no value specified at line level
+
+The SupplierParty in the Header identifies the provider of the item. Depending on the exchange scenario, the provider may be either a Supplier, Manufacturer or a Catalog Party. If no SupplierParty is specified at line level, the header value of the SupplierParty is assumed to hold true for the line </xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the name of the Catalog.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CurrencyCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the default currency of the Catalog. If a Currencey is specified for the Catalog, all the prices in the Catalog are assumed to be in the corresponding currency.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the default currency of the Catalog. If a Currencey is specified for the Catalog, all the prices in the Catalog are assumed to be in the corresponding currency.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the effective period of the Catalog or Catalog revision.
+
+The EffectiveTimePeriod  indicates the effectivity date and the expiration date for the validity of the Catalog. Often times the effectivity of a Catalog Revision is indicated by the release of a new revision of the Catalog. As such the Finish Effectivity date is never specified but assumed to be the Starting Effectivity date on the next revision</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UsageRestrictionCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">UsageRestriction is used to indicate additional restrictions on the Catalog usage. The implementation of this is to be agreed upon between trading partners. An example of usage of this is when a supplier has different Catalogs - one for general usage and others for usage by specific customers/ group of customers. In this scenario, the UsageRestriction can be specified as PUBLIC/ PRIVATE</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ClassificationScheme" minOccurs="0"/>
+                                        <xsd:element ref="PublisherParty" minOccurs="0"/>
+                                        <xsd:element ref="SupplierParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ClassificationSchemeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies the classification scheme used by all the items in the Catalog. Additionally, this also identifies all the classifications within this scheme and their hierarchical representation. The features that are defined in this classification scheme and also the features that are associated with each hierarchical classification representation can also be specified </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ClassificationSchemeID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the identifier of the Classification Scheme.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="Classification" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Property" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ClassificationDefinition" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ClassificationDetailsType">
+                <xsd:sequence>
+                        <xsd:element ref="Classification" minOccurs="0"/>
+                        <xsd:element ref="Property" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="CatalogLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The CatalogLine represents an item in a Catalog. The SupplierParty in the CatalogItemLine identifies the provider of the item. Depending on the exchange scenario, the provider may be either a Supplier, Manufacturer or a Catalog Party. If no SupplierParty is specified at line level, the header value of the SupplierParty is assumed to hold true for the line </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:choice>
+                                <xsd:element ref="Item" minOccurs="0"/>
+                                <xsd:element ref="CommodityClassification" minOccurs="0"/>
+                        </xsd:choice>
+                        <xsd:element ref="UOMCode" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the UnitOfMeasure in which the Item is available to be sold.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="SupplierParty" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ItemPrice" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ItemPriceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies a unit price for  an item</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="UnitPrice" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the amount per quantity.</xsd:documentation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the amount per quantity.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="CustomerParty" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The PartyReference in ItemPrice is used to indicate prices applicable for a specific customer</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="BuyerContractReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="SupplierContractReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                        <xsd:element ref="PriceBreak" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="Catalog" type="CatalogType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Catalog is a list of items or commodities. The items may be arranged according to a classification scheme. The Catalog can identify the classification scheme it uses, and the classifications and features that are defined within that scheme. Within the Catalog, each item can be classified into one oe more categories , and the specifications of each item can be identified. A Catalog has at least one publisher and one or many suppliers for the items in the Catalog.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CatalogHeader" type="CatalogHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the Catalog as a whole and communicates information that pertains to the entire Catalog.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ClassificationDefinition" type="ClassificationDetailsType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes a hierarchical association of classifications. A unique identifier for each ClassificationStructure can also be specified.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ItemPrice" type="ItemPriceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the price of the item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ClassificationScheme" type="ClassificationSchemeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the classification scheme as a whole. A Catalog can have one ClassificationScheme associated with it. For example, a classification scheme for inventory management may classify items according to handling characteristics.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CatalogLine" type="CatalogLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the items that are in the Catalog.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+</xsd:schema>

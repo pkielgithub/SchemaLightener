@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:cidx:names:specification:ces:schema:all:4:0">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd"/>
+  <xsd:element name="AcceptanceNotification" type="AcceptanceNotificationType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Top level element of the AcceptanceNotification transaction.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AcceptanceNotificationType">
+    <xsd:sequence>
+      <xsd:element ref="Header"/>
+      <xsd:element ref="AcceptanceNotificationBody"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" type="cidxToken" use="required" fixed="4.0"/>
+  </xsd:complexType>
+  <xsd:element name="AcceptanceNotificationBody" type="AcceptanceNotificationBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>High level element containing AcceptanceNotification properties, partners, and details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AcceptanceNotificationBodyType">
+    <xsd:sequence>
+      <xsd:element ref="AcceptanceNotificationProperties"/>
+      <xsd:element ref="AcceptanceNotificationPartners"/>
+      <xsd:element ref="AcceptanceNotificationDetails"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="AcceptanceNotificationDetails" type="AcceptanceNotificationDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Quantity/Product/Location/Delivery time details of the receipt made</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AcceptanceNotificationDetailsType">
+    <xsd:sequence>
+      <xsd:element ref="AcceptanceNotificationLineItem" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="AcceptanceNotificationIdentifier" type="AcceptanceNotificationIdentifierType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Unique identifier assigned to a Acceptance Certificate.</Description>
+          <SampleData>A1201</SampleData>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:simpleType name="AcceptanceNotificationIdentifierType">
+    <xsd:restriction base="cidxToken"/>
+  </xsd:simpleType>
+  <xsd:element name="AcceptanceNotificationLineItem" type="AcceptanceNotificationLineItemType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The line item description of product received including product, storage, and receipt details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AcceptanceNotificationLineItemType">
+    <xsd:sequence>
+      <xsd:element ref="LineNumber"/>
+      <xsd:element ref="ReceivingCondition"/>
+      <xsd:element ref="AcceptanceNotificationLocation"/>
+      <xsd:element ref="DeliveryProduct"/>
+      <xsd:element ref="StorageTankIdentifier" minOccurs="0"/>
+      <xsd:element ref="OrderedProductQuantity" minOccurs="0"/>
+      <xsd:element ref="ShippedQuantity" minOccurs="0"/>
+      <xsd:element ref="ReceiptSummary"/>
+      <xsd:element ref="PayableQuantity"/>
+      <xsd:element ref="Pricing" maxOccurs="unbounded"/>
+      <xsd:element ref="TaxableFlag" minOccurs="0"/>
+      <xsd:element ref="LineItemTotal" minOccurs="0"/>
+      <xsd:element ref="PaymentTerms" minOccurs="0"/>
+      <xsd:element ref="SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="LineItemTaxableTotal" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="AcceptanceNotificationLocation" type="AcceptanceNotificationLocationType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The location where delivery was received including partner details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AcceptanceNotificationLocationType">
+    <xsd:sequence>
+      <xsd:element ref="PartnerInformation"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="AcceptanceNotificationPartners" type="AcceptanceNotificationPartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Defines the buyer and the seller between which the transaction takes place</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AcceptanceNotificationPartnersType">
+    <xsd:sequence>
+      <xsd:element ref="Buyer"/>
+      <xsd:element ref="Seller"/>
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="AcceptanceNotificationProperties" type="AcceptanceNotificationPropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Mid-level element containing AcceptanceNotification for language and reference numbers.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="AcceptanceNotificationPropertiesType">
+    <xsd:sequence>
+      <xsd:element ref="LanguageCode"/>
+      <xsd:element ref="AcceptanceNotificationIdentifier"/>
+      <xsd:element ref="AcceptanceNotificationStatus"/>
+      <xsd:element ref="ReferenceInformation" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="ShipmentIdentification" minOccurs="0"/>
+      <xsd:element ref="PurchaseOrderInformation" minOccurs="0"/>
+      <xsd:element ref="ContractInformation" minOccurs="0"/>
+      <xsd:element ref="SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="PrimaryCurrency"/>
+      <xsd:element ref="SecondCurrency" minOccurs="0"/>
+      <xsd:element ref="CurrencyRate" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="PaymentTerms" minOccurs="0"/>
+      <xsd:element ref="MarketPlaceInformation" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="AcceptanceNotificationStatus" type="AcceptanceNotificationStatusType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>This element identifies to the recipient the nature of the message - if this has been sent before and if so, what should the recipient do with this message.</Description>
+          <SampleData>Original</SampleData>
+          <CodeList>Cancel
+Change
+Original
+Replace</CodeList>
+          <Synonyms>FreightBillStatus, ShipmentInstructionsStatus, LoadTenderStatus</Synonyms>
+          <Comments>Definitions for CIDX ShipNoticeStatus codes:
+Cancel - Indicates a cancellation of the ShipNotice, implies a resend with a status of original may follow.
+Change - Indicates a partial update
+Original - Indicates a new message
+Replace - Indicates a full overlay of the entire message</Comments>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:simpleType name="AcceptanceNotificationStatusType">
+    <xsd:restriction base="cidxToken"/>
+  </xsd:simpleType>
+  <xsd:element name="PayableQuantity" type="PayableQuantityType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Quantity in which Buyer has consented to payment .
+Structure</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="PayableQuantityType">
+    <xsd:sequence>
+      <xsd:element ref="Measurement"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ReceivingCondition" type="ReceivingConditionType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Indicates the condition of the goods received.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ReceivingConditionType">
+    <xsd:sequence>
+      <xsd:element ref="ReceivingConditionCode"/>
+      <xsd:element ref="Comment" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ReceivingConditionCode" type="ReceivingConditionCodeType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Code designating phisical condition or status of goods received in a specific shipment</Description>
+          <SampleData>01</SampleData>
+          <CodeListName>ANSI ASC X12 412</CodeListName>
+          <Comments>01(Damaged Product or Container), 
+02(Quantity Short), 03(Quantity Over), 
+04(Quality Problem), 
+05(Incorrect Product), 07(Good Condition), 
+08( Rejected)
+09(Hold)</Comments>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:simpleType name="ReceivingConditionCodeType">
+    <xsd:restriction base="cidxToken"/>
+  </xsd:simpleType>
+</xsd:schema>

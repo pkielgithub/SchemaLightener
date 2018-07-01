@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:cidx:names:specification:ces:schema:all:4:0">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd"/>
+  <xsd:element name="BuyerContractInformation" type="BuyerContractInformationType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Information which describes written or otherwise recorded agreement between two parties for a transaction.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="BuyerContractInformationType">
+    <xsd:sequence>
+      <xsd:element ref="DocumentReference"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="BuyerProductInformation" type="BuyerProductInformationType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Structure for the product that is being purchased by buyer</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="BuyerProductInformationType">
+    <xsd:sequence>
+      <xsd:element ref="ProductIdentification"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CustomerCatalogPrice" type="CustomerCatalogPriceType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Pricing structure for a given customer</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerCatalogPriceType">
+    <xsd:sequence>
+      <xsd:element ref="Pricing" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CustomerSpecificCatalogPriceData" type="CustomerSpecificCatalogPriceDataType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The price a given customer is quoted which is based upon a published catalog.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerSpecificCatalogPriceDataType">
+    <xsd:sequence>
+      <xsd:element ref="CustomerCatalogPrice"/>
+      <xsd:element ref="PriceEffectiveDate"/>
+      <xsd:element ref="PriceModifierDown" minOccurs="0"/>
+      <xsd:element ref="PriceModifierUp" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CustomerSpecificCatalogUpdate" type="CustomerSpecificCatalogUpdateType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description/>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerSpecificCatalogUpdateType">
+    <xsd:sequence>
+      <xsd:element ref="Header"/>
+      <xsd:element ref="CustomerSpecificCatalogUpdateBody"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" type="cidxToken" use="required" fixed="4.0"/>
+  </xsd:complexType>
+  <xsd:element name="CustomerSpecificCatalogUpdateBody" type="CustomerSpecificCatalogUpdateBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Body Structure. Contains the message-specific metadata in up-to three sections: Properties, Partners, and Details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerSpecificCatalogUpdateBodyType">
+    <xsd:sequence>
+      <xsd:element ref="CustomerSpecificCatalogUpdateProperties"/>
+      <xsd:element ref="CustomerSpecificCatalogUpdatePartners"/>
+      <xsd:element ref="CustomerSpecificCatalogUpdateDetails"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CustomerSpecificCatalogUpdateDetails" type="CustomerSpecificCatalogUpdateDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Details Structure. It contains the remainder of the message data which was not covered under "Properties" (which is the message 'metadata' or 'common data') and "Partners" (which is the information about the parties involved).</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerSpecificCatalogUpdateDetailsType">
+    <xsd:sequence>
+      <xsd:element ref="CustomerSpecificCatalogUpdateProductLineItem" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CustomerSpecificCatalogUpdatePartners" type="CustomerSpecificCatalogUpdatePartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Partners Structure. It contains the information about the parties involved in the data exchange.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerSpecificCatalogUpdatePartnersType">
+    <xsd:sequence>
+      <xsd:element ref="Seller"/>
+      <xsd:element ref="Buyer"/>
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CustomerSpecificCatalogUpdateProductLineItem" type="CustomerSpecificCatalogUpdateProductLineItemType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The collection of business properties that describe the document entry.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerSpecificCatalogUpdateProductLineItemType">
+    <xsd:sequence>
+      <xsd:element ref="LineNumber"/>
+      <xsd:element ref="BuyerProductInformation" minOccurs="0"/>
+      <xsd:element ref="ProductInformation"/>
+      <xsd:element ref="PriceStructure" maxOccurs="unbounded"/>
+      <xsd:element ref="MinimumQuantity" minOccurs="0"/>
+      <xsd:element ref="MaximumQuantity" minOccurs="0"/>
+      <xsd:element ref="OrderLeadTime" minOccurs="0"/>
+      <xsd:element ref="ShippingServiceLevelCode" minOccurs="0"/>
+      <xsd:element ref="SpecialFulfillmentRequestCode" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="ProjectedVolume" minOccurs="0"/>
+      <xsd:element ref="StandardOrderQuantity" minOccurs="0"/>
+      <xsd:element ref="SpecialInstructions" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="CatalogEffectiveDates"/>
+    </xsd:sequence>
+    <xsd:attribute name="Action" type="cidxListActionType" use="required"/>
+  </xsd:complexType>
+  <xsd:element name="CustomerSpecificCatalogUpdateProperties" type="CustomerSpecificCatalogUpdatePropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Properties Structure. It contains the message 'metadata' or 'common data'</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CustomerSpecificCatalogUpdatePropertiesType">
+    <xsd:sequence>
+      <xsd:element ref="LanguageCode"/>
+      <xsd:element ref="CatalogIdentifier" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="MaximumQuantity" type="MaximumQuantityType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Largest quantity of a product or product mix that can be purchased in a given transaction or totally.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="MaximumQuantityType">
+    <xsd:sequence>
+      <xsd:element ref="Measurement"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="MinimumQuantity" type="MinimumQuantityType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Smallest quantity that can be purchased, manufactured or shipped.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="MinimumQuantityType">
+    <xsd:sequence>
+      <xsd:element ref="Measurement"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="PriceStructure" type="PriceStructureType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Structure containing information used to specify the pricing for a line item, product or offering.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="PriceStructureType">
+    <xsd:sequence>
+      <xsd:element ref="DocumentReference"/>
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="PlannedEndUse" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="BuyerContractInformation" minOccurs="0"/>
+      <xsd:element ref="DeliveryTerms" minOccurs="0"/>
+      <xsd:element ref="TransportMethodCode" minOccurs="0"/>
+      <xsd:element ref="CustomerSpecificCatalogPriceData" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element ref="DutyStatus" minOccurs="0"/>
+      <xsd:element ref="CountryOfOriginCode" minOccurs="0"/>
+      <xsd:choice minOccurs="0">
+        <xsd:element ref="ShipTo"/>
+        <xsd:element ref="CountryOfFinalDestinationCode" minOccurs="0"/>
+      </xsd:choice>
+      <xsd:element ref="ShippingLeadTime" minOccurs="0"/>
+      <xsd:element ref="ShipmentMethodOfPaymentCode" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ShippingLeadTime" type="ShippingLeadTimeType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Number of days required or estimated for shipping functions to prepare and deliver the product.</Description>
+          <SampleData>17</SampleData>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:simpleType name="ShippingLeadTimeType">
+    <xsd:restriction base="xsd:nonNegativeInteger"/>
+  </xsd:simpleType>
+</xsd:schema>

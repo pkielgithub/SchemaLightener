@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ns.hr-xml.org/2007-04-15" targetNamespace="http://ns.hr-xml.org/2007-04-15" elementFormDefault="qualified" version="2007-04-15">
+	<xsd:annotation>
+		<xsd:documentation>
+"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org"
+Name: AssessmentResult.xsd
+Status: Recommendation
+Date this version: 2007-04-15
+Author(s): Assessment  Work Group
+Documentation: Assessments.html
+
+Terms of license can be found in license.txt.
+
+Changes in 2007-04-15 release:
+  Added additional enumerations to the “type” attribute of “Score.” 
+  Created AssessmentPersonDescriptors, which is located within AssessmentSubject. 
+</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../W3C/xml.xsd"/>
+	<xsd:include schemaLocation="../CPO/PersonName.xsd"/>
+	<xsd:include schemaLocation="../CPO/ContactMethod.xsd"/>
+	<xsd:include schemaLocation="../CPO/EntityIdType.xsd"/>
+	<xsd:include schemaLocation="../CPO/ISOUtilities.xsd"/>
+	<xsd:include schemaLocation="../CPO/UserArea.xsd"/>
+	<xsd:include schemaLocation="../CPO/SupportingMaterials.xsd"/>
+	<xsd:include schemaLocation="../Assessment/AssessmentTypes.xsd"/>
+	<xsd:element name="AssessmentResult" type="AssessmentResultType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentResult schema, which is designed to hold data necessary to convey information on the results of the assessment</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AssessmentResultType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentResult schema, which is designed to hold data necessary to convey information on the results of the assessment</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ClientId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies a client for the 3rd party vendor (assessor). It is up to the vendor to provide the client its identifier.The client id is mandatory for all messages going from a customer to an assessment vendor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProviderId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies An assessment provider for the customer. It is up to the client to provide the provider its identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ClientOrderId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier, for the client, to identify the order.There can be multiple order id for one request (e.g. PO #, department)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier supplied by the assessment provider that will allow the client to know how to request updates</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Results" type="AssessmentSingleResultType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The results of the assessment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentStatus" type="AssessmentStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The status of type request at this particular moment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentLanguage" type="xsd:language" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Indicates the language this assessment was taken in.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang"/>
+		<xsd:attribute name="validFrom" type="xsd:date" use="optional"/>
+		<xsd:attribute name="validTo" type="xsd:date" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentSingleResultType">
+		<xsd:sequence>
+			<xsd:element name="Profile" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The name of this set of results. Commonly used to distinguish between multiple Results elements, for example to indicate the normative group applied to the scoring.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="SupportingMaterials" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="OverallResult" type="AssessmentResultsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A summary or "high-level" view of the result of the subject</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DetailResult" type="AssessmentResultsType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The details of the subject's result, assessment category per category.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>The xml:lang attribute on AssessmentSingleResultType is used to indicate the language in use for this specific set of results.  This is to enable the Assessment Vendor to produce a single set of results in multiple languages.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentResultsType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentResults type, which is designed to hold data necessary to convey information on assessment results</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ScoreId" type="EntityIdType" minOccurs="0"/>
+			<xsd:element name="Passed" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A boolean expression that denotes whether the subject passed or failed the assessment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Description" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>"Label" of the score</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CompetencyAssessed" type="AssessmentCompetencyReferenceType" minOccurs="0"/>
+			<xsd:element name="Score" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The raw value (numeric) of the score</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:float">
+							<xsd:attribute name="type" type="AssessmentResultTypes" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Scale" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A textual label to indicate the range of possible values for this score. For example,  0-100 for a percentage scale. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Band" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Provides for categorizing or grouping of results.For example, "beginner", "intermediate" and "expert" would be three different bands</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Comments" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A textual description that provides the opinion of the assessment vendor. It may be based on criteria that have been defined between the client and the vendor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="AssessmentResultTypes">
+		<xsd:union memberTypes="AssessmentScoreEnumTypes xStringPatternExtensionType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="AssessmentScoreEnumTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="percentile"/>
+			<xsd:enumeration value="raw score"/>
+			<xsd:enumeration value="stanine"/>
+			<xsd:enumeration value="sten"/>
+			<xsd:enumeration value="t-score"/>
+			<xsd:enumeration value="z-score"/>
+			<xsd:enumeration value="intelligence quotient"/>
+			<xsd:enumeration value="number attempted"/>
+			<xsd:enumeration value="other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

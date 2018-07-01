@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssessmentCatalogQuery xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentCatalogQuery.xsd">
+	<Filter>
+		<FilterString>
+			<Type>
+				<StandardValue>sql</StandardValue>
+			</Type>
+			<Value>WHERE actual_price BETWEEN 10.0 AND 25.99 AND delivery_mode="phone"</Value>
+		</FilterString>
+	</Filter>
+	<UserArea/>
+</AssessmentCatalogQuery>

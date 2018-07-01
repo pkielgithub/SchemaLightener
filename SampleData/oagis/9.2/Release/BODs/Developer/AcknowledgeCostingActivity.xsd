@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/BODs/Developer/AcknowledgeCostingActivity.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../../Resources/Nouns/CostingActivity.xsd"/>
+        <xsd:element name="AcknowledgeCostingActivity" type="AcknowledgeCostingActivityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">In an effort to simpilify the usage of the verbs the AcknowledgeCostingActivity BOD is being deprecated as of OAGIS 9.0, the AcknowledgeCostingActivity will still be provided for the next three releases at which time it is scheduled to be removed from OAGIS.  As such for all new development we recommend that you use the PostCostingActivity BOD which may serve the same function of the AcknowledgeCostingActivity BOD.
+
+The purpose of the AcknowledgeCostingActivity BOD is to enable the update of Activityinformation from a production or manufacturing application to a costing application.  This is necessary for applications that are based on a Dual Cycle Accounting model.  This Dual Cycle Accounting model does not capture the details of the Activities that caused entries to be made in the general ledger application, but instead captures them in a separate overall costing application.
+This BOD commonly causes updates to occur and may be used as part of a large integration scenario or as a single tool for updating data. 
+
+For Single Cycle accounting systems, the PostJournalEntry BOD will be used to ensure that the costing information flows from the Manufacturing Application to the Financial Application.
+
+In most cases either PostJournal or AcknowledgeActivity will be used when the Financial applications are included with Logistics, but both Business Service Requests will not be used in the same integration scenario.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="AcknowledgeCostingActivityType">
+                <xsd:complexContent>
+                        <xsd:extension base="BusinessObjectDocumentType">
+                                <xsd:sequence>
+                                        <xsd:element name="DataArea" type="AcknowledgeCostingActivityDataAreaType">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is where the information that the BOD message carries is provided, in this case AcknowledgeCostingActivity. The information consists of a Verb and one or more Nouns. The verb (Acknowledge) indicates the action to be performed on the Noun (CostingActivity).</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="AcknowledgeCostingActivityDataAreaType">
+                <xsd:sequence>
+                        <xsd:element ref="Acknowledge"/>
+                        <xsd:element ref="CostingActivity" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

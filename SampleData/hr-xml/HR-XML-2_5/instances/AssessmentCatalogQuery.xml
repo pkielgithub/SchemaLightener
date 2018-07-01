@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Sample AssessmentCatalogQuery:  Give me all the assessment packages you have for client
+"Client24" for the "Customer Service" job family that are not proctored and have an actual price
+(TPA custom field) between $10 and $25.99.
+-->
+<AssessmentCatalogQuery xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentCatalogQuery.xsd">
+	<ClientId idOwner="Big Assessment Vendor">
+		<IdValue>Client24</IdValue>
+	</ClientId>
+	<Filter>
+		<SimpleExpression>
+			<ElementName>AssessmentJobInfo/AssessmentJobFamily</ElementName>
+			<Operator>
+				<StandardValue>equals</StandardValue>
+			</Operator>
+			<ElementValue>Customer Service</ElementValue>
+		</SimpleExpression>
+		<SimpleExpression>
+			<ElementName>proctored</ElementName>
+			<Operator>
+				<StandardValue>not equals</StandardValue>
+			</Operator>
+			<ElementValue>true</ElementValue>
+		</SimpleExpression>
+	</Filter>
+	<!-- 
+These two filters hit the same AssessmentPackage element(s):
+
+<Filter>
+    <FilterString type="xpath">AssessmentCatalog/AssessmentPackage[AssessmentJobInfo/AssessmentJobFamily='Customer Service'][Proctored='false' or Proctored=0]</FilterString>
+</Filter>
+
+<Filter>
+    <FilterString type="xpath">AssessmentCatalog/AssessmentPackage[AssessmentJobInfo/AssessmentJobFamily='Customer Service'][not(Proctored='true')][not(Proctored=1)]</FilterString>
+</Filter>
+
+NOTE: 
+1) xsd:boolean data type has 4 values - true, false, 1, and 0 - instead of the expected 2.  Be careful here.
+2) The use of multiple brackets "[]" means logical AND.   
+
+So the first filter says (in pseudo sql):
+
+SELECT all AssessmentPackages WHERE AssessmentJobFamily='Customer Service' AND (Proctored='false' OR Proctored=0)
+
+The second filter says:
+
+SELECT all AssessmentPackages WHERE AssessmentJobFamily='Customer Service' AND NOT Proctored='true' AND NOT Proctored=1
+
+  -->
+	<ProviderId>
+		<IdValue name="VendorId">AVend21</IdValue>
+	</ProviderId>
+	<UserArea/>
+</AssessmentCatalogQuery>

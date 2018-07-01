@@ -1,0 +1,3466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Don Cuthbertson (private) -->
+<xs:schema xmlns="http://www.twiststandards.org/3.1/FinancialSupplyChain" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.twiststandards.org/3.1/FinancialSupplyChain" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Copyright 2006 TWIST Process Innovations, LTD. -->
+	<!--Working Draft-->
+	<!-- This schema is available for comment and the structure is subject to change -->
+	<!-- Version 3.1 September 2006-->
+	<!-- Specification Document: -->
+	<xs:include schemaLocation="TWIST3.1.TWISTCore.TwistMsg.200609.xsd"/>
+	<xs:complexType name="FinanceRequest">
+		<xs:annotation>
+			<xs:documentation>Message for requesting finance for an invoice(s) new with 3.1 add per 0906-17</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="financeRequestHeader" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="requestForFinanceNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Request for Finance transaction  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForFinanceDate" type="xs:date"/>
+								<xs:element name="requestForFinanceType">
+									<xs:annotation>
+										<xs:documentation>Specifies the type of Request for Finance</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="code" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Request for Finance type represented as a code
+list: {'PREB' – Pre-shipment  Buyer financing | 'PREV' – Pre-shipment Vendor financing | 'PSTB' – Post-shipment  Buyer financing | 'PSTV' – Post-shipment Vendor financing }
+</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="PREB"/>
+														<xs:enumeration value="PREV"/>
+														<xs:enumeration value="PSTB"/>
+														<xs:enumeration value="PSTV"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="description" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="GUID" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the transaction instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="instructions" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="financeRequestInvoiceDetail" type="FinanceRequestInvoiceDetail"/>
+								<xs:element name="creditor">
+									<xs:annotation>
+										<xs:documentation>Information about the creditor</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="debtor">
+									<xs:annotation>
+										<xs:documentation>Information about the debtor</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="originator" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the originator</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FinanceRequestCancellation">
+		<xs:annotation>
+			<xs:documentation>Message for cancelling a finance request for an invoice(s) new with 3.1 add per 0906-19</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="financeRequestCancellationHeader" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="financeRequestCancellationNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Finance Request Cancellation transaction  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="financeRequestCancellationDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Finance Request Cancellation transaction was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the transaction instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForFinanceNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Request for Finance transaction  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForFinanceDate" type="xs:date" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Date the Request for Finance transaction was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="financeRequestCancellationDetail">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="sequenceNumber" type="Identifier">
+												<xs:annotation>
+													<xs:documentation>Unique sequence number </xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="invoiceStatus" type="InvoiceStatusType" minOccurs="0"/>
+											<xs:element name="invoiceStatusDate" type="xs:date" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Date the Invoice Status transaction was issued</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="cancellationReason">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="code" type="xs:string" minOccurs="0"/>
+														<xs:element name="description" type="xs:string" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="creditor">
+									<xs:annotation>
+										<xs:documentation>Information about the creditor</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="debtor">
+									<xs:annotation>
+										<xs:documentation>Information about the debtor</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="originator" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the originator</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="invoiceReference">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="Invoice">
+												<xs:sequence>
+													<xs:element name="invoiceLineStatusDetail" type="LineStatusDetail" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FinanceRequestStatusNotification">
+		<xs:annotation>
+			<xs:documentation>Message for requesting status of a finance request for an invoice(s) new with 3.1 add per 0906-18</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="financeRequestStatusNotificationHeader" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="financeRequestStatusNotificationNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Finance Request Status Notification transaction  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="financeRequestStatusNotificationDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Finance Request Status Notification transaction was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="financeRequestStatus">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="code" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Request for Finance status represented as a code
+list: {'PND' – Pending | 'APP' – Approved | 'REJ' – Rejected | 'CAN' – Cancelled }
+</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="PND"/>
+														<xs:enumeration value="APP"/>
+														<xs:enumeration value="REJ"/>
+														<xs:enumeration value="CAN"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="description" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="GUID" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the transaction instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForFinanceNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Request for Finance transaction  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForFinanceDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Request for Finance transaction was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="creditor">
+									<xs:annotation>
+										<xs:documentation>Information about the creditor</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="debtor">
+									<xs:annotation>
+										<xs:documentation>Information about the debtor</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="originator" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the originator</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="financeRequestInvoiceDetail" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="FinanceRequestInvoiceDetail">
+												<xs:sequence>
+													<xs:element name="financedPayment" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:complexContent>
+																<xs:extension base="SettlementDetail">
+																	<xs:sequence>
+																		<xs:element name="exchangeRate" type="ExchangeRate" minOccurs="0"/>
+																	</xs:sequence>
+																</xs:extension>
+															</xs:complexContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Invoice">
+		<xs:annotation>
+			<xs:documentation>Message for an invoice</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="invoiceHeader" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="invoiceNumber" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Unique identification of the invoice (from the vendor's system) [renamed invoiceNumber and type to Identifier (0606-77)]</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>The date the invoice was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoicePeriodStartDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>[added 0606-78)]</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoicePeriodEndDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>[added 0606-79)]</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="GUID" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>[added (0606-80)]</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyerInvoiceReferenceNumber" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Unique identification of the invoice (from the buyer's system) [changed name from buyerInvoiceNumber to buyerInvoiceReferenceNumber and type to Identifier and 1-1 to 0-1 (0606-81)]</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="sellerInvoiceReferenceNumber" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Identification number assigned to the invoice by the seller -added 0606-239</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="relatedInvoiceNumber" type="DocumentReference" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>For related documents case e.g. credit note/prepayment invoice is attached to a specific invoice) [changed type to DocumentReference -0606-85]</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceAttachment" type="Attachment" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>File attachments for an invoice including the binary attachment, file url - could be scan of invoice supporting documents</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceCurrency" type="Currency" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Currency for the total amount of the invoice</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="paymentCurrency" type="Currency" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>The coded identifier of the monetary unit to be used for the payment of an invoice.
+list: {'AED'|'AFN'|'ALL'… etc.  ISO 4217 currency codes</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyerInformation" type="PartyInformation">
+									<xs:annotation>
+										<xs:documentation>Information about the buyer added 0606-88</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="sellerInformation" type="PartyInformation">
+									<xs:annotation>
+										<xs:documentation>Information about the seller added 0606-89</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="creditorInformation" type="PartyInformation" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the creditor  [changed to (0-1) 0606-90)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="debtorInformation" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the debtor  [changed to (0-1) 0606-91] </xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="remitToInformation" type="PartyInformation" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>In the case of factoring, the payment is remitted to the factor, not the bill from.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="consigneeInformation" type="PartyInformation" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the party to whom the goods must be delivered, if different from buyer added 0606-92</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="paymentTerms" type="PaymentTerms">
+									<xs:annotation>
+										<xs:documentation>Conditions applicable to the invoice payment</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="paymentMethod" type="MethodOfPayment" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Indication of the preferred financial instrument to effect payment added 0606-93</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceType">
+									<xs:annotation>
+										<xs:documentation>Type of invoice: commercial,consolidated,pro forma etc. [updated enumeration list 0606-222]</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="Proforma invoice"/>
+											<xs:enumeration value="Commercial invoice"/>
+											<xs:enumeration value="Credit note"/>
+											<xs:enumeration value="Debit note"/>
+											<xs:enumeration value="Commission note"/>
+											<xs:enumeration value="Consolidated invoice"/>
+											<xs:enumeration value="Prepayment invoice"/>
+											<xs:enumeration value="Self-billed invoice"/>
+											<xs:enumeration value="Delcredere invoice"/>
+											<xs:enumeration value="Factored invoice"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="invoiceFunction">
+									<xs:annotation>
+										<xs:documentation>Function of invoice
+list: {'Original'|'Copy'|'Duplicate'|'Cancellation'|'Retransmission'
+|'Test'|'Confirmation'|'Accepted for financing'}
+ added 0606-94</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="Original"/>
+											<xs:enumeration value="Copy"/>
+											<xs:enumeration value="Duplicate"/>
+											<xs:enumeration value="Cancellation"/>
+											<xs:enumeration value="Retransmission"/>
+											<xs:enumeration value="Test"/>
+											<xs:enumeration value="Confirmation"/>
+											<xs:enumeration value="Accepted for Financing"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="taxExemptionAuthority" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>reference to tax authority that granted the taxation exemption</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="exemptionNumber">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:length value="30"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="exemptionGrantedDate" type="xs:date"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="taxPointDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>The date on which the supply of goods or services was made / completed for VAT purposes, or the date on which any payment on account was made, where this date can be determined and differs from the issue date of the invoice. The tax point date is valid for all invoice lines. added 0606-95</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceTotalLineAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>total of all line items (invoiceLineAmount), including line item charges and allowances added 0606-96</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceTotalTaxableAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>total amount subject to tax or fee. added 0606-97</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceTotalTaxFeeAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>total of all tax and fee amounts. added 0606-98</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceTotalAllowanceChargeAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>total of all allowance and charge amounts levied at the invoice level. added 0606-99</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceTotalAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>total amount due, including invoice charges, allowances and taxes. added 0606-100</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="exchangeRate" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>exchange rate used for the conversion of the invoicing currency from a source currency added 0606-101</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="ExchangeRate">
+												<xs:sequence>
+													<xs:element name="date" type="xs:date" minOccurs="0"/>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="deliveryTerms" type="DeliveryTerms" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>details concerning the terms of delivery added 0606-104</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="documentReference" type="DocumentReference" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>document reference added 0606-105 </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="transportDetails" type="TransportDetails" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>specific details concerning the transport used to ship the goods  adeed 0606-107</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="consignmentDetails" type="ConsignmentDetails" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>specific details concerning the consignment  added 0606-109</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="allowanceCharge" type="AllowanceCharges" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>specific charges and discounts applied at the Invoice level, e.g. Packing Charges, Freight Charges, Insurance Charges, Other Fees, Discount, etc. Exclusive of any charges or discounts applied at the line item level.  [added 0606-225]</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="exemptionNumber" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>official exemption number granted by the tax authority </xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="30"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="invoiceDetail" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Details of the invoice by line</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="lineItemNumber" type="LineNumber">
+												<xs:annotation>
+													<xs:documentation>unique number of the invoice line item</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="lineItemType" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Specifies the type of invoice line item by means of a code
+list: {‘LIN’ - Normal line item | ‘SUB’ - Sub-line item | ‘TOT’ - Subtotal  line item}
+added 0606-241</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="GUID" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>A computer-generated globally unique identifier (GUID) for the Invoice Line instance [added 0606-153]</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="GUID">
+														<xs:enumeration value="LIN"/>
+														<xs:enumeration value="SUB"/>
+														<xs:enumeration value="TOT"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="itemPriceTotal" type="Money">
+												<xs:annotation>
+													<xs:documentation>total price information for the invoice item (calculated as pricePerUnit x quantityInvoiced), i.e. without any allowances, charges or taxes</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="quantityInvoiced" type="xs:decimal">
+												<xs:annotation>
+													<xs:documentation>quantity of product units invoiced and
+associated unit of measurement</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="invoicePeriodStartDate" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>invoice period start date, used for period invoicing [added 0606-154</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="invoicePeriodEndDate" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>invoice period end date, used for period invoicing[added 0606-155]</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="userDefinedDescription" type="xs:string">
+												<xs:annotation>
+													<xs:documentation>Remarks for the item</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="productItem" type="ProductItem">
+												<xs:annotation>
+													<xs:documentation>product details added 0606-184</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="pricePerUnit" type="Money">
+												<xs:annotation>
+													<xs:documentation>price per unit of product invoiced</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="priceUnit" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>quantity and unit of measure to which the pricePerUnit applies [added 0606-156]</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="quantity" type="Quantity" minOccurs="0"/>
+														<xs:element name="unitOfMeasure" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:maxLength value="35"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="invoiceLineAmount" type="Money">
+												<xs:annotation>
+													<xs:documentation>Calculated net amount (price plus charges, minus allowances, plus taxes) of the invoice line item</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="taxInformation" type="TaxInformation" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>details the tax applicable to a individual line item [name changed from vATInformation 0606-158, changed from 1-1 to 0-n 0606-159 changed type from  TaxInfo to TaxInformation 0606-160b]</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="allowanceCharge" type="AllowanceCharges" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>charges amount included for total of invoice [changed invoiceCharges to allowanceCharge 0-n 0606-162]</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="deliveryDate" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>The date when the goods line item was delivered to the buyer added 0606-163</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="despatchDate" type="xs:dateTime" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>The date when the goods line item was despatched by the supplier added 0606-164</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="grossWeightMeasure" type="Measure" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>total consignment gross weight (includes packaging) added 0606-165</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="netWeightMeasure" type="Measure" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>total consignment net weight (excludes all packaging) added 0606-166</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="netNetWeightMeasure" type="Measure" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>total consignment net net weight (excludes all packaging and conversion material) added 0606-167</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="grossVolumeMeasure" type="Measure" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>total consignment volume added 0606-168</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="FOBValueAmount" type="Money" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>line item FOB (FreeOnBoard) amount added 0606-169</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="CIFValueAmount" type="Money" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>line item CIF (CostInsuranceAndFreight) amount added 0606-170</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="CFRValueAmount" type="Money" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>line item CFR (CostAndFreight) amount added 0606-171</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="freeOfChargeIndicator" type="xs:boolean" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>indicates whether line item goods are free of charge 1=freeOfCharge [added 0606-172]</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="purchaseOrderNumber" type="DocumentReference" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>purchase order identification number by which the goods were purchased.  [Changed from OrderNumber type to DocumentReference 0606-173 changed from 1-1 to 0-1 0606-176]</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="purchaseOrderLineNumber" type="Identifier" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>line number on the purchase order changed to Identifier and from 1-1 to 0-1 0606-174</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="purchaseOrderLineStatusCode" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>status of the purchase order line added 0606-175</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="15"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="purchaseOrderLineGUID" type="GUID" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>a computer-generated globally unique identifier (GUID) for the referenced purchase order line [added 0606-177]</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="deliverySequenceNumber" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>identification of order by which the goods were delivered [changed name from scheduleNumber to deliverySequenceNumber 0606-178]</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:integer">
+														<xs:totalDigits value="3"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="contractId" type="DocumentReference" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>unique identifier for the buying agreement [changed type to DocumentReference 0606-179]</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="otherDocumentReference" type="DocumentReference" minOccurs="0" maxOccurs="unbounded">
+												<xs:annotation>
+													<xs:documentation>other document reference not already specified for line item added 0606-180</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="industrySpecificDetails" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>additional information</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="100"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="invoiceAdjustment" type="Adjustment" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Adjustment details related to the credit note, debit note or invoice added 0606-123</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>added 0606-124</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InvoiceAcceptance">
+		<xs:annotation>
+			<xs:documentation>Message to notify of invoice acceptance new with 3.1 added per 0906-</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="invoiceAcceptanceHeader" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="invoiceAcceptanceDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Invoice Acceptance transaction was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the transaction instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="instructions" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Free form text instructions to the transaction recipient</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyer">
+									<xs:annotation>
+										<xs:documentation>Information about the buyer</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="originator" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the originator</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="InvoiceAcceptanceDetail">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="sequenceNumber" type="Identifier"/>
+											<xs:element name="invoiceStatus" type="InvoiceStatusType"/>
+											<xs:element name="invoiceStatusDate" type="xs:date" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Date the Invoice Status transaction was issued</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="financePlanNumber" type="Identifier" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Specifies the finance plan identification number</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="seller">
+												<xs:annotation>
+													<xs:documentation>Information about the seller</xs:documentation>
+												</xs:annotation>
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="PartyInformation"/>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="documentReference" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="DocumentReference">
+															<xs:sequence>
+																<xs:element name="invoiceLineStatusDetail" type="LineStatusDetail" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="invoiceDocument" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="Invoice">
+															<xs:sequence>
+																<xs:element name="invoiceLineStatusDetail" type="LineStatusDetail" minOccurs="0" maxOccurs="unbounded"/>
+															</xs:sequence>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="invoiceAcceptanceNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Invoice Acceptance transaction  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InvoiceDispute">
+		<xs:annotation>
+			<xs:documentation>Message for an invoice dispute - DEPRECATED WITH RELEASE 3.1 - BEING REPLACED BY INVOICE STATUS - 200609</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="disputeHeader" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="disputeNumber">
+									<xs:annotation>
+										<xs:documentation>unique identification number of the dispute message</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="20"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="buyerInvoiceNumber" type="OrderNumber">
+									<xs:annotation>
+										<xs:documentation>Unique identification of the invoice (from the buyer's system)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="disputedAmount" type="Money">
+									<xs:annotation>
+										<xs:documentation>Total amount that is subject to dispute</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="debtorInformation">
+									<xs:annotation>
+										<xs:documentation>Information about the debtor </xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="vendorInvoiceNumber" type="OrderNumber" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Unique identification of the invoice (from the vendor's system) </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="creditorInformation" type="PartyInformation">
+									<xs:annotation>
+										<xs:documentation>Information about the creditor</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="genericDispute">
+									<xs:annotation>
+										<xs:documentation>indicator to express that the invoice is rejected in total, e.g sent to the wrong debtor </xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="20"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="disputeDetail" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="disputedInvoiceLine" type="LineNumber">
+												<xs:annotation>
+													<xs:documentation>unique identifier of the disputed line of the invoice</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="disputeType" type="xs:string">
+												<xs:annotation>
+													<xs:documentation>the nature of the dispute e.g. incorrect quantity</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="invoiceData" type="xs:string">
+												<xs:annotation>
+													<xs:documentation>original data on the invoice that is in dispute - quantity, unit price etc.</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="disputeData" type="xs:string">
+												<xs:annotation>
+													<xs:documentation>expected data on the invoice that is in dispute - quantity, unit price etc. </xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="disputedAmountNet" type="Money">
+												<xs:annotation>
+													<xs:documentation>financial impact of the dispute, the difference between the original invoice NET and the adjusted value</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="disputedVATAmount" type="Money">
+												<xs:annotation>
+													<xs:documentation>financial impact of the dispute, difference original invoice GROSS amount for that line and adjusted value</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="disputeResolution" type="xs:string">
+												<xs:annotation>
+													<xs:documentation>suggested way to resolve the dispute, eg by credit note, payment adjustment - source</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InvoiceStatus">
+		<xs:annotation>
+			<xs:documentation>Message for information about an invoice including disputes new with 3.1 added per 0906-14</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="invoiceStatusHeader" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="invoiceStatusDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Invoice Status transaction was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the transaction instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="invoiceStatus" type="InvoiceStatusType"/>
+								<xs:element name="invoiceRejectionReason" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Specifies the reason for rejection</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="code" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Rejection reason represented as a code
+list: {'DUP' – Duplicate transaction | 'DIS' – Disputed transaction}
+</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="DUP"/>
+														<xs:enumeration value="DIS"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="description" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Description of the rejection reason</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="invoiceResolutionResult" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Specifies the dispute resolution result</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="code" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Resolution result represented as a code
+list: {'ACC' – Accepted without change | 'AMD' – Accepted subject to change | ‘RES’ – Resubmitted}	0..1</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="ACC"/>
+														<xs:enumeration value="AMD"/>
+														<xs:enumeration value="RES"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="description" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Description of the rejection reason</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="lineStatusDetail" type="LineStatusDetail" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="settlementDetail" type="SettlementDetail" minOccurs="0" maxOccurs="unbounded"/>
+								<xs:element name="buyer">
+									<xs:annotation>
+										<xs:documentation>Information about the buyer</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="seller">
+									<xs:annotation>
+										<xs:documentation>Information about the seller</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="originator" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the originator</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="PartyInformation"/>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="invoiceReference" type="DocumentReference"/>
+								<xs:element name="invoiceStatusNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Invoice Status transaction  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Order">
+		<xs:annotation>
+			<xs:documentation>Message for an Order [created 0606-209]  THIS MESSAGE IS NEW FOR RELEASE 3.0 AND IS WRITTEN ACCORDING TO THE SPECIFICATION DOCUMENT "TWIST PO V0.2 20060427.doc".  IT IS A STRONG CANDIDATE FOR REFACTORING AND AS SUCH THE ELEMENT NAMES WILL LIKELY CHANGE IN A FUTURE RELEASE (e.g. orderDate- is similar in name and function to quotationDate (Quotation) and  requestForQuotationDate (QuotationRequest))</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="order" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="orderNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify an Order  </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Order was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="GUID" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the entity (Order, Order line item, etc) instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderType">
+									<xs:annotation>
+										<xs:documentation>Type of Order list: {'Purchase order'|'Blanket order'|'Call off order'|'Sample order'|'Hire order'}</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="Blanket order"/>
+											<xs:enumeration value="Call off order"/>
+											<xs:enumeration value="Sample order"/>
+											<xs:enumeration value="Hire order"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="orderFunction">
+									<xs:annotation>
+										<xs:documentation>Function of the Order list: {'Original'|'Copy'|'Duplicate'|'Cancellation'|'Retransmission'|'Test'|'Confirmation'|'Accepted for financing'|’Order change’}</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="Original"/>
+											<xs:enumeration value="Copy"/>
+											<xs:enumeration value="Duplicate"/>
+											<xs:enumeration value="Cancellation"/>
+											<xs:enumeration value="Retransmission"/>
+											<xs:enumeration value="Test"/>
+											<xs:enumeration value="Confirmation"/>
+											<xs:enumeration value="Accepted for financing"/>
+											<xs:enumeration value="Order change"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="orderChangeSequenceNumber" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Order Change Sequence Number assigned by the Buyer to ensure the proper sequencing of changes</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="validityPeriodStartDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Start date/time of the period for which the document (Quotation, Order, etc) is valid</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="validityPeriodEndDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>End date/time of the period for which the document (Quotation, Order, etc) is valid</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestedDeliveryDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Delivery date/time requested by the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="latestDeliveryDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Latest delivery date/time allowed by the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyerOrderReferenceNumber" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Identification number assigned to the Order by the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="sellerOrderReferenceNumber" type="Identifier" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Identification number assigned to the Order by the seller</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="relatedOrderReference" type="DocumentReference" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Related Order number</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderAttachment" type="Attachment" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>File attachments associated with the Order</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderCurrency" type="Currency" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Coded identifier of the monetary unit used for the Order line and total amounts. list: {'AED'|'AFN'|'ALL'… etc.  ISO 4217 currency codes.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestedInvoiceCurrency" type="Currency" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Coded identifier of the monetary unit used for the Order line and total amounts. list: {'AED'|'AFN'|'ALL'… etc.  ISO 4217 currency codes.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="sellerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the seller</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="originatorInformation" type="Party" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the party that had the original demand for the goods and/or services (initiated the procurement process)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="agentInformation" type="Party" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about an agent acting on behalf of the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="payerInformation" type="Party" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the party responsible for the payment of the goods and/or services.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="consigneeInformation" type="Party" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the party to whom the goods and/or services will be delivered, if different from buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="carrierInformation" type="Party" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the party responsible for the transport of the goods</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="paymentTerms" type="PaymentTerms" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Conditions applicable to the invoice payment</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="paymentMethod" type="MethodOfPayment" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Indication of the preferred financial instrument to effect payment</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="partialShipmentIndicator" type="xs:boolean" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Indication of whether the buyer allows partial shipment of the ordered goods 0=no, 1=yes</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderTotalLineAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total of all line items (lineItemAmount), including line item charges and allowances</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderTotalTaxableAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total amount subject to tax or fee.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderTotalTaxFeeAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total of all tax and fee amounts.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderTotalAllowanceChargeAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total of all allowance and charge amounts levied at the order header level.
+</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderTotalAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total amount due, including invoice charges, allowances and taxes.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="deliveryTerms" type="DeliveryTerms" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Details concerning the terms of delivery</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationReference" type="DocumentReference" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Reference to the related Quotation </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractReference" type="DocumentReference" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Reference to the buying agreement</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="otherDocumentReference" type="DocumentReference" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Other document reference not already</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="transportDetails" type="TransportDetails" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Specific details concerning the transport to be used or used, to ship the goods </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="allowanceCharge" type="AllowanceCharges" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Specific charges and discounts applied at the document header level, e.g. Packing Charges, Freight Charges, Insurance Charges, Other Fees, Discount, etc. Exclusive of any charges or discounts applied at the line item level. </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="lineItem" type="LineItem" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Details of the transaction line item</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="changeReason" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Specifies the reason for any changes that have been applied</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="code" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Change reason represented as a code</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="35"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="description" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Description of change reason</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Free form text applying to the entire document.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderCancellation">
+		<xs:annotation>
+			<xs:documentation>Message for an OrderCancellation [created 0606-210]  THIS MESSAGE IS NEW FOR RELEASE 3.0 AND IS WRITTEN ACCORDING TO THE SPECIFICATION DOCUMENT "TWIST PO V0.2 20060427.doc".  IT IS A STRONG CANDIDATE FOR REFACTORING AND AS SUCH THE ELEMENT NAMES WILL LIKELY CHANGE IN A FUTURE RELEASE (e.g. orderCancellationDate- is similar in name and function to quotationDate (Quotation) and  requestForQuotationDate (QuotationRequest) and orderDate (Order))</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="orderCancellation" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="orderCancellationNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify an Order  Cancellation</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderCancellationDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Order Cancellation was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="GUID" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the entity (Order, Order line item, etc) instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="orderReference" type="DocumentReference">
+									<xs:annotation>
+										<xs:documentation>Reference to the Order being cancelled</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="sellerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the seller</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractReference" type="DocumentReference" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Reference to the buying agreement</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="otherDocumentReference" type="DocumentReference" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Other document reference not already</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="cancelReason" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Specifies the reason for cancellation</xs:documentation>
+									</xs:annotation>
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="code" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Cancel reason represented as a code</xs:documentation>
+												</xs:annotation>
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:maxLength value="35"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:element>
+											<xs:element name="description" type="xs:string" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>Description of cancel reason</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Free form text applying to the entire document.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderConfirmationAcceptance">
+		<xs:annotation>
+			<xs:documentation>Messagefor a OrderConfirmationAcceptance [created 0606-217] THIS MESSAGE IS NEW FOR RELEASE 3.0 AND IS WRITTEN ACCORDING TO THE SPECIFICATION DOCUMENT "TWIST PO V0.2 20060427.doc".  IT IS A STRONG CANDIDATE FOR REFACTORING AND AS SUCH THE ELEMENT NAMES WILL LIKELY CHANGE IN A FUTURE RELEASE</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="orderConfirmationAcceptance" type="OrderConfirmationContent" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderConfirmationAcceptanceWithAmmendment">
+		<xs:annotation>
+			<xs:documentation>Messagefor a OrderConfirmationAcceptanceWithAmmendment [created 0606-217] THIS MESSAGE IS NEW FOR RELEASE 3.0 AND IS WRITTEN ACCORDING TO THE SPECIFICATION DOCUMENT "TWIST PO V0.2 20060427.doc".  IT IS A STRONG CANDIDATE FOR REFACTORING AND AS SUCH THE ELEMENT NAMES WILL LIKELY CHANGE IN A FUTURE RELEASE</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="orderConfirmationAcceptanceWithAmmendment" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="OrderConfirmationContent">
+									<xs:sequence>
+										<xs:element name="orderType">
+											<xs:annotation>
+												<xs:documentation>Type of Order list: {'Purchase order'|'Blanket order'|'Call off order'|'Sample order'|'Hire order'}</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Blanket order"/>
+													<xs:enumeration value="Call off order"/>
+													<xs:enumeration value="Sample order"/>
+													<xs:enumeration value="Hire order"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="orderFunction">
+											<xs:annotation>
+												<xs:documentation>Function of the Order list: {'Original'|'Copy'|'Duplicate'|'Cancellation'|'Retransmission'|'Test'|'Confirmation'|'Accepted for financing'|’Order change’}</xs:documentation>
+											</xs:annotation>
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="Original"/>
+													<xs:enumeration value="Copy"/>
+													<xs:enumeration value="Duplicate"/>
+													<xs:enumeration value="Cancellation"/>
+													<xs:enumeration value="Retransmission"/>
+													<xs:enumeration value="Test"/>
+													<xs:enumeration value="Confirmation"/>
+													<xs:enumeration value="Accepted for financing"/>
+													<xs:enumeration value="Order change"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="orderChangeSequenceNumber" type="Identifier" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Order Change Sequence Number assigned by the Buyer to ensure the proper sequencing of changes</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="validityPeriodStartDate" type="xs:dateTime" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Start date/time of the period for which the document (Quotation, Order, etc) is valid</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="validityPeriodEndDate" type="xs:dateTime" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>End date/time of the period for which the document (Quotation, Order, etc) is valid</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="requestedDeliveryDate" type="xs:dateTime" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Delivery date/time requested by the buyer</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="latestDeliveryDate" type="xs:dateTime" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Latest delivery date/time allowed by the buyer</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="buyerOrderReferenceNumber" type="Identifier" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Identification number assigned to the Order by the buyer</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="sellerOrderReferenceNumber" type="Identifier" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Identification number assigned to the Order by the seller</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="relatedOrderReference" type="DocumentReference" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Related Order number</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="orderConfirmationAttachment" type="Attachment" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>File attachments associated with the Order</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="orderCurrency" type="Currency" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Coded identifier of the monetary unit used for the Order line and total amounts. list: {'AED'|'AFN'|'ALL'… etc.  ISO 4217 currency codes.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="requestedInvoiceCurrency" type="Currency" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Coded identifier of the monetary unit used for the Order line and total amounts. list: {'AED'|'AFN'|'ALL'… etc.  ISO 4217 currency codes.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="originatorInformation" type="Party" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Information about the party that had the original demand for the goods and/or services (initiated the procurement process)</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="agentInformation" type="Party" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Information about an agent acting on behalf of the buyer</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="payerInformation" type="Party" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Information about the party responsible for the payment of the goods and/or services.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="consigneeInformation" type="Party" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Information about the party to whom the goods and/or services will be delivered, if different from buyer</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="carrierInformation" type="Party" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Information about the party responsible for the transport of the goods</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="paymentTerms" type="PaymentTerms" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Conditions applicable to the invoice payment</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="paymentMethod" type="MethodOfPayment" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Indication of the preferred financial instrument to effect payment</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="partialShipmentIndicator" type="xs:boolean" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Indication of whether the buyer allows partial shipment of the ordered goods 0=no, 1=yes</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="orderTotalLineAmount" type="Money" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Anticipated total of all line items (lineItemAmount), including line item charges and allowances</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="orderTotalTaxableAmount" type="Money" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Anticipated total amount subject to tax or fee.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="orderTotalTaxFeeAmount" type="Money" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Anticipated total of all tax and fee amounts.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="orderTotalAllowanceChargeAmount" type="Money" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Anticipated total of all allowance and charge amounts levied at the order header level.
+</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="orderTotalAmount" type="Money" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Anticipated total amount due, including invoice charges, allowances and taxes.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="deliveryTerms" type="DeliveryTerms" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Details concerning the terms of delivery</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="quotationReference" type="DocumentReference" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Reference to the related Quotation </xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="transportDetails" type="TransportDetails" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Specific details concerning the transport to be used or used, to ship the goods </xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="allowanceCharge" type="AllowanceCharges" minOccurs="0" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Specific charges and discounts applied at the document header level, e.g. Packing Charges, Freight Charges, Insurance Charges, Other Fees, Discount, etc. Exclusive of any charges or discounts applied at the line item level. </xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="lineItem" type="LineItem" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Details of the transaction line item</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="changeReason" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Specifies the reason for any changes that have been applied</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="code" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Change reason represented as a code</xs:documentation>
+														</xs:annotation>
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:maxLength value="35"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="description" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Description of change reason</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrderConfirmationRejection">
+		<xs:annotation>
+			<xs:documentation>Messagefor a OrderConfirmationAcceptance [created 0606-217] THIS MESSAGE IS NEW FOR RELEASE 3.0 AND IS WRITTEN ACCORDING TO THE SPECIFICATION DOCUMENT "TWIST PO V0.2 20060427.doc".  IT IS A STRONG CANDIDATE FOR REFACTORING AND AS SUCH THE ELEMENT NAMES WILL LIKELY CHANGE IN A FUTURE RELEASE</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="orderConfirmationRejection" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="OrderConfirmationContent">
+									<xs:sequence>
+										<xs:element name="rejectionReason">
+											<xs:annotation>
+												<xs:documentation>Specifies the reason for Order rejection</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="code">
+														<xs:annotation>
+															<xs:documentation>Cancellation reason represented as a code</xs:documentation>
+														</xs:annotation>
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:maxLength value="35"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="description" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Description of cancellation reason</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Quotation">
+		<xs:annotation>
+			<xs:documentation>Messagefor a quotation [created 0606-208] THIS MESSAGE IS NEW FOR RELEASE 3.0 AND IS WRITTEN ACCORDING TO THE SPECIFICATION DOCUMENT "TWIST PO V0.2 20060427.doc".  IT IS A STRONG CANDIDATE FOR REFACTORING AND AS SUCH THE ELEMENT NAMES WILL LIKELY CHANGE IN A FUTURE RELEASE (e.g. quotationDate - is similar in name and function to requestForQuotationDate (QuotationRequest) and orderDate (Order))</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="quotation" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="quotationNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Quotation</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Quotation was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="GUID" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the entity (Order, Order line item, etc) instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="validityPeriodStartDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Start date/time of the period for which the document (Quotation, Order, etc) is valid</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="validityPeriodEndDate" type="xs:dateTime" minOccurs="0"/>
+								<xs:element name="requestedDeliveryDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Delivery date/time requested by the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="latestDeliveryDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Latest delivery date/time allowed by the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationAttachment" type="Attachment" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>File attachments associated with the Request for Quotation</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="transactionCurrency" type="Currency">
+									<xs:annotation>
+										<xs:documentation>Coded identifier of the monetary unit for this and subsequent response transactions
+list: {'AED'|'AFN'|'ALL'… etc.  ISO 4217 currency codes
+</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="sellerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the seller</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="originatorInformation" type="Party" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the party that had the original demand for the goods and/or services (initiated the procurement process)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="paymentTerms" type="PaymentTerms" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Conditions applicable to the invoice payment</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="paymentMethod" type="MethodOfPayment" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Indication of the preferred financial instrument to effect payment</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="partialShipmentAllowedIndicator" type="xs:boolean" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Indication of whether the buyer allows partial shipment of the ordered goods (0=no,1=yes)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationTotalLineAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total of all line items (lineItemAmount), including line item charges and allowances</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationTotalTaxableAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total of all tax and fee amounts.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationTotalTaxFeeAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total of all allowance and charge amounts levied at the order header level.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationTotalAllowanceChargeAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total amount due, including invoice charges, allowances and taxes.	</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="quotationTotalAmount" type="Money" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Anticipated total of all tax and fee amounts.	</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="deliveryTerms" type="DeliveryTerms" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Details concerning the terms of delivery	</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForQuotationReference" type="DocumentReference" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Reference to the related Request for Quotation 	</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="contractReference" type="DocumentReference" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Reference to the buying agreement	
+</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="otherDocumentReference" type="DocumentReference" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Other document reference not already</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="transportDetails" type="TransportDetails" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Specific details concerning the transport to be used or used, to ship the goods </xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="allowanceCharge" type="AllowanceCharges" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Specific charges and discounts applied at the document header level, e.g. Packing Charges, Freight Charges, Insurance Charges, Other Fees, Discount, etc. Exclusive of any charges or discounts applied at the line item level. 	
+</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="lineItem" type="LineItem" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Details of the transaction line item</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Free form text applying to the entire document.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QuotationRequest">
+		<xs:annotation>
+			<xs:documentation>Message to request a quotation [created 0606-207]  THIS MESSAGE IS NEW FOR RELEASE 3.0 AND IS WRITTEN ACCORDING TO THE SPECIFICATION DOCUMENT "TWIST PO V0.2 20060427.doc".  IT IS A STRONG CANDIDATE FOR REFACTORING AND AS SUCH THE ELEMENT NAMES WILL LIKELY CHANGE IN A FUTURE RELEASE (e.g. requestForQuotationDate - is similar in name and function to quotationDate (Quotation) and orderDate (Order))</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="quotationRequest" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="requestForQuotationNumber" type="Identifier">
+									<xs:annotation>
+										<xs:documentation>Unique number assigned by the issuer to identify a Request for Quotation</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForQuotationDate" type="xs:date">
+									<xs:annotation>
+										<xs:documentation>Date the Request for Quotation was issued</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="GUID" type="GUID" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Computer-generated globally unique identifier (GUID) for the entity (Order, Order line item, etc) instance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestedDeliveryDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Delivery date/time requested by the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="latestDeliveryDate" type="xs:dateTime" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Latest delivery date/time allowed by the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="requestForQuotationAttachment" type="Attachment" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>File attachments associated with the Request for Quotation</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="transactionCurrency" type="Currency">
+									<xs:annotation>
+										<xs:documentation>Coded identifier of the monetary unit for this and subsequent response transactions
+list: {'AED'|'AFN'|'ALL'… etc.  ISO 4217 currency codes
+</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="buyerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the buyer</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="sellerInformation" type="Party">
+									<xs:annotation>
+										<xs:documentation>Information about the seller</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="originatorInformation" type="Party" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Information about the party that had the original demand for the goods and/or services (initiated the procurement process)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="partialShipmentAllowedIndicator" type="xs:boolean" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Indication of whether the buyer allows partial shipment of the ordered goods (0=no,1=yes)</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="lineItem" type="LineItem" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Details of the transaction line item</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Free form text applying to the entire document.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="GUID">
+		<xs:annotation>
+			<xs:documentation>[added (0606-220)]</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Identifier">
+		<xs:annotation>
+			<xs:documentation>[added (0606-82)]</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LineNumber">
+		<xs:annotation>
+			<xs:documentation>the type for an invoice line item number </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Measure">
+		<xs:annotation>
+			<xs:documentation>created 0606-223</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:simpleType name="OrderNumber">
+		<xs:annotation>
+			<xs:documentation>number for orders and invoices</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Quantity">
+		<xs:annotation>
+			<xs:documentation>created 0606-224</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:complexType name="Adjustment">
+		<xs:annotation>
+			<xs:documentation>created 0606-122</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="adjustmentReason" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>code identifying of the adjustment reason.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="adjusmentAmount" type="Money" minOccurs="0"/>
+			<xs:element name="adjustmentNote" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AllowanceCharges">
+		<xs:annotation>
+			<xs:documentation>complex type for invoice level charges (renamed from InvoiceCharges to AllowanceCharges 0606-110</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="allowanceChargeType">
+				<xs:annotation>
+					<xs:documentation>type of allowance or charges for the invoice item - eg. insurance, freight, commission[changed name from invoiceChargeType to allowanceChargeType 0606-114]</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code">
+							<xs:annotation>
+								<xs:documentation>type of allowance or charge expressed as a code</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="name">
+							<xs:annotation>
+								<xs:documentation>type of allowance or charge expressed as text</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="50"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="allowanceChargeCostCenter" type="xs:string" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>example business unit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowanceChargeAmount" type="Money">
+				<xs:annotation>
+					<xs:documentation>monetary amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowanceChargeFunctionCode">
+				<xs:annotation>
+					<xs:documentation>Code to indicate whether the AllowanceCharge is an allowance or a charge
+list: {'ALL'|'CHG'} [added 0606-112]
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ALL"/>
+						<xs:enumeration value="CHG"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prepaidCollectCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Code to indicate whether the AllowanceCharge is prepaid or collect
+list: {'CLCT'|'PRPD'} added0606-113
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="CLCT"/>
+						<xs:enumeration value="PRPD"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="allowanceChargeBasisAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>monetary value that is the basis on which the allowance or charge is calculated. [added 0606-117]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowanceChargeBasisQuantity" type="Quantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>quantity that is the basis on which the allowance or charge is calculated. [added 0606-118]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowanceChargePercent" type="Rate">
+				<xs:annotation>
+					<xs:documentation>Allowance or charge percentage rate used as the basis for calculating the allowance or charge amount  [added 0606-119]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Attachment">
+		<xs:annotation>
+			<xs:documentation>the type for invoice attachments</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fileURI" type="xs:anyURI"/>
+			<xs:element name="documentType">
+				<xs:annotation>
+					<xs:documentation>Type of document, e.g. Air Waybill, Bill of Lading, L/C, Purchase Order [changed name from type to documentType 0606-131]</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Bill of Lading"/>
+						<xs:enumeration value="Air Waybill"/>
+						<xs:enumeration value="L/C"/>
+						<xs:enumeration value="Purchase Order"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsignmentDetails">
+		<xs:annotation>
+			<xs:documentation>created 0606-108</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="grossWeightMeasure" type="Measure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total consignment gross weight (includes packaging)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="netWeightMeasure" type="Measure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total consignment net weight (excludes all packaging)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="netNetWeightMeasure" type="Measure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total consignment net net weight (excludes all packaging and conversion material)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grossMeasure" type="Measure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total consignment volume</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="packageQuantity" type="Quantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total number of packages within the consignment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="packageType" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>package type expressed as a code</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="description" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>description of package type</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="128"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="goodsDescription" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>general description of the goods within the consignment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shippingMarks" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>general description of the shipping marks applied to the consignment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="partialShipmentIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether or not the consignment is a partial (hipment 91=partial shipment 0=full shipment)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliverySchedule">
+		<xs:annotation>
+			<xs:documentation>created 0606-212</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestedDeliveryDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Delivery date/time requested by the Buyer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="earliestDeliveryDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Earliest delivery date/time allowed by the Buyer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="latestDeliveryDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Latest delivery date/time allowed by the Buyer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryQuantity" type="Quantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Delivery quantity requested by the Buyer for this schedule entry</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minimumQuantity" type="Quantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Minimum delivery quantity for this schedule entry</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="maximumQuantity" type="Quantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Maximum delivery quantity for this schedule entry</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryAddress" type="PostAddress" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Address of where the referenced goods are scheduled to be delivered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliveryTerms">
+		<xs:annotation>
+			<xs:documentation>created 0606-103</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="deliveryTermsIdentifier">
+				<xs:annotation>
+					<xs:documentation>unique identifier of the delivery terms referred to as INCOTERMS</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="EXW"/>
+						<xs:enumeration value="FCA"/>
+						<xs:enumeration value="FAS"/>
+						<xs:enumeration value="FOB"/>
+						<xs:enumeration value="CFR"/>
+						<xs:enumeration value="CIF"/>
+						<xs:enumeration value="CPT"/>
+						<xs:enumeration value="CIP"/>
+						<xs:enumeration value="DAF"/>
+						<xs:enumeration value="DES"/>
+						<xs:enumeration value="DEQ"/>
+						<xs:enumeration value="DDU"/>
+						<xs:enumeration value="DDP"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="deliveryTermsDescription" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>textual description of the delivery terms</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryTermsLocation" type="Location" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>designated location applicable to the delivery terms  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Dimension">
+		<xs:annotation>
+			<xs:documentation>created 0606-215</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dimensionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Code specifying the type of the dimension list: {‘HT’ - Height | 'LN' - Length | 'WD’ - Width}</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="HT"/>
+						<xs:enumeration value="LN"/>
+						<xs:enumeration value="WD"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="dimensionMeasure" type="Measure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Value of the dimension measurement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimensionMinimumMeasure" type="Measure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Minimum value of the dimension measurement </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dimensionMaximumMeasure" type="Measure" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Maximum value of the dimension measurement </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DiscountType">
+		<xs:annotation>
+			<xs:documentation>complex type for discounts </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="discountPercentage" type="xs:decimal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>the percentage discount to be applied for early payment </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="discountAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>amount for discount (to be deducted) on the total invoice for early payment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DocumentReference">
+		<xs:annotation>
+			<xs:documentation>created per 0606-83</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="documentIdentifier" type="Identifier"/>
+			<xs:element name="GUID" type="GUID" minOccurs="0"/>
+			<xs:element name="documentType" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Bill of Lading"/>
+						<xs:enumeration value="Air Waybill"/>
+						<xs:enumeration value="L/C"/>
+						<xs:enumeration value="Purchase Order"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="documentDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="documentVersion" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="acceptanceDateTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="documentStatus" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="copyIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>0=not a copy, 1=copy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issueLocation" type="Location" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialAcctInfo">
+		<xs:annotation>
+			<xs:documentation>created per 0606-205 currently not used</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bankAccountType" type="BankAccountType" minOccurs="0"/>
+			<xs:element name="bankAccountNumber" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="iBAN" type="IBAN" minOccurs="0"/>
+						<xs:element name="bBAN" type="BBAN" minOccurs="0"/>
+						<xs:element name="uPIC" type="UPIC" minOccurs="0"/>
+						<xs:element name="domesticId" minOccurs="0">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="35"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="bankAccountCCY" type="Currency" minOccurs="0"/>
+			<xs:element name="bankAccountName" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="70"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="bankInfo">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="BankInfo"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinanceRequestInvoiceDetail">
+		<xs:sequence>
+			<xs:element name="sequenceNumber" type="Identifier"/>
+			<xs:element name="invoiceStatus" type="InvoiceStatusType"/>
+			<xs:element name="invoiceStatusDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="financePlanNumber" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the finance plan identification number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="financePoolingIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the referenced Invoice(s) are to be considered for Invoice pooling (offset against a redefined fixed finance amount) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="invoiceCurrency" type="Currency" minOccurs="0"/>
+			<xs:element name="paymentCurrency" type="Currency" minOccurs="0"/>
+			<xs:element name="invoiceTotalTaxableAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total amount subject to tax or fee.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoiceTotalTaxFeeAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total of all tax and fee amounts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoiceTotalAllowanceChargeAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>total of all allowance and charge amounts levied at the invoice level.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoiceTotalAmount" type="Money">
+				<xs:annotation>
+					<xs:documentation>total amount due, including invoice charges, allowances and taxes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requestedPayment" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="SettlementDetail">
+							<xs:sequence>
+								<xs:element name="exchangeRate" type="ExchangeRate" minOccurs="0"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="invoiceReference" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="Invoice">
+							<xs:sequence>
+								<xs:element name="invoiceLineStatusDetail" type="LineStatusDetail" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InvoiceStatusType">
+		<xs:sequence>
+			<xs:element name="code" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Invoice status represented as a code
+list: {'ANS' - Approved For Normal Settlement | 'ADS' - Approved For Vendor Discounted Settlement | 'AFF' - Approved For Finance | 'REJ' - Rejected |  'PAP' - PartApproved | 'PNS' - PartApproved For Normal Settlement | 'PDS' - PartApproved For Supplier Discounted Settlement | 'PFF' - PartApproved For Finance}	0..1</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ANS"/>
+						<xs:enumeration value="ADS"/>
+						<xs:enumeration value="AFF"/>
+						<xs:enumeration value="REJ"/>
+						<xs:enumeration value="PAP"/>
+						<xs:enumeration value="PNS"/>
+						<xs:enumeration value="PDS"/>
+						<xs:enumeration value="PFF"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the invoice status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemQuantity">
+		<xs:annotation>
+			<xs:documentation>created to support multiple use in LineItem complex type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="quantity" type="Quantity"/>
+			<xs:element name="unitOfMeasure">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LineItem">
+		<xs:annotation>
+			<xs:documentation>created per 0606-211</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lineItemNumber" type="Identifier">
+				<xs:annotation>
+					<xs:documentation>Unique number of the transaction line item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineItemTypeCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the type line item by means of a code list: {‘LIN’ - Normal line item | ‘SBX’ – Substitute line item | ‘RPX’ - Replacement  line item}</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="LIN"/>
+						<xs:enumeration value="SBX"/>
+						<xs:enumeration value="RPX"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lineItemStatusCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the status of the line item by means of a code list: {‘ACP’ - Accepted by Seller| ‘REJ’ – Rejected by Seller | ‘PND’ – Pending by Seller | ‘ACW’ - Accepted without change by Seller | ‘ACX’ - Accepted with change by Seller | ‘DEL’ – Deleted by Buyer | ‘ADD’ – Added by Buyer| ‘CHG’ – Changed by Buyer}</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ACP"/>
+						<xs:enumeration value="REJ"/>
+						<xs:enumeration value="PND"/>
+						<xs:enumeration value="ACW"/>
+						<xs:enumeration value="ACX"/>
+						<xs:enumeration value="DEL"/>
+						<xs:enumeration value="ADD"/>
+						<xs:enumeration value="CHG"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="GUID" type="GUID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Computer-generated globally unique identifier (GUID) for the entity (Order, Order line item, etc) instance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineItemQuantity" type="ItemQuantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Quantity of product units and associated unit of measurement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineItemAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Calculated net amount (price plus charges, minus allowances, plus taxes) of the line item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineItemTaxableAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line item amount subject to a tax or fee</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineItemTaxFeeAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line item tax or fee amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minimumQuantity" type="ItemQuantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line item minimum supply quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="maximumQuantity" type="ItemQuantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Line item maximum supply quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="minimumBackOrderQuantity" type="ItemQuantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>minimumBackOrderQuantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="maximumBackOrderQuantity" type="ItemQuantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>maximumBackOrderQuantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="partialShipmentAllowedIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indication of whether the buyer allows partial shipment of the ordered goods 0=no, 1=yes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="backOrderAllowedIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indication of whether the buyer allows the ordered goods to placed on back order, partially or fully 0=no, 1=yes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="priceAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Price of the line item, calculated as pricePerUnit x lineItemQuantity, i.e. without any allowances, charges or taxes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePerUnit" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Price per unit of product </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="priceUnit" type="ItemQuantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Quantity and unit of measure to which the pricePerUnit applies</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productItem" type="ProductItem">
+				<xs:annotation>
+					<xs:documentation>Product details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowanceCharge" type="AllowanceCharges" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Individual line item allowance or charge amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quoteReference" type="DocumentReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to the related Quotation </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractReference" type="DocumentReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to the buying agreement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherDocumentReference" type="DocumentReference" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Other document reference not already specified for line item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="packagingDetails" type="PackagingDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Information concerning the packaging of the line item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LineStatusDetail">
+		<xs:sequence>
+			<xs:element name="lineItemNumber" type="Identifier">
+				<xs:annotation>
+					<xs:documentation>Unique number of the transaction line item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GUID" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Computer-generated globally unique identifier (GUID) for the line item instance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lineItemStatusCode">
+				<xs:annotation>
+					<xs:documentation>Specifies the status of the line item by means of a code
+list: {‘ACP’ - Accepted by Seller| ‘REJ’ – Rejected by Seller | ‘PND’ – Pending by Seller | ‘ACW’ - Accepted without change by Seller | ‘ACX’ - Accepted with change by Seller | ‘DEL’ – Deleted by Buyer | ‘ADD’ – Added by Buyer| ‘CHG’ – Changed by Buyer | 'ANS' - Approved For Normal Settlement | 'ADS' - Approved For Vendor Discounted Settlement | 'AFF' - Approved For Finance }
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ACP"/>
+						<xs:enumeration value="REJ"/>
+						<xs:enumeration value="PND"/>
+						<xs:enumeration value="ACW"/>
+						<xs:enumeration value="ACX"/>
+						<xs:enumeration value="DEL"/>
+						<xs:enumeration value="ADD"/>
+						<xs:enumeration value="CHG"/>
+						<xs:enumeration value="ANS"/>
+						<xs:enumeration value="ADS"/>
+						<xs:enumeration value="AFF"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lineRejectionReason" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the reason for rejection</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Rejection reason represented as a code
+list: {'DIS' – Disputed line }
+</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="DIS"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="description" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="lineResolutionResult" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the dispute resolution result</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Resolution result represented as a code
+list: {'ACC' – Accepted without change | 'AMD' – Accepted subject to change | ‘RES’ – Resubmitted}	0..1</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="ACC"/>
+									<xs:enumeration value="AMD"/>
+									<xs:enumeration value="RES"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="description" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Description of the rejection reason</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="disputeDetail" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="disputeType" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>the nature of the dispute e.g. incorrect quantity</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="invoiceData" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>original data on the invoice that is in dispute - quantity, unit price etc.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="disputeData" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>expected data on the invoice that is in dispute - quantity, unit price etc. </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="disputedAmountNet" type="Money">
+							<xs:annotation>
+								<xs:documentation>financial impact of the dispute, the difference between the original invoice NET and the adjusted value</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="disputedVATAmount" type="Money">
+							<xs:annotation>
+								<xs:documentation>financial impact of the dispute, difference original invoice GROSS amount for that line and adjusted value</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="disputeResolution" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>suggested way to resolve the dispute, eg by credit note, payment adjustment - source</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Location">
+		<xs:annotation>
+			<xs:documentation>created per 0606-84</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Location represented as a code</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="name" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name of location</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MethodOfPayment">
+		<xs:annotation>
+			<xs:documentation>created per 0606-87</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Payment method represented as a code</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of payment method list: {'direct payment'|'open account'|'telegraphic transfer'|'cheque'|'bank draft'|'documentary credit'</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="direct payment"/>
+						<xs:enumeration value="open account"/>
+						<xs:enumeration value="telegraphic transfer"/>
+						<xs:enumeration value="cheque"/>
+						<xs:enumeration value="bank draft"/>
+						<xs:enumeration value="documentary credit"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderConfirmationContent">
+		<xs:annotation>
+			<xs:documentation>Created as a complex type for shared use in OrderConfirmationAcceptance, OrderConfirmationAcceptanceWithAmmendment and OrderConfirmationRejection [0606-216]</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="orderConfirmationNumber" type="Identifier">
+				<xs:annotation>
+					<xs:documentation>Unique number assigned by the issuer to identify an Order Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderConfirmationDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Date the Order Confirmation was issued</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GUID" type="GUID" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Computer-generated globally unique identifier (GUID) for the entity (Order, Order line item, etc) instance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="acceptanceIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the referenced Order  has been accepted (true) or rejected (false)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="buyerInformation" type="Party">
+				<xs:annotation>
+					<xs:documentation>Information about the buyer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sellerInformation" type="Party">
+				<xs:annotation>
+					<xs:documentation>Information about the seller</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractReference" type="DocumentReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to the buying agreement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherDocumentReference" type="DocumentReference" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Other document reference not already</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Free form text applying to the entire document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PackagingDetails">
+		<xs:annotation>
+			<xs:documentation>created per 0606-214</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="packageQuantity" type="Quantity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Number of pieces per package</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="packagingType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of package Refer UN Recommendation No. 21 (Codes for Types of Packages ) http://www.unece.org/cefact/recommendations/     </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shippingMarks" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of the marks and numbers on a package </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Dimension" type="Dimension" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies the dimensions of the referenced package(s)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartyInformation">
+		<xs:annotation>
+			<xs:documentation>generic information for creditor(bill to) and debtor(bill from) information in both the invoice and dispute messages [modified 0606-136a]</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PartyContactInformation">
+				<xs:sequence>
+					<xs:element name="businessId" type="Identifier" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>to store the official business id [added 0606-138]
+</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="businessIdType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>official business id type
+list: {'SIREN'|'SIRET'|'SIC'|'other'}[added 0606-137]
+</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="SIREN"/>
+								<xs:enumeration value="SIRET"/>
+								<xs:enumeration value="SIC"/>
+								<xs:enumeration value="Other"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="individualContact" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="name">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:length value="70"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="contactInfo" type="ContactInfo"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="taxName" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Registered organisation name for tax reporting purposes [added 0606-139]</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="70"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="partyTaxNumber" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="35"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="bankingInformation" type="GenericAcctInfo" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PaymentTerms">
+		<xs:annotation>
+			<xs:documentation>complex type for payment terms </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="invoiceDueDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date the invoice payment is due</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paymentDuePeriod" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>the number of days within which the invoice should be paid (changed name and type 0606-126,127)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="dueDateTime" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The payment due date/time</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="durationMeasure" type="Measure" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Eg. the number of days within which the invoice should be paid</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="descriptionCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A description of the payment period expressed as a code
+list: {'EMTD (EndOfMonthOfDelivery)'|
+'EMTR (EndOfMonthOfReceipt)'|
+'EPRD (EndOfPeriodAfterDelivery)'|
+'EPRR (EndOfPeriodAfterReceipt)'|
+'IREC (PaymentOnReceiptOfInvoice)'|
+'PRMD (EndOfPeriodAfterEndOfDeliveryMonth)'|
+'PRMR (EndOfPeriodAfterEndOfReceiptMonth)}
+</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="EMTD"/>
+									<xs:enumeration value="EMTR"/>
+									<xs:enumeration value="EPRD"/>
+									<xs:enumeration value="EPRR"/>
+									<xs:enumeration value="IREC"/>
+									<xs:enumeration value="PRMD"/>
+									<xs:enumeration value="PRMR"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="description" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A text description of the payment period</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="discount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Payment conditions that apply to be eligible for a discount [changed name and type 0606-128,129]</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="startDateTime" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The start date/time of the discount period</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endDateTime" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The end date/time of the discount period</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="durationMeasure" type="Measure" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Eg. the number of days within which the payment should be paid to be eligible for a discount</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="descriptionCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A description of the discount period expressed as a code</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="description" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A text description of the discount period</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="discountPercentage" type="Rate" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>the percentage discount to be applied for early payment</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="discountAmount" type="Money" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>amount for discount (to be deducted) for early payment</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="paymentDiscount" type="DiscountType" minOccurs="0"/>
+			<xs:element name="paymentTermsIdentifier" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The identifier for the Payment Terms [added 0606-125]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="penalty" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Payment conditions that apply to incur a penalty [added 0606-130]</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="startDateTime" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The start date/time of the penalty period</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endDateTime" type="xs:dateTime" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>The end date/time of the penalty period</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="durationMeasure" type="Measure" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Eg. the number of days within which the payment should be paid to be eligible for a penalty </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="descriptionCode" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A description of the penalty period expressed as a code</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="description" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>A text description of the penalty period</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="penaltyPercentage" type="Rate" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>the percentage penalty to be applied for late payment</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="penaltyAmount" type="Money" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>amount for penalty (to be deducted) for late payment</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="paymentTermsClause" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>free text payment terms clause</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="35"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductItem">
+		<xs:annotation>
+			<xs:documentation>created from definition in invoiceDetail for reuse in Order 0606-242</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="productDesription">
+				<xs:annotation>
+					<xs:documentation>description of product or service delivered added 0606-185</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="70"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="productNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>seller's unique identifier of the product delivered added 0606-186 </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="productName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>branded name of product invoiced added 0606-187</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="buyerProductNumber" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>buyer's unique product identifier added 0606-188</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="manufacturerProductNumber" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>manufacturer's unique product identifier added 0606-189</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="standardProductNumber" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>unique identifier assigned according to a standard system added 0606-191</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="catalogueProductNumber" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>unique identifier assigned according to a cataloging system. added 0606-190</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherProductNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>added 0606-192</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="identifier" type="Identifier"/>
+						<xs:element name="description">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="70"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="commodityCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>coded classification of the product from the relevant statistical commodity list or customs tariff. Also known as the statistical heading or tariff heading  added 0606-193</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="quotaCategoryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>coded classification of the product quota purposes. added 0606-194</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="countryOfOrigin" type="Country" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The country in which the goods have been produced or manufactured. added 0606-195</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="manufacturerParty" type="PartyInformation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Information about the party who manufactured the product added 0606-196</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="brandName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The brand name for the item added 0606-197</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="modelName" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The model name for the item added 0606-198</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lotNumber" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The identification number assigned to a lot which includes the goods of the invoice line added 0606-199</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lotExpiryDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The expiry date of the lot added 0606-200</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productCharacteristic" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Identifies the characteristics of a product. added 0606-203</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="structuredCharacteristics" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="typeCode" minOccurs="0">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="15"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="value" minOccurs="0">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="otherCharacteristics" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="value" minOccurs="0">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="description" minOccurs="0">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:maxLength value="50"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaxInformation">
+		<xs:annotation>
+			<xs:documentation>details the tax applicable to a individual line item [created 0606-160]</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="netPaymentAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The invoice line amount subject to a tax or fee</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxAmount" type="Money" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The sum of all tax and fee amounts valid for the invoice line</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxReferenceNumber" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tax identification number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransportDetails">
+		<xs:annotation>
+			<xs:documentation>created 0606-106</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="transportMode">
+				<xs:annotation>
+					<xs:documentation>transport mode represented as a code
+list: {'1' - Sea | '2' - Rail | '3' - Road | '4' - Air | '6' - Multimodal | '8' - Inland water}
+</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="1 - Sea"/>
+						<xs:enumeration value="2 - Rail"/>
+						<xs:enumeration value="3 - Road"/>
+						<xs:enumeration value="4 - Air"/>
+						<xs:enumeration value="6 - Multimodal"/>
+						<xs:enumeration value="8 - Inland water"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="transportMeansType" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="code" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>type means of transport represented as a code</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="15"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="name" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>name of type of means of transport</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:maxLength value="35"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="transportMeansId" type="Identifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>identification of means of transport</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="placeOfDischarge" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Location where the goods are requested to be or were, discharged from the means of transport  [added 0606-213]</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SettlementDetail">
+		<xs:sequence>
+			<xs:element name="paymentDate" type="xs:date"/>
+			<xs:element name="paymentAmount" type="Money" minOccurs="0"/>
+			<xs:element name="paymentMethod" type="MethodOfPayment" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

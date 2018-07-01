@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+        ACORD TXLife Business Message/Transaction Specification
+        Revision: 2.09.00
+        Date: Thursday, December 18, 2003
+        (c) ACORD Corporation, 2000-2003 All Rights Reserved - www.acord.org
+        For Use Only by ACORD Members and parties obtaining written ACORD permission
+        under the ACORD Standards Terms and Conditions of Use
+        Produced by Blue Frog ADMServer - www.bluefrogsolutions.com
+
+-->
+<xsd:schema targetNamespace="http://ACORD.org/Standards/Life/2" xmlns="http://ACORD.org/Standards/Life/2" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="2.9.00" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="XMLife2.9.00.xsd" />
+	<xsd:element name="ChangeSubType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ChangeSubTypeKey" minOccurs="0" />
+				<xsd:element ref="ChangeSubTypeSysKey" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="ChangeTC" minOccurs="0" />
+				<xsd:element ref="TranContentCode" minOccurs="0" />
+				<xsd:element ref="ChangeBasedOn" minOccurs="0" />
+				<xsd:element ref="ElementName" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID" />
+			<xsd:attribute name="ChangeID" type="xsd:IDREF" />
+			<xsd:attribute name="DataRep" type="DATAREP_TYPES" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CriteriaExpression">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="Criteria" />
+				<xsd:sequence>
+					<xsd:element ref="CriteriaOperator" />
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element ref="Criteria" />
+						<xsd:element ref="CriteriaExpression" />
+					</xsd:choice>
+					<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DataTransmittalSubType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ObjectType" />
+				<xsd:element ref="TranContentCode" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FormInstanceDestination">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FormInstanceDestinationKey" minOccurs="0" />
+				<xsd:element ref="FormInstanceDestinationSysKey" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="FormInstanceDestinationType" minOccurs="0" />
+				<xsd:element ref="FormInstanceDestinationDesc" minOccurs="0" />
+				<xsd:element ref="MailToPartyID" minOccurs="0" />
+				<xsd:element ref="NumberOfCopies" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID" />
+			<xsd:attribute name="DataRep" type="DATAREP_TYPES" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FormInstanceRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FormInstanceRequestKey" minOccurs="0" />
+				<xsd:element ref="FormInstanceRequestSysKey" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="FormInstanceCategory" minOccurs="0" />
+				<xsd:element ref="FormInstanceKey" minOccurs="0" />
+				<xsd:element ref="FormName" minOccurs="0" />
+				<xsd:element ref="FormInstanceVersion" minOccurs="0" />
+				<xsd:element ref="RequestedLanguage" minOccurs="0" />
+				<xsd:element ref="CreationDate" minOccurs="0" />
+				<xsd:element ref="CreationTime" minOccurs="0" />
+				<xsd:element ref="ReprintInd" minOccurs="0" />
+				<xsd:element ref="FormInstanceDestination" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="IllustrationRequest" minOccurs="0" />
+				<xsd:element ref="IllustrationResult" minOccurs="0" />
+				<xsd:element ref="KeyedValue" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID" />
+			<xsd:attribute name="DataRep" type="DATAREP_TYPES" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IllustrationRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="StartDate" minOccurs="0" />
+				<xsd:element ref="EndDate" minOccurs="0" />
+				<xsd:element ref="RelaxLapseRulesInd" minOccurs="0" />
+				<xsd:element ref="WaivePolicyFeesInd" minOccurs="0" />
+				<xsd:element ref="StopOption" minOccurs="0" />
+				<xsd:element ref="StopAgeYears" minOccurs="0" />
+				<xsd:element ref="VariableProjectionType" minOccurs="0" />
+				<xsd:element ref="RequestBasis" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="IllustrationTxn" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="AnchorBasisID" type="xsd:IDREF" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IllustrationResult">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TaxFailDate" minOccurs="0" />
+				<xsd:element ref="ResultBasis" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="IllustrationTxn">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="IllusTxnPrimaryType" />
+				<xsd:element ref="IllusTxnSecondaryType" minOccurs="0" />
+				<xsd:element ref="IllusTxnTertiaryType" minOccurs="0" />
+				<xsd:element ref="IllusTxnAmt" minOccurs="0" />
+				<xsd:element ref="IllusTxnMode" minOccurs="0" />
+				<xsd:element ref="StartDate" minOccurs="0" />
+				<xsd:element ref="EndDate" minOccurs="0" />
+				<xsd:element ref="IncreasePercent" minOccurs="0" />
+				<xsd:element ref="OverrideStatePremiumTaxInd" minOccurs="0" />
+				<xsd:element ref="OverrideStatePremiumTaxAmt" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="CoverageRef" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MIBRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MIBRecipientList" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="MIBPriority" minOccurs="0" />
+				<xsd:element ref="MIBSearchDepth" minOccurs="0" />
+				<xsd:choice>
+					<xsd:element ref="MIBServiceDescriptor" maxOccurs="unbounded" />
+					<xsd:element ref="MIBServiceConfigurationID" minOccurs="0" />
+				</xsd:choice>
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MIBResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MIBRecipientList" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="MIBPriority" minOccurs="0" />
+				<xsd:element ref="MIBSearchDepth" minOccurs="0" />
+				<xsd:choice>
+					<xsd:element ref="MIBServiceDescriptor" maxOccurs="unbounded" />
+					<xsd:element ref="MIBServiceConfigurationID" minOccurs="0" />
+				</xsd:choice>
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MIBServiceDescriptor">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MIBService" minOccurs="0" />
+				<xsd:element ref="MIBServiceOptions" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MIBServiceOptions">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MIBFollowUpInd" minOccurs="0" />
+				<xsd:element ref="MIBLimitedInfoSearchInd" minOccurs="0" />
+				<xsd:element ref="MIBPolicyNumberSearchInd" minOccurs="0" />
+				<xsd:element ref="FileCode" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ObjectTypeCC">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ObjectType" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PolicyActivityList">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="SeqNum" />
+				<xsd:element ref="PolicyActivity" />
+				<xsd:element ref="PolicyActivityDate" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProxyVendor">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VendorName" />
+				<xsd:element ref="AppName" />
+				<xsd:element ref="AppVer" />
+				<xsd:element ref="SeqNum" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ReinsuranceRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ReinsReportPeriodEndDate" />
+				<xsd:element ref="ReinsTranModel" />
+				<xsd:element ref="PolicyActivityList" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="RequestBasis">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="BasisName" />
+				<xsd:element ref="InterestAssumption" minOccurs="0" />
+				<xsd:element ref="InterestAssumptionRate" minOccurs="0" />
+				<xsd:element ref="MortalityAssumption" minOccurs="0" />
+				<xsd:element ref="MortalityAssumptionBlend" minOccurs="0" />
+				<xsd:element ref="MortalityReEntryInd" minOccurs="0" />
+				<xsd:element ref="DividendAssumption" minOccurs="0" />
+				<xsd:element ref="DividendAssumptionBlend" minOccurs="0" />
+				<xsd:element ref="IllustrateNonGuarBonusInd" minOccurs="0" />
+				<xsd:element ref="LifeExpectancy" minOccurs="0" />
+				<xsd:element ref="JointLifeExpectancy" minOccurs="0" />
+				<xsd:element ref="ExclusionRatio" minOccurs="0" />
+				<xsd:element ref="GtdPayoutAmt" minOccurs="0" />
+				<xsd:element ref="InternalRateOfReturn" minOccurs="0" />
+				<xsd:element ref="LastGtdPayoutDate" minOccurs="0" />
+				<xsd:element ref="MaxMortalityAge" minOccurs="0" />
+				<xsd:element ref="PayoutsCertain" minOccurs="0" />
+				<xsd:element ref="PayoutAmt" minOccurs="0" />
+				<xsd:element ref="SinglePremiumAmt" minOccurs="0" />
+				<xsd:element ref="StatePremiumTaxRate" minOccurs="0" />
+				<xsd:element ref="PolFee" minOccurs="0" />
+				<xsd:element ref="VectorRequest" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ResultBasis">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GDBComplianceEndDate" minOccurs="0" />
+				<xsd:element ref="LapseDate" minOccurs="0" />
+				<xsd:element ref="LapseReason" minOccurs="0" />
+				<xsd:element ref="InterestAssumption" minOccurs="0" />
+				<xsd:element ref="InterestAssumptionRate" minOccurs="0" />
+				<xsd:element ref="MortalityAssumption" minOccurs="0" />
+				<xsd:element ref="MortalityAssumptionBlend" minOccurs="0" />
+				<xsd:element ref="DividendAssumption" minOccurs="0" />
+				<xsd:element ref="DividendAssumptionBlend" minOccurs="0" />
+				<xsd:element ref="Vector" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ResultInfo">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ResultInfoCode" minOccurs="0" />
+				<xsd:element ref="ResultInfoDesc" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="ProblemRef" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TargetURL">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="URLAddress" minOccurs="0" />
+				<xsd:element ref="SessionExpirationDate" minOccurs="0" />
+				<xsd:element ref="SessionExpirationTime" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TransResult">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ResultCode" />
+				<xsd:element ref="ConfirmationID" minOccurs="0" />
+				<xsd:element ref="RecordsFound" minOccurs="0" />
+				<xsd:element ref="ResultInfo" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TXLife">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:sequence>
+					<xsd:element ref="UserAuthRequest" minOccurs="0" />
+					<xsd:element ref="TXLifeRequest" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+				<xsd:sequence>
+					<xsd:element ref="UserAuthResponse" minOccurs="0" />
+					<xsd:element ref="TXLifeResponse" minOccurs="0" maxOccurs="unbounded" />
+					<xsd:element ref="TXLifeNotify" minOccurs="0" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:choice>
+			<xsd:attribute name="Version" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TXLifeNotify">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TransRefGUID" />
+				<xsd:element ref="TransType" />
+				<xsd:element ref="TransExeDate" minOccurs="0" />
+				<xsd:element ref="TransExeTime" minOccurs="0" />
+				<xsd:element ref="TransMode" minOccurs="0" />
+				<xsd:element ref="InquiryLevel" minOccurs="0" />
+				<xsd:element ref="MaxRecords" minOccurs="0" />
+				<xsd:element ref="StartRecord" minOccurs="0" />
+				<xsd:element ref="StartDate" minOccurs="0" />
+				<xsd:element ref="EndDate" minOccurs="0" />
+				<xsd:element ref="PendingResponseOK" minOccurs="0" />
+				<xsd:element ref="NoResponseOK" minOccurs="0" />
+				<xsd:element ref="TestIndicator" minOccurs="0" />
+				<xsd:element ref="IllustrationRequest" minOccurs="0" />
+				<xsd:element ref="MIBRequest" minOccurs="0" />
+				<xsd:element ref="TransResult" minOccurs="0" />
+				<xsd:element ref="OLifE" minOccurs="0" />
+				<xsd:element ref="XTbML" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TXLifeRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TransRefGUID" />
+				<xsd:element ref="TransType" />
+				<xsd:element ref="TransSubType" minOccurs="0" />
+				<xsd:element ref="DataTransmittalSubType" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="ObjectTypeCC" minOccurs="0" />
+				<xsd:element ref="TransExeDate" minOccurs="0" />
+				<xsd:element ref="TransExeTime" minOccurs="0" />
+				<xsd:element ref="TransEffDate" minOccurs="0" />
+				<xsd:element ref="TransMode" minOccurs="0" />
+				<xsd:element ref="InquiryLevel" minOccurs="0" />
+				<xsd:element ref="MaxRecords" minOccurs="0" />
+				<xsd:element ref="NextRecord" minOccurs="0" />
+				<xsd:element ref="StartRecord" minOccurs="0" />
+				<xsd:element ref="StartDate" minOccurs="0" />
+				<xsd:element ref="EndDate" minOccurs="0" />
+				<xsd:element ref="PendingResponseOK" minOccurs="0" />
+				<xsd:element ref="NoResponseOK" minOccurs="0" />
+				<xsd:element ref="TestIndicator" minOccurs="0" />
+				<xsd:element ref="URLTargetRequestInd" minOccurs="0" />
+				<xsd:element ref="SupressNotificationsInd" minOccurs="0" />
+				<xsd:element ref="CaseStatusOnResponseInd" minOccurs="0" />
+				<xsd:element ref="BenefitsInquiryType" minOccurs="0" />
+				<xsd:element ref="PrimaryObjectType" minOccurs="0" />
+				<xsd:element ref="CriteriaExpression" minOccurs="0" />
+				<xsd:element ref="IllustrationRequest" minOccurs="0" />
+				<xsd:element ref="MIBRequest" minOccurs="0" />
+				<xsd:element ref="ReinsuranceRequest" minOccurs="0" />
+				<xsd:element ref="ChangeSubType" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="FormInstanceRequest" minOccurs="0" />
+				<xsd:element ref="OLifE" minOccurs="0" />
+				<xsd:element ref="XTbML" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID" />
+			<xsd:attribute name="PrimaryObjectID" type="xsd:IDREF" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TXLifeResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TransRefGUID" />
+				<xsd:element ref="TransType" />
+				<xsd:element ref="TransSubType" minOccurs="0" />
+				<xsd:element ref="TransExeDate" />
+				<xsd:element ref="TransExeTime" />
+				<xsd:element ref="TransMode" minOccurs="0" />
+				<xsd:element ref="InquiryLevel" minOccurs="0" />
+				<xsd:element ref="MaxRecords" minOccurs="0" />
+				<xsd:element ref="NextRecord" minOccurs="0" />
+				<xsd:element ref="StartRecord" minOccurs="0" />
+				<xsd:element ref="StartDate" minOccurs="0" />
+				<xsd:element ref="EndDate" minOccurs="0" />
+				<xsd:element ref="PendingResponseOK" minOccurs="0" />
+				<xsd:element ref="NoResponseOK" minOccurs="0" />
+				<xsd:element ref="TestIndicator" minOccurs="0" />
+				<xsd:element ref="URLTargetRequestInd" minOccurs="0" />
+				<xsd:element ref="BenefitsInquiryType" minOccurs="0" />
+				<xsd:element ref="ChangeSubType" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="CriteriaExpression" minOccurs="0" />
+				<xsd:element ref="IllustrationRequest" minOccurs="0" />
+				<xsd:element ref="IllustrationResult" minOccurs="0" />
+				<xsd:element ref="MIBResponse" minOccurs="0" />
+				<xsd:element ref="TransResult" />
+				<xsd:element ref="TargetURL" minOccurs="0" />
+				<xsd:element ref="OLifE" minOccurs="0" />
+				<xsd:element ref="XTbML" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="PrimaryObjectID" type="xsd:IDREF" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UserAuthRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice>
+					<xsd:sequence>
+						<xsd:element ref="UserLoginName" minOccurs="0" />
+						<xsd:element ref="UserPswd" minOccurs="0" />
+					</xsd:sequence>
+					<xsd:sequence>
+						<xsd:element ref="UserSessionKey" minOccurs="0" />
+					</xsd:sequence>
+				</xsd:choice>
+				<xsd:element ref="UserDomain" minOccurs="0" />
+				<xsd:element ref="UserDate" minOccurs="0" />
+				<xsd:element ref="UserTime" minOccurs="0" />
+				<xsd:element ref="VendorApp" minOccurs="0" />
+				<xsd:element ref="ProxyVendor" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UserAuthResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TransResult" minOccurs="0" />
+				<xsd:element ref="SvrDate" minOccurs="0" />
+				<xsd:element ref="SvrTime" minOccurs="0" />
+				<xsd:element ref="UserSessionKey" minOccurs="0" />
+				<xsd:element ref="UserSessionKeyExpDate" minOccurs="0" />
+				<xsd:element ref="UserSessionKeyExpTime" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UserPswd">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="CryptType" minOccurs="0" />
+				<xsd:choice>
+					<xsd:element ref="Pswd" minOccurs="0" />
+					<xsd:element ref="CryptPswd" minOccurs="0" />
+				</xsd:choice>
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Vector">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VectorType" minOccurs="0" />
+				<xsd:element ref="VectorBaseDate" minOccurs="0" />
+				<xsd:element ref="VectorEndDate" minOccurs="0" />
+				<xsd:element ref="VectorMode" minOccurs="0" />
+				<xsd:element ref="InitialValue" minOccurs="0" />
+				<xsd:element ref="V" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="VectorItem">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VectorType" minOccurs="0" />
+				<xsd:element ref="VectorBaseDate" minOccurs="0" />
+				<xsd:element ref="TimingOption" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="VectorRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VectorSetType" minOccurs="0" />
+				<xsd:element ref="VectorItem" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="VendorApp">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VendorName" minOccurs="0" />
+				<xsd:element ref="AppName" minOccurs="0" />
+				<xsd:element ref="AppVer" minOccurs="0" />
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- ********** PROPERTIES ********** -->
+	<xsd:element name="AppName" type="xsd:string" />
+	<xsd:element name="AppVer" type="xsd:string" />
+	<xsd:element name="BasisName" type="xsd:string" />
+	<xsd:element name="BenefitsInquiryType" type="BENEFIT_INQUIRY" />
+	<xsd:element name="CaseStatusOnResponseInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="ChangeBasedOn" type="OLI_LU_CHNGBASIS" />
+	<xsd:element name="ChangeSubTypeKey" type="PERSISTKEY" />
+	<xsd:element name="ChangeSubTypeSysKey" type="SYSKEY" />
+	<xsd:element name="ChangeTC" type="OLI_LU_CHNGTYPE" />
+	<xsd:element name="ConfirmationID" type="xsd:string" />
+	<xsd:element name="CriteriaOperator" type="CRITERIA_OPERATOR" />
+	<xsd:element name="CryptPswd" type="xsd:string" />
+	<xsd:element name="CryptType" type="xsd:string" />
+	<xsd:element name="DividendAssumption" type="TC_MORTASSUMPTION" />
+	<xsd:element name="DividendAssumptionBlend" type="xsd:string" />
+	<xsd:element name="ElementName" type="xsd:string" />
+	<xsd:element name="FileCode" type="xsd:string" />
+	<xsd:element name="FormInstanceDestinationDesc" type="xsd:string" />
+	<xsd:element name="FormInstanceDestinationKey" type="PERSISTKEY" />
+	<xsd:element name="FormInstanceDestinationType" type="OLI_LU_FORMINSTDESTTYPE" />
+	<xsd:element name="FormInstanceRequestKey" type="PERSISTKEY" />
+	<xsd:element name="GDBComplianceEndDate" type="xsd:date" />
+	<xsd:element name="GtdPayoutAmt" type="xsd:decimal" />
+	<xsd:element name="IllustrateNonGuarBonusInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="IllusTxnAmt" type="xsd:decimal" />
+	<xsd:element name="IllusTxnMode" type="OLI_LU_PAYMODE" />
+	<xsd:element name="IllusTxnPrimaryType" type="TC_ILLUSPRIMTYPE" />
+	<xsd:element name="IllusTxnSecondaryType" type="TC_ILLUSSECTYPE" />
+	<xsd:element name="IllusTxnTertiaryType" type="TC_ILLUSTERTTYPE" />
+	<xsd:element name="IncreasePercent" type="xsd:double" />
+	<xsd:element name="InitialValue" type="xsd:decimal" />
+	<xsd:element name="InquiryLevel" type="INQUIRY_LEVEL_CODES" />
+	<xsd:element name="InterestAssumption" type="TC_INTASSUMPTION" />
+	<xsd:element name="InterestAssumptionRate" type="xsd:double" />
+	<xsd:element name="InternalRateOfReturn" type="xsd:double" />
+	<xsd:element name="JointLifeExpectancy" type="xsd:double" />
+	<xsd:element name="LapseDate" type="xsd:date" />
+	<xsd:element name="LapseReason" type="LAPSE_REASON" />
+	<xsd:element name="LastGtdPayoutDate" type="xsd:date" />
+	<xsd:element name="LifeExpectancy" type="xsd:double" />
+	<xsd:element name="MailToPartyID" type="xsd:IDREF" />
+	<xsd:element name="MaxMortalityAge" type="xsd:integer" />
+	<xsd:element name="MaxRecords" type="xsd:integer" />
+	<xsd:element name="MIBFollowUpInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="MIBLimitedInfoSearchInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="MIBPolicyNumberSearchInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="MIBPriority" type="TC_MIB_PRIORITY" />
+	<xsd:element name="MIBRecipientList" type="xsd:string" />
+	<xsd:element name="MIBSearchDepth" type="TC_MIB_SEARCHDEPTH" />
+	<xsd:element name="MIBService" type="TC_MIB_SERVICE" />
+	<xsd:element name="MIBServiceConfigurationID" type="xsd:string" />
+	<xsd:element name="MortalityAssumption" type="TC_MORTASSUMPTION" />
+	<xsd:element name="MortalityAssumptionBlend" type="xsd:double" />
+	<xsd:element name="MortalityReEntryInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="NextRecord" type="xsd:integer" />
+	<xsd:element name="NoResponseOK" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="NumberOfCopies" type="xsd:integer" />
+	<xsd:element name="OverrideStatePremiumTaxAmt" type="xsd:double" />
+	<xsd:element name="OverrideStatePremiumTaxInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="PayoutsCertain" type="xsd:integer" />
+	<xsd:element name="PendingResponseOK" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="PolicyActivity" type="REINS_SUBTRAN_CODES" />
+	<xsd:element name="PolicyActivityDate" type="xsd:date" />
+	<xsd:element name="PrimaryObjectType" type="OLI_LU_OBJECTTYPE" />
+	<xsd:element name="Pswd" type="xsd:string" />
+	<xsd:element name="RecordsFound" type="xsd:integer" />
+	<xsd:element name="ReinsReportPeriodEndDate" type="xsd:date" />
+	<xsd:element name="ReinsTranModel" type="REINS_TRANMODEL_CODES" />
+	<xsd:element name="RelaxLapseRulesInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="ReprintInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="RequestedLanguage" type="OLI_LU_LANGUAGES" />
+	<xsd:element name="ResultCode" type="RESULT_CODES" />
+	<xsd:element name="ResultInfoCode" type="RESULT_INFO_CODES" />
+	<xsd:element name="ResultInfoDesc" type="xsd:string" />
+	<xsd:element name="SeqNum" type="xsd:integer" />
+	<xsd:element name="SessionExpirationDate" type="xsd:date" />
+	<xsd:element name="SessionExpirationTime" type="xsd:time" />
+	<xsd:element name="SinglePremiumAmt" type="xsd:decimal" />
+	<xsd:element name="StartRecord" type="xsd:integer" />
+	<xsd:element name="StatePremiumTaxRate" type="xsd:double" />
+	<xsd:element name="StopAgeYears" type="xsd:integer" />
+	<xsd:element name="StopOption" type="OLI_LU_STOPOPTION" />
+	<xsd:element name="SupressNotificationsInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="SvrDate" type="xsd:date" />
+	<xsd:element name="SvrTime" type="xsd:time" />
+	<xsd:element name="TaxFailDate" type="xsd:date" />
+	<xsd:element name="TestIndicator" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="TimingOption" type="TC_TIMINGOPTION" />
+	<xsd:element name="TransEffDate" type="xsd:date" />
+	<xsd:element name="TransExeDate" type="xsd:date" />
+	<xsd:element name="TransExeTime" type="xsd:time" />
+	<xsd:element name="TransMode" type="TRANS_MODE_CODES" />
+	<xsd:element name="TransRefGUID" type="xsd:string" />
+	<xsd:element name="TransSubType" type="TRANS_SUBTYPE_CODES" />
+	<xsd:element name="TransType" type="OLI_LU_TRANS_TYPE_CODES"/>
+	<xsd:element name="URLAddress" type="xsd:string" />
+	<xsd:element name="URLTargetRequestInd" type="OLI_LU_BOOLEAN" />
+	<xsd:element name="UserDate" type="xsd:date" />
+	<xsd:element name="UserDomain" type="xsd:string" />
+	<xsd:element name="UserLoginName" type="xsd:string" />
+	<xsd:element name="UserSessionKey" type="xsd:string" />
+	<xsd:element name="UserSessionKeyExpDate" type="xsd:date" />
+	<xsd:element name="UserSessionKeyExpTime" type="xsd:time" />
+	<xsd:element name="UserTime" type="xsd:time" />
+	<xsd:element name="VariableProjectionType" type="ILL_VAR_PROJTYPE" />
+	<xsd:element name="VectorBaseDate" type="xsd:date" />
+	<xsd:element name="VectorEndDate" type="xsd:date" />
+	<xsd:element name="VectorMode" type="OLI_LU_PAYMODE" />
+	<xsd:element name="VectorSetType" type="TC_VECTORSETTYPE" />
+	<xsd:element name="VectorType" type="TC_VECTOR" />
+	<xsd:element name="VendorName">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="VendorCode" type="xsd:string" use="required" />
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="WaivePolicyFeesInd" type="OLI_LU_BOOLEAN" />
+	<!-- ********** LOOKUPS ********** -->
+	<xsd:complexType name="BENEFIT_INQUIRY">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE" />
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="CRITERIA_OPERATOR">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="ILL_VAR_PROJTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="INQUIRY_LEVEL_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="LAPSE_REASON">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_CHNGBASIS">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_CHNGTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_STOPOPTION">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="REINS_SUBTRAN_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="REINS_TRANMODEL_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="REINS_TRANTYPE_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="RESULT_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="RESULT_INFO_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_ILLUSPRIMTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_ILLUSSECTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_ILLUSTERTTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_INTASSUMPTION">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_MIB_PRIORITY">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_MIB_SEARCHDEPTH">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_MIB_SERVICE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_MORTASSUMPTION">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_TIMINGOPTION">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_VECTOR">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TC_VECTORSETTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TRANS_MODE_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="TRANS_SUBTYPE_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE" />
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:schema>

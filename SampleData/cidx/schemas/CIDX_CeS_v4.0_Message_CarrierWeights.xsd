@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:cidx:names:specification:ces:schema:all:4:0">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd" />
+  <xsd:element name="CarrierWeights" type="CarrierWeightsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description />
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CarrierWeightsType">
+    <xsd:sequence>
+      <xsd:element ref="Header" />
+      <xsd:element ref="CarrierWeightsBody" />
+    </xsd:sequence>
+    <xsd:attribute name="Version" type="cidxToken" use="required" fixed="4.0" />
+  </xsd:complexType>
+  <xsd:element name="CarrierWeightsBody" type="CarrierWeightsBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The body of the carrier weights message.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CarrierWeightsBodyType">
+    <xsd:sequence>
+      <xsd:element ref="CarrierWeightsProperties" />
+      <xsd:element ref="CarrierWeightsPartners" />
+      <xsd:element ref="CarrierWeightsDetails" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CarrierWeightsDetails" type="CarrierWeightsDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The details of the carrier weights message</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CarrierWeightsDetailsType">
+    <xsd:sequence>
+      <xsd:element ref="EquipmentIdentifier" />
+      <xsd:element ref="ScaleDate" />
+      <xsd:element ref="Weight" />
+      <xsd:element ref="EquipmentOwnershipCode" minOccurs="0" />
+      <xsd:element ref="TareWeight" minOccurs="0" />
+      <xsd:element ref="WeightAllowance" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element ref="ReferenceInformation" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CarrierWeightsPartners" type="CarrierWeightsPartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The trading partner structure of the carrier weights message</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CarrierWeightsPartnersType">
+    <xsd:sequence>
+      <xsd:element ref="Carrier" />
+      <xsd:element ref="Shipper" />
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CarrierWeightsProperties" type="CarrierWeightsPropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The properties structure of the carrier weights message</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CarrierWeightsPropertiesType">
+    <xsd:sequence>
+      <xsd:element ref="LoadTenderInformation" />
+      <xsd:element ref="LanguageCode" />
+      <xsd:element ref="SpecialInstructions" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element ref="ReferenceInformation" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element ref="RequestedDocument" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ScaleDate" type="ScaleDateType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Date and/or time that the equipment was weighed.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ScaleDateType">
+    <xsd:sequence>
+      <xsd:element ref="DateTime" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="Weight" type="WeightType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Weight of the equipment unit.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="WeightType">
+    <xsd:sequence>
+      <xsd:element ref="SpecifiedMeasurement" />
+    </xsd:sequence>
+    <xsd:attribute name="WeightQualifier" type="cidxListWeightType" use="required" />
+  </xsd:complexType>
+  <xsd:element name="WeightAllowance" type="WeightAllowanceType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Weight allowance variation for the equipment unit.</Description>
+          <SampleData>35000</SampleData>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="WeightAllowanceType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:nonNegativeInteger" />
+    </xsd:simpleContent>
+  </xsd:complexType>
+</xsd:schema>

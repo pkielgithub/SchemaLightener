@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+
+    ** OAGIS® Revision:    9.2  **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Instance Example. 
+
+    The data examples between the brackets contained in this XML file are not meant to be real data. The data exists in order to show an example of an instance of XML that matches the corresponding XSD published by OAGi.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+     XML Instance 
+     
+    Name: /OAGIS/9_2/References/GeneratedBODInstances/AcknowledgeConfirmWIP.xml
+-->
+<AcknowledgeConfirmWIP xmlns="http://www.openapplications.org/oagis/9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openapplications.org/oagis/9 ../../BODs/Developer/AcknowledgeConfirmWIP.xsd" languageCode="en-US" versionID="normalizedString" releaseID="normalizedString" systemEnvironmentCode="Production">
+	<ApplicationArea>
+		<Sender>
+			<LogicalID schemeAgencyName="String" schemeAgencyID="normalizedString" schemeVersionID="normalizedString" schemeName="String" schemeURI="http://www.openapplications.org" schemeID="normalizedString" schemeDataURI="http://www.openapplications.org">normalizedString</LogicalID>
+			<ComponentID schemeAgencyName="String" schemeAgencyID="normalizedString" schemeVersionID="normalizedString" schemeName="String" schemeURI="http://www.openapplications.org" schemeID="normalizedString" schemeDataURI="http://www.openapplications.org">normalizedString</ComponentID>
+			<TaskID schemeAgencyName="String" schemeAgencyID="normalizedString" schemeVersionID="normalizedString" schemeName="String" schemeURI="http://www.openapplications.org" schemeID="normalizedString" schemeDataURI="http://www.openapplications.org">normalizedString</TaskID>
+			<ReferenceID schemeAgencyName="String" schemeAgencyID="normalizedString" schemeVersionID="normalizedString" schemeName="String" schemeURI="http://www.openapplications.org" schemeID="normalizedString" schemeDataURI="http://www.openapplications.org">normalizedString</ReferenceID>
+			<ConfirmationCode languageID="en-us" listName="String" listAgencyName="String" listURI="http://www.openapplications.org" listSchemeURI="http://www.openapplications.org" listID="normalizedString" listVersionID="normalizedString" name="String" listAgencyID="normalizedString">Always</ConfirmationCode>
+			<AuthorizationID schemeAgencyName="String" schemeAgencyID="normalizedString" schemeVersionID="normalizedString" schemeName="String" schemeURI="http://www.openapplications.org" schemeID="normalizedString" schemeDataURI="http://www.openapplications.org">normalizedString</AuthorizationID>
+		</Sender>
+		<CreationDateTime>1967-08-13</CreationDateTime>
+		<Signature qualifyingAgencyId="normalizedString"/>
+		<BODID schemeAgencyName="String" schemeAgencyID="normalizedString" schemeVersionID="normalizedString" schemeName="String" schemeURI="http://www.openapplications.org" schemeID="normalizedString" schemeDataURI="http://www.openapplications.org">normalizedString</BODID>
+		<UserArea/>
+	</ApplicationArea>
+	<DataArea>
+		<Acknowledge/>
+		<ConfirmWIP/>
+	</DataArea>
+</AcknowledgeConfirmWIP>

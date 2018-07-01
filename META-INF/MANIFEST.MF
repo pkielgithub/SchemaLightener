@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: lib/saxon9.jar
+Main-Class: SchemaLightener
+

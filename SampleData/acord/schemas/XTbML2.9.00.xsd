@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--    -->
+<!--
+     XTbML2.8.92 XSD
+      Date:   2003 Jun 24
+      (c) ACORD Corporation, 2002 - 2003 - All Rights Reserved
+ -->
+<xsd:schema targetNamespace="http://ACORD.org/Standards/Life/2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ACORD.org/Standards/Life/2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.9.00">
+	<xsd:include schemaLocation="XLifeBase2.9.00.xsd"/>
+	<xsd:element name="Axis">
+		<xsd:annotation>
+			<xsd:documentation>Axis Value Collection</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="Axis" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="V" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:choice>
+			<xsd:attribute name="T" type="xsd:string" use="optional"/>
+			<xsd:attribute name="DT" type="xsd:string" use="optional"/>
+			<xsd:attribute name="AxisDefID" type="xsd:IDREF"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AxisDef">
+		<xsd:annotation>
+			<xsd:documentation>Definition of each Axis</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ScaleType" minOccurs="0"/>
+				<xsd:element ref="ScaleSubType" minOccurs="0"/>
+				<xsd:element ref="AxisName" minOccurs="0"/>
+				<xsd:choice>
+					<xsd:sequence>
+						<xsd:element ref="MinScaleDate"/>
+						<xsd:element ref="MaxScaleDate" minOccurs="0"/>
+					</xsd:sequence>
+					<xsd:sequence>
+						<xsd:element ref="MinScaleValue"/>
+						<xsd:element ref="MaxScaleValue" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:choice>
+				<xsd:element ref="Increment" minOccurs="0"/>
+				<xsd:element ref="Mode" minOccurs="0"/>
+				<xsd:element ref="Continuous" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ContentClassification">
+		<xsd:annotation>
+			<xsd:documentation>Identifying Information about the table</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ContentClassificationKey" minOccurs="0"/>
+				<xsd:element ref="TableIdentity" minOccurs="0"/>
+				<xsd:element ref="ProviderDomain" minOccurs="0"/>
+				<xsd:element ref="ProviderName" minOccurs="0"/>
+				<xsd:element ref="TableURL" minOccurs="0"/>
+				<xsd:element ref="TableReference" minOccurs="0"/>
+				<xsd:element ref="ContentType"/>
+				<xsd:element ref="TableName" minOccurs="0"/>
+				<xsd:element ref="TableDescription" minOccurs="0"/>
+				<xsd:element ref="EffDate" minOccurs="0"/>
+				<xsd:element ref="Comments" minOccurs="0"/>
+				<xsd:element ref="KeyWord" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="Extension" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="EnumeratedValue">
+		<xsd:annotation>
+			<xsd:documentation>Specific Value</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="t" type="xsd:integer" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Extension">
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:any processContents="skip" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID"/>
+			<xsd:attribute name="VendorCode" type="xsd:string" use="required"/>
+			<xsd:attribute name="ExtensionCode" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Key">
+		<xsd:annotation>
+			<xsd:documentation>Key Value Collection</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="Key" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="Axis" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="V" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:choice>
+			<xsd:attribute name="tc" use="optional"/>
+			<xsd:attribute name="KeyIs" type="xsd:string"/>
+			<xsd:attribute name="KeyDefID" type="xsd:IDREF"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="KeyDef">
+		<xsd:annotation>
+			<xsd:documentation>definition of the contents of the Key</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="KeyType"/>
+				<xsd:element ref="KeySubType" minOccurs="0"/>
+				<xsd:element ref="KeySubClassType" minOccurs="0"/>
+				<xsd:element ref="KeySubClass" minOccurs="0"/>
+				<xsd:element ref="KeyName" minOccurs="0"/>
+				<xsd:choice>
+					<xsd:element ref="EnumeratedValue" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="EnumeratedTypeCodeValue" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="EnumeratedStringValue" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MetaData">
+		<xsd:annotation>
+			<xsd:documentation>Definition of the contents</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ScalingFactor" minOccurs="0"/>
+				<xsd:element ref="DataType" minOccurs="0"/>
+				<xsd:element ref="CurrencyTypeCode" minOccurs="0"/>
+				<xsd:element ref="Nation" minOccurs="0"/>
+				<xsd:element ref="JurisdictionCC" minOccurs="0"/>
+				<xsd:element ref="TableDescription" minOccurs="0"/>
+				<xsd:element ref="KeyDef" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="AxisDef" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Table">
+		<xsd:annotation>
+			<xsd:documentation>Table definition</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="MetaData"/>
+				<xsd:element ref="Values"/>
+			</xsd:sequence>
+			<xsd:attribute name="ContentClassificationID" type="xsd:IDREF"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="V">
+		<xsd:complexType>
+			<xsd:annotation>
+				<xsd:documentation>Specific Value</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="T" type="xsd:integer"/>
+					<xsd:attribute name="DT" type="xsd:date"/>
+					<xsd:attribute name="FN" type="FOOTNOTE_CODES"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Values">
+		<xsd:annotation>
+			<xsd:documentation>Actual Values</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice>
+					<xsd:element ref="Key" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element ref="Axis" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="XTbML">
+		<xsd:annotation>
+			<xsd:documentation>Tabular Data</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ContentClassification" maxOccurs="unbounded"/>
+				<xsd:element ref="Table" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="Version" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<xsd:element name="AxisName" type="xsd:string"/>
+	<xsd:element name="Comments" type="xsd:string"/>
+	<xsd:element name="ContentClassificationKey" type="xsd:string"/>
+	<xsd:element name="ContentType" type="CONTENTTYPE"/>
+	<xsd:element name="Continuous" type="OLI_LU_BOOLEAN"/>
+	<xsd:element name="DataType" type="OLI_LU_DATATYPE"/>
+	<xsd:element name="EnumeratedStringValue" type="xsd:string"/>
+	<xsd:element name="EnumeratedTypeCodeValue" type="ENUMERATED"/>
+	<xsd:element name="Increment" type="xsd:integer" default="1"/>
+	<xsd:element name="KeySubType" type="KEYSUBTYPE"/>
+	<xsd:element name="KeySubClassType" type="KEYSUBCLASSTYPE"/>
+	<xsd:element name="KeySubClass" type="xsd:string"/>
+	<xsd:element name="KeyType" type="KEYTYPE"/>
+	<xsd:element name="KeyWord" type="xsd:string"/>
+	<xsd:element name="MaxScaleDate" type="xsd:date"/>
+	<xsd:element name="MaxScaleValue" type="xsd:integer"/>
+	<xsd:element name="MinScaleDate" type="xsd:date"/>
+	<xsd:element name="MinScaleValue" type="xsd:integer"/>
+	<xsd:element name="ProviderDomain" type="xsd:string"/>
+	<xsd:element name="ProviderName" type="xsd:string"/>
+	<xsd:element name="ScaleSubType" type="SCALESUBTYPE"/>
+	<xsd:element name="ScaleType" type="SCALETYPE"/>
+	<xsd:element name="ScalingFactor" type="xsd:double"/>
+	<xsd:element name="TableDescription" type="xsd:string"/>
+	<xsd:element name="TableIdentity" type="xsd:string"/>
+	<xsd:element name="TableName" type="xsd:string"/>
+	<xsd:element name="TableReference" type="xsd:string"/>
+	<xsd:element name="TableURL" type="xsd:string"/>
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<!--    -->
+	<xsd:complexType name="CONTENTTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE">
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="ENUMERATED">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE">							
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="FOOTNOTE_CODES">
+		<xsd:restriction base="xsd:nonNegativeInteger">			
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="KEYSUBTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE">							
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="KEYTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE">
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="SCALESUBTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE">
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="SCALETYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE">
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="KEYSUBCLASSTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE">
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+</xsd:schema>

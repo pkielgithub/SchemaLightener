@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: ProcessAssessmentReport.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       Purpose: Used to request processing of the AssessmentReport noun by a receiving application or party.  
+
+       AssessmentReport  Provides scores and other details to fulfill or respond to an assessment order. 
+
+       Process is an "Action Verb". ActionExpression(s) represent and communicate data management  
+       instructions. XPath is the default expression language. The actionCode attribute (Add, Change, Delete,   
+       Replace) specifies the action to be taken by the receiver. The data entities being managed   
+       are represented as elements of the AssessmentReport noun in the BOD instance. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentReport.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="ProcessAssessmentReport" type="ProcessAssessmentReportType"/> 
+       	<xsd:complexType name="ProcessAssessmentReportType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Used to request processing of the AssessmentReport noun by a receiving application or party.  
+
+       AssessmentReport  Provides scores and other details to fulfill or respond to an assessment order. 
+
+       Process is an "Action Verb". ActionExpression(s) represent and communicate data management  
+       instructions. XPath is the default expression language. The actionCode attribute (Add, Change, Delete,   
+       Replace) specifies the action to be taken by the receiver. The data entities being managed   
+       are represented as elements of the AssessmentReport noun in the BOD instance. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="ProcessAssessmentReportDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances. In the case of the ProcessAssessmentReport, the verb Process indicates the action to be performed on the noun AssessmentReport.</xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="ProcessAssessmentReportDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Process"/> 
+       			<xsd:element ref="AssessmentReport" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

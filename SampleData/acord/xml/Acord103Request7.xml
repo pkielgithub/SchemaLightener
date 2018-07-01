@@ -1,0 +1,287 @@
+<TXLife xmlns="http://ACORD.org/Standards/Life/2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ACORD.org/Standards/Life/2 ../schemas/TXLife2.9.00.xsd">
+	<UserAuthRequest>
+		<UserLoginName>DEMO</UserLoginName>
+		<UserPswd>
+			<CryptType>NONE</CryptType>
+			<Pswd>DEMO</Pswd>
+		</UserPswd>
+		<UserDomain>forc=YES,verb=YES,genprefix=APDMO</UserDomain>
+		<VendorApp>
+			<VendorName VendorCode="35">  IBM Life Demo</VendorName>
+			<AppName>  IBM Life Demo</AppName>
+			<AppVer>1.00</AppVer>
+		</VendorApp>
+	</UserAuthRequest>
+	<TXLifeRequest id="TXLifeRequest1">
+		<TransRefGUID>2004-1217-141016-000017</TransRefGUID>
+		<TransType tc="103">New Business Submission</TransType>
+		<OLifE>
+			<Holding id="APDMO52596">
+				<Policy id="POLICY17">
+					<LineOfBusiness tc="1">Life</LineOfBusiness>
+					<ProductType tc="4">Variable Universal Life</ProductType>
+					<CarrierCode>XYZ</CarrierCode>
+					<PolicyStatus tc="12">Proposed</PolicyStatus>
+					<Jurisdiction tc="53">WA</Jurisdiction>
+					<PaymentMode tc="1">Annual</PaymentMode>
+					<PaymentAmt>1000</PaymentAmt>
+					<PaymentMethod tc="0">direct</PaymentMethod>
+					<Life>
+						<Coverage id="Coverage1">
+							<CoverageKey>AAA</CoverageKey>
+							<ProductCode>TVLGD03P</ProductCode>
+							<IndicatorCode tc="1">Base</IndicatorCode>
+							<DeathBenefitOptType tc="1">Level</DeathBenefitOptType>
+							<InitCovAmt>50000</InitCovAmt>
+							<IntialNumberOfUnits>50</IntialNumberOfUnits>
+							<ValuePerUnit>1000</ValuePerUnit>
+							<EffDate>2002-10-10</EffDate>
+							<LifeParticipant PartyID="T240">
+								<LifeParticipantRoleCode tc="18">Owner</LifeParticipantRoleCode>
+							</LifeParticipant>
+							<LifeParticipant PartyID="T240">
+								<LifeParticipantRoleCode tc="12">Payer</LifeParticipantRoleCode>
+							</LifeParticipant>
+							<LifeParticipant PartyID="T241">
+								<LifeParticipantRoleCode tc="1">Primary Insured</LifeParticipantRoleCode>
+							</LifeParticipant>
+							<LifeParticipant PartyID="T242">
+								<LifeParticipantRoleCode tc="7">Primary Beneficiary</LifeParticipantRoleCode>
+							</LifeParticipant>
+							<LifeParticipant PartyID="AGENT060203">
+								<LifeParticipantRoleCode tc="15">Primary Agent</LifeParticipantRoleCode>
+							</LifeParticipant>
+						</Coverage>
+					</Life>
+				</Policy>
+				<Investment id="Investment134">
+					<SubAccount id="SubAccount136">
+						<AssetClass tc="2">Equity (separate Account)</AssetClass>
+						<ProductCode>TAAMCG</ProductCode>
+						<CarrierCode>PPP</CarrierCode>
+						<AllocPercent>100</AllocPercent>
+					</SubAccount>
+					<SubAccount id="SubAccount135">
+						<AssetClass tc="2">Equity (separate Account)</AssetClass>
+						<ProductCode>TSTDSC</ProductCode>
+						<CarrierCode>PPP</CarrierCode>
+						<AllocPercent>0</AllocPercent>
+					</SubAccount>
+					<SubAccount id="SubAccount138">
+						<AssetClass tc="2">Equity (separate Account)</AssetClass>
+						<ProductCode>TAAGRW</ProductCode>
+						<CarrierCode>PPP</CarrierCode>
+						<AllocPercent>0</AllocPercent>
+					</SubAccount>
+					<SubAccount id="SubAccount137">
+						<AssetClass tc="2">Equity (separate Account)</AssetClass>
+						<ProductCode>TAMINE</ProductCode>
+						<CarrierCode>PPP</CarrierCode>
+						<AllocPercent>0</AllocPercent>
+					</SubAccount>
+				</Investment>
+			</Holding>
+			<Party id="T240">
+				<PartyTypeCode tc="1">Person</PartyTypeCode>
+				<GovtID></GovtID>
+				<Person>
+					<FirstName>Diane</FirstName>
+					<LastName>Cook</LastName>
+					<Gender tc="2">FEMALE</Gender>
+					<BirthDate>1956-06-10</BirthDate>
+				</Person>
+				<Address>
+					<Line1>303 S. Barker</Line1>
+					<City>Greenacres</City>
+					<AddressStateTC tc="53">WA</AddressStateTC>
+					<Zip>99201</Zip>
+				</Address>
+				<Phone>
+					<PhoneTypeCode tc="1">Home</PhoneTypeCode>
+					<AreaCode>999</AreaCode>
+					<DialNumber>5442476</DialNumber>
+				</Phone>
+			</Party>
+			<Party id="T241">
+				<PartyTypeCode tc="1">Person</PartyTypeCode>
+				<GovtID></GovtID>
+				<Person>
+					<FirstName>Gilbert</FirstName>
+					<LastName>Cook</LastName>
+					<Gender tc="2">MALE</Gender>
+					<BirthDate>1976-02-18</BirthDate>
+				</Person>
+				<Address>
+					<Line1>303 S. Barker</Line1>
+					<City>Greenacres</City>
+					<AddressStateTC tc="53">WA</AddressStateTC>
+					<Zip>99201</Zip>
+				</Address>
+				<Phone>
+					<PhoneTypeCode tc="1">Home</PhoneTypeCode>
+					<AreaCode>999</AreaCode>
+					<DialNumber>5442476</DialNumber>
+				</Phone>
+			</Party>
+			<Party id="T242">
+				<PartyTypeCode tc="10"></PartyTypeCode>
+				<GovtID>180196691</GovtID>
+				<Person>
+					<FirstName>Gilbert</FirstName>
+					<LastName>Cook</LastName>
+					<MarStat tc="1">Married</MarStat>
+					<Gender tc="1">MALE</Gender>
+					<BirthDate>1976-02-18</BirthDate>
+					<Height2>
+						<MeasureUnits tc="2">US Standard</MeasureUnits>
+						<MeasureValue>71</MeasureValue>
+					</Height2>
+					<Weight2>
+						<MeasureUnits tc="2">US Standard</MeasureUnits>
+						<MeasureValue>160</MeasureValue>
+					</Weight2>
+				</Person>
+				<Address>
+					<AddressTypeCode tc="1">Residence</AddressTypeCode>
+					<Line1>303 S. Barker</Line1>
+					<City>Greenacres</City>
+					<AddressStateTC tc="53">WA</AddressStateTC>
+					<Zip>99201</Zip>
+				</Address>
+				<Phone>
+					<PhoneTypeCode tc="1">Home</PhoneTypeCode>
+					<AreaCode>999</AreaCode>
+					<DialNumber>5442476</DialNumber>
+				</Phone>
+				<Risk>
+					<OLifEExtension VendorCode="http://www.arbitraryvendor.com/basequestions">
+						<baseQuestions>
+							<baseQuestion>
+								<baseQuestionCode>med_q_1_a</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_1_b</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_1_c</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_2_a</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_2_b</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_3</baseQuestionCode>
+								<answer>Yes</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_4</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_5</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_6</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_7</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_8</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_9</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Occ_q_1</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Occ_q_3_a</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Occ_q_3_b</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Occ_q_3_c</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Occ_q_3_d</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Avoc_q_1</baseQuestionCode>
+								<answer>Yes</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Avoc_q_2</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Dis_q_1</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_10</baseQuestionCode>
+								<answer>Yes</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Dis_q_2</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>med_q_11</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Gen_q_1</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+							<baseQuestion>
+								<baseQuestionCode>Gen_q_2</baseQuestionCode>
+								<answer>No</answer>
+							</baseQuestion>
+						</baseQuestions>
+					</OLifEExtension>
+				</Risk>
+			</Party>
+			<Party id="AGENT060203">
+				<GovtID></GovtID>
+				<Person>
+					<FirstName>FRANCENE</FirstName>
+					<LastName>EASTON</LastName>
+					<MarStat tc="1">Married</MarStat>
+					<Gender tc="1">FEMALE</Gender>
+					<BirthDate>1968-03-03</BirthDate>
+				</Person>
+				<Address id="Address_01S">
+					<AddressTypeCode tc="2">Business</AddressTypeCode>
+					<Line1>ONE INNOVATIVE PLAZA</Line1>
+					<City>PORTLAND</City>
+					<AddressStateTC tc="23">OR</AddressStateTC>
+					<Zip>99999</Zip>
+				</Address>
+				<Phone id="Phone_03S">
+					<PhoneTypeCode tc="2">Business</PhoneTypeCode>
+					<AreaCode>208</AreaCode>
+					<DialNumber>5551028</DialNumber>
+				</Phone>
+			</Party>
+		</OLifE>
+	</TXLifeRequest>
+</TXLife>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssessmentCatalog xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentCatalog.xsd">
+  <ProviderId>
+    <IdValue>PSI_Example_Only</IdValue>
+  </ProviderId>
+  <CatalogQueryStatus>
+    <Status>Error</Status>
+    <Details>Invalid filter expression "proctor:false".</Details>
+  </CatalogQueryStatus>
+</AssessmentCatalog>

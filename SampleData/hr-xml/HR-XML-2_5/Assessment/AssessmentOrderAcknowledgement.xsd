@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ns.hr-xml.org/2007-04-15" elementFormDefault="qualified" version="2007-04-15">
+	<xsd:annotation>
+		<xsd:documentation>
+"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org"
+Name: AssessmentOrderAcknowledgement.xsd
+Status: Recommendation
+Date this version: 2007-04-15
+Author(s): Assessment  Work Group
+Documentation: Assessments.html
+
+Terms of license can be found in license.txt.
+
+</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../W3C/xml.xsd"/>
+	<xsd:include schemaLocation="../CPO/PersonName.xsd"/>
+	<xsd:include schemaLocation="../CPO/ContactMethod.xsd"/>
+	<xsd:include schemaLocation="../CPO/EntityIdType.xsd"/>
+	<xsd:include schemaLocation="../CPO/UserArea.xsd"/>
+	<xsd:include schemaLocation="../Assessment/AssessmentStatusRequest.xsd"/>
+	<xsd:include schemaLocation="../Assessment/AssessmentTypes.xsd"/>
+	<xsd:element name="AssessmentOrderAcknowledgement" type="AssessmentOrderAcknowledgementType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentOrderAcknowledgment schema, which is designed to hold data necessary to acknowledge an assessment request.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AssessmentOrderAcknowledgementType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentOrderAcknowledgment schema, which is designed to hold data necessary to acknowledge an assessment request.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ClientId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies a client for the 3rd party vendor (assessor). It is up to the vendor to provide the client its identifier.The client id is mandatory for all messages going from a customer to an assessment vendor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProviderId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies An assessment provider for the customer. It is up to the client to provide the provider its identifier.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ReceiptId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier supplied by the assessment provider that will allow the client to know how to request updates</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ClientOrderId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier, for the client, to identify the order.There can be multiple order id for one request (e.g. PO #, department)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AccessPoint" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The way to access the Assessment</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="ContactMethodType">
+							<xsd:sequence>
+								<xsd:element name="Description" type="xsd:string" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>Instructions for the subject to access the assessment via this access point.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="Login" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>A login to use to take the assessment</xsd:documentation>
+									</xsd:annotation>
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="Token" type="xsd:string" minOccurs="0"/>
+											<xsd:element name="UserName" type="xsd:string" minOccurs="0"/>
+											<xsd:element name="Password" type="xsd:string" minOccurs="0"/>
+										</xsd:sequence>
+										<xsd:attribute name="validFrom" type="LocalDateType"/>
+										<xsd:attribute name="validTo" type="LocalDateType"/>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AssessmentStatus" type="AssessmentStatusType">
+				<xsd:annotation>
+					<xsd:documentation>The status of the request at this particular moment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:schema>

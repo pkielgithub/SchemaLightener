@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+The notices below are provided with respect to licensed content incorporated herein:
+Copyright The HR-XML Consortium. All Rights Reserved. http://www.hrxmlconsortium.org 
+Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved 
+-->
+<xsd:schema xmlns="http://www.hr-xml.org/3" xmlns:udt="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ccts="urn:un:unece:uncefact:documentation:1.1" xmlns:qdt="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" targetNamespace="http://www.hr-xml.org/3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+Status: DRAFT
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/QualifiedDataTypes.xsd"/>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/UnqualifiedDataTypes.xsd"/>
+	<xsd:include schemaLocation="../Common/Components.xsd"/>
+	<xsd:element name="AssessmentReport" type="AssessmentReportType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentReport noun, a document carrying information about an assessment result.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AssessmentReportType">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.hr-xml.org" xml:lang="en">
+				<ccts:DictionaryEntryName>Assessment Report. Details</ccts:DictionaryEntryName>
+				<ccts:DefinitionText>Provides scores and other details to fulfill or respond to an assessment order. AssessmentStatusDetails is part of the data model so that tests, whether completed or pending, can be reported upon. </ccts:DefinitionText>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="DocumentIDGroup" minOccurs="0"/>
+			<xsd:element ref="DocumentSequence" minOccurs="0"/>
+			<xsd:element ref="OrderID" minOccurs="0"/>
+			<xsd:element ref="CustomerPartyDetails" minOccurs="0"/>
+			<xsd:element ref="SupplierPartyDetails" minOccurs="0"/>
+			<xsd:element ref="AssessmentSubject" minOccurs="0"/>
+			<xsd:element ref="AssessmentResult" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="languageCode" type="LanguageCodeContentType" use="optional"/>
+		<xsd:attributeGroup ref="EffectiveDateAttributeGroup"/>
+	</xsd:complexType>
+</xsd:schema>

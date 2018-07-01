@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: CancelAssessmentReport.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       Purpose: CancelAssessmentReport conveys an instruction to cancel a previously communicated AssessmentReport instance or component thereof. Cancel is not a simple delete in that cancelation may require business calculations and require prior agreement on cancelation terms. 
+
+       AssessmentReport  Provides scores and other details to fulfill or respond to an assessment order. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentReport.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="CancelAssessmentReport" type="CancelAssessmentReportType"/> 
+       	<xsd:complexType name="CancelAssessmentReportType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       CancelAssessmentReport conveys an instruction to cancel a previously communicated AssessmentReport instance. Cancel is not a simple delete in that cancelation may require business calculations and require prior agreement on cancelation terms. 
+
+       AssessmentReport  Provides scores and other details to fulfill or respond to an assessment order. 
+
+       Cancel is an "Action Verb". ActionExpression(s) represent and communicate data management  
+       instructions. The data entities being managed are represented as elements of the AssessmentReport noun in the BOD instance. 
+
+       The Cancel verb is used when the sender of the BOD is not the owner of the 
+       data, but is sending a request for the document to be canceled. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="CancelAssessmentReportDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances. </xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="CancelAssessmentReportDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Cancel"/> 
+       			<xsd:element ref="AssessmentReport" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

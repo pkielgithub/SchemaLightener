@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/CreditTransferIST.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" xmlns:ist="urn:swift:xsd:$pain.001.001.01" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:import namespace="urn:swift:xsd:$pain.001.001.01" schemaLocation="../Components/Financial/iso20022/$pain.001.001.01.xsd"/>
+        <xsd:include schemaLocation="../Components/Common/Meta.xsd"/>
+        <xsd:element name="CreditTransferIST" type="ist:pain.001.001.01">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Core Credit Transfer message is used to request movement of cash from a Debtor's account to a Creditor.   It can be sent by the Initiating Party to the Forwarding Agent or First Agent.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+</xsd:schema>

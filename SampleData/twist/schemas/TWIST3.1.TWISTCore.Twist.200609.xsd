@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Don Cuthbertson (private) -->
+<!-- Copyright 2005 TWIST Process Innovations, LTD. -->
+<!-- Baseline 2.0 -->
+<!-- This schema is available for comment and the structure is subject to change -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="Document" abstract="true">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The abstract base type for TwistTrades and TwistMsg.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:element name="Twist" type="Document">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">todo</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

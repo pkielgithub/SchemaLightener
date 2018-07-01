@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Twist xmlns="http://www.twiststandards.org/3.1/ElectronicBilling" xmlns:ns2="dsig:http://www.w3.org/2000/09/xmldsig#" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.twiststandards.org/3.1/ElectronicBilling
+../schemas/TWIST3.1.Billing.TWISTMsgElectronicBilling.200609.xsd" xsi:type="ElectronicBillingMsg">
+		<header>
+			<messageId>normalizedString</messageId>
+			<inReplyTo>normalizedString</inReplyTo>
+			<sentBy id="ID000085">
+				<typedPartyId>
+					<partyId>String</partyId>
+					<partyIdType>String</partyIdType>
+				</typedPartyId>
+			</sentBy>
+			<creationTimestamp>2001-12-17T09:30:47.0Z</creationTimestamp>
+		</header>
+		<electronicStatement>
+			<statementHeader>
+				<stmtSender>
+					<name>String</name>
+					<legalName>String</legalName>
+					<contactInfo>
+						<postAddress>
+							<city>String</city>
+							<country>String</country>
+						</postAddress>
+					</contactInfo>
+				</stmtSender>
+				<stmtReceiver>
+					<name>String</name>
+					<legalName>String</legalName>
+					<contactInfo>
+						<postAddress>
+							<city>String</city>
+							<country>String</country>
+						</postAddress>
+					</contactInfo>
+				</stmtReceiver>
+			</statementHeader>
+			<statement>
+				<account>
+					<accountLevel>Detail</accountLevel>
+					<bban>String</bban>
+					<statementEndDate>1967-08-13</statementEndDate>
+					<statementProductionDate>1967-08-13</statementProductionDate>
+					<accountName>String</accountName>
+					<compensationMethod>No</compensationMethod>
+					<accountBalanceCurrencyCode>Str</accountBalanceCurrencyCode>
+				</account>
+			</statement>
+		</electronicStatement>
+</Twist>

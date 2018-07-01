@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:hrx="http://www.hr-xml.org/3" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:oa="http://www.openapplications.org/oagis/9" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" xmlns:tns="http://www.hr-xml.org/3/ws" targetNamespace="http://www.hr-xml.org/3/ws" name="AssessmentCatalog">
+	<wsdl:types>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+			<xsd:include schemaLocation="../../../Developer/BODs/ProcessAssessmentCatalog.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/AcknowledgeAssessmentCatalog.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/CancelAssessmentCatalog.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/GetAssessmentCatalog.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/ShowAssessmentCatalog.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/ConfirmBOD.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/NotifyAssessmentCatalog.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/ChangeAssessmentCatalog.xsd"/>
+			<xsd:include schemaLocation="../../../Developer/BODs/SyncAssessmentCatalog.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="ProcessAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:ProcessAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:message name="GetAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:GetAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:message name="ShowAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:ShowAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:message name="ConfirmBOD">
+		<wsdl:part name="Message" element="hrx:ConfirmBOD"/>
+	</wsdl:message>
+	<wsdl:message name="CancelAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:CancelAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:message name="AcknowledgeAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:AcknowledgeAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:message name="ChangeAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:ChangeAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:message name="NotifyAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:NotifyAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:message name="SyncAssessmentCatalog">
+		<wsdl:part name="Message" element="hrx:SyncAssessmentCatalog"/>
+	</wsdl:message>
+	<wsdl:portType name="AssessmentCatalog_PortType">
+		<wsdl:operation name="ProcessAssessmentCatalog">
+			<wsdl:input message="tns:ProcessAssessmentCatalog"/>
+			<wsdl:output message="tns:AcknowledgeAssessmentCatalog"/>
+			<wsdl:fault name="ProcessAssessmentCatalogFault" message="tns:ConfirmBOD"/>
+		</wsdl:operation>
+		<wsdl:operation name="CancelAssessmentCatalog">
+			<wsdl:input message="tns:CancelAssessmentCatalog"/>
+			<wsdl:output message="tns:AcknowledgeAssessmentCatalog"/>
+			<wsdl:fault name="CancelAssessmentCatalogFault" message="tns:ConfirmBOD"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAssessmentCatalog">
+			<wsdl:input message="tns:GetAssessmentCatalog"/>
+			<wsdl:output message="tns:ShowAssessmentCatalog"/>
+			<wsdl:fault name="GetAssessmentCatalogFault" message="tns:ConfirmBOD"/>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeAssessmentCatalog">
+			<wsdl:input message="tns:ChangeAssessmentCatalog"/>
+			<wsdl:output message="tns:AcknowledgeAssessmentCatalog"/>
+			<wsdl:fault name="ChangeAssessmentCatalogFault" message="tns:ConfirmBOD"/>
+		</wsdl:operation>
+		<wsdl:operation name="NotifyAssessmentCatalog">
+			<wsdl:input message="tns:NotifyAssessmentCatalog"/>
+			<wsdl:output message="tns:AcknowledgeAssessmentCatalog"/>
+			<wsdl:fault name="NotifyAssessmentCatalogFault" message="tns:ConfirmBOD"/>
+		</wsdl:operation>
+		<wsdl:operation name="SyncAssessmentCatalog">
+			<wsdl:input message="tns:SyncAssessmentCatalog"/>
+			<wsdl:output message="tns:ConfirmBOD"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AssessmentCatalog_Binding" type="tns:AssessmentCatalog_PortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ProcessAssessmentCatalog">
+			<soap:operation soapAction="ProcessAssessmentCatalog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ProcessAssessmentCatalogFault">
+				<soap:fault name="ProcessAssessmentCatalogFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CancelAssessmentCatalog">
+			<soap:operation soapAction="CancelAssessmentCatalog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CancelAssessmentCatalogFault">
+				<soap:fault name="CancelAssessmentCatalogFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetAssessmentCatalog">
+			<soap:operation soapAction="GetAssessmentCatalog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAssessmentCatalogFault">
+				<soap:fault name="GetAssessmentCatalogFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ChangeAssessmentCatalog">
+			<soap:operation soapAction="ChangeAssessmentCatalog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ChangeAssessmentCatalogFault">
+				<soap:fault name="ChangeAssessmentCatalogFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="NotifyAssessmentCatalog">
+			<soap:operation soapAction="NotifyAssessmentCatalog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="NotifyAssessmentCatalogFault">
+				<soap:fault name="NotifyAssessmentCatalogFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SyncAssessmentCatalog">
+			<soap:operation soapAction="SyncAssessmentCatalog" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AssessmentCatalog_Service">
+		<wsdl:port name="AssessmentCatalog_Port" binding="tns:AssessmentCatalog_Binding">
+			<soap:address location="http://www.hr-xml.org/3/ws/AssessmentCatalog"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

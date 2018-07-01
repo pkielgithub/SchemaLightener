@@ -1,0 +1,1606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+$Workfile: acord-doc.xsd $
+
+$Author: Dan Vint $
+$Date: 4/18/03 9:18a $
+
+Version Number
+______________
+
+$Revision: 6 $
+
+COPYRIGHT NOTICE
+________________
+
+(c) 2003 ACORD. All Rights Reserved.
+
+Use of this Schema is covered by the terms and conditions file that was included in 
+the distribution file that you found this file.
+
+http://www.acord.org
+
+Usage Information
+__________________
+
+
+This is the ACORD XML Documentation format Schema.
+
+The following is the proper form of a namespace to refer to this schema:
+   http://www.ACORD.org/standards/Support/xml/v1.0
+
+The ending version number will be changed as modifications are made to this
+schema.
+
+This Schema consists of 2 files. This one and a shared Schema defintion file that is
+provided/maintained by the W3C. This second file is referenced into this schema with
+the following:
+
+
+      <!ENTITY % p 'xsd:'>
+      <!ENTITY % s ':xsd'>
+
+      <!ENTITY % schema-def SYSTEM "xmlschema.dtd">
+      %schema-def;
+
+This additional file is needed wo we can manage one set of character entities that are
+used to make it easy to enter and maintain these special characters.
+
+Last Modification
+$Modtime: 4/18/03 9:18a $
+
+$Log: /P-C Spec Tool/StyleSheets/schemaGen/acord-doc.xsd $
+ * 
+ * 6     4/18/03 9:18a Dan Vint
+ * 
+ * 5     2/14/03 2:21p Dan Vint
+ * coordinated namespace references in schema
+ *
+ * 4     2/13/03 1:08p Dan Vint
+ * Added Schema unique element genDate.
+ *
+ * 3     2/13/03 12:44p Dan Vint
+ * Added header information to the schema.
+
+
+-->
+
+
+<!DOCTYPE xsd:schema [
+      <!ENTITY amp "&#38;#38;" >
+      <!ENTITY apos "&#39;" >
+      <!ENTITY copy "&#x00A9;" >
+      <!ENTITY gt "&#62;" >
+      <!ENTITY hellip "&#x2026;" >
+      <!ENTITY ldquo "&#x201C;" >
+      <!ENTITY lsquo "&#x2018;" >
+      <!ENTITY lt "&#38;#60;" >
+      <!ENTITY mdash "&#x2014;" >
+      <!ENTITY nbsp "&#xA0;" >
+      <!ENTITY ndash "&#x2013;" >
+      <!ENTITY para "&#x00B6;">
+      <!ENTITY quot "&#34;" >
+      <!ENTITY rdquo "&#x201D;" >
+      <!ENTITY reg "&#x00AE;">
+      <!ENTITY rsquo "&#x2019;" >
+      <!ENTITY sect "&#x00A7;">
+
+      <!-- Following items are used to bring in the DTD for the schema elements -->
+
+      <!ENTITY % p 'xsd:'> <!-- can be overriden in the internal subset of a
+                               schema document to establish a different
+                               namespace prefix -->
+      <!ENTITY % s ':xsd'> <!-- if %p is defined (e.g. as foo:) then you must
+                               also define %s as the suffix for the appropriate
+                               namespace declaration (e.g. :foo) -->
+      <!ENTITY % schema-def SYSTEM "xmlschema.dtd">
+      %schema-def;
+
+]>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified"
+   attributeFormDefault="qualified"
+   targetNamespace="http://www.ACORD.org/standards/Support/xml/v1.0"
+   xmlns="http://www.ACORD.org/standards/Support/xml/v1.0"
+   >
+
+   <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
+               schemaLocation="xml-ns.xsd">
+      <xsd:annotation>
+         <xsd:documentation>Get access to the xml: attribute groups for xml:lang
+               </xsd:documentation>
+      </xsd:annotation>
+   </xsd:import>
+
+   <xsd:group name="ACORD.STUFF">
+      <xsd:choice>
+         <xsd:element ref="MR"/>
+         <xsd:element ref="MRref"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="COMMENTS">
+      <xsd:choice>
+         <xsd:element ref="issue"/>
+         <xsd:element ref="ednote"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="ILLUSTRATIONS">
+      <xsd:choice>
+         <xsd:element ref="code"/>
+         <xsd:element ref="graphic"/>
+         <xsd:element ref="illustration"/>
+         <xsd:element ref="example"/>
+         <xsd:element ref="faq"/>
+         <xsd:element ref="table"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="LISTS">
+      <xsd:choice>
+         <xsd:element ref="ulist"/>
+         <xsd:element ref="olist"/>
+         <xsd:element ref="glist"/>
+         <xsd:element ref="orglist"/>
+         <xsd:element ref="blist"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="MISC">
+      <xsd:choice>
+         <xsd:element ref="termdef"/>
+         <xsd:element ref="term"/>
+         <xsd:element ref="emph"/>
+         <xsd:element ref="phrase"/>
+         <xsd:element ref="quote"/>
+         <xsd:element ref="URL"/>
+         <xsd:element ref="email"/>
+         <xsd:element ref="a"/>
+         <xsd:element ref="other"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="MARKUP">
+      <xsd:choice>
+         <xsd:element ref="el"/>
+         <xsd:element ref="att"/>
+         <xsd:element ref="attval"/>
+         <xsd:element ref="ent"/>
+         <xsd:element ref="baseclass"/>
+         <xsd:element ref="datatype"/>
+         <xsd:element ref="codelist"/>
+         <xsd:element ref="codeval"/>
+         <xsd:element ref="xpathexpr"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="NOTES">
+      <xsd:choice>
+         <xsd:element ref="note"/>
+         <xsd:element ref="warning"/>
+         <xsd:element ref="footnote"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="REFERENCES">
+      <xsd:choice>
+         <xsd:element ref="bibref"/>
+         <xsd:element ref="specref"/>
+         <xsd:element ref="ref"/>
+         <xsd:element ref="docref"/>
+         <xsd:element ref="termref"/>
+         <xsd:element ref="titleref"/>
+         <xsd:element ref="xspecref"/>
+         <xsd:element ref="xtermref"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="REQUIREMENT.NOTES">
+      <xsd:choice>
+         <xsd:element ref="recommendation"/>
+         <xsd:element ref="requirement"/>
+         <xsd:element ref="businessrule"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="ALL.ENTS">
+      <xsd:choice>
+         <xsd:group ref="ACORD.STUFF"/>
+         <xsd:group ref="COMMENTS"/>
+         <xsd:group ref="ILLUSTRATIONS"/>
+         <xsd:group ref="LISTS"/>
+         <xsd:group ref="MISC"/>
+         <xsd:group ref="MARKUP"/>
+         <xsd:group ref="NOTES"/>
+         <xsd:group ref="REFERENCES"/>
+         <xsd:group ref="REQUIREMENT.NOTES"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:group name="CONTENT">
+      <xsd:choice>
+         <xsd:element ref="p"/>
+         <xsd:group ref="ALL.ENTS"/>
+      </xsd:choice>
+   </xsd:group>
+   <xsd:attributeGroup name="REFING-SUPPORT">
+      <xsd:attribute name="ref" type="xsd:IDREF" use="required"/>
+   </xsd:attributeGroup>
+   <xsd:attributeGroup name="LinkSupport">
+      <xsd:attribute name="id" type="xsd:ID"/>
+   </xsd:attributeGroup>
+
+   <xsd:element name="genDate">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+
+   <xsd:element name="ACORDdoc">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="header"/>
+            <xsd:element ref="front" minOccurs="0"/>
+            <xsd:element ref="toc" minOccurs="0"/>
+            <xsd:element ref="body"/>
+            <xsd:element ref="back" minOccurs="0"/>
+
+         </xsd:sequence>
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="status">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="int-review"/>
+                  <xsd:enumeration value="ext-review"/>
+                  <xsd:enumeration value="final"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="MR">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="MRref">
+      <xsd:complexType>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="URL">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="href" type="xsd:string" use="required"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="a">
+      <xsd:complexType>
+         <xsd:attribute name="name" type="xsd:NMTOKEN"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="abstract">
+      <xsd:complexType>
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="p"/>
+            <xsd:group ref="LISTS"/>
+            <xsd:group ref="NOTES"/>
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="affiliation">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="answer">
+      <xsd:complexType>
+         <xsd:choice maxOccurs="unbounded">
+            <xsd:element ref="p"/>
+            <xsd:group ref="LISTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="att">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="attval">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="authlist">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="author" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="author">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="name"/>
+            <xsd:element ref="affiliation" minOccurs="0"/>
+            <xsd:element ref="email" minOccurs="0"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="back">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="div1" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:element ref="revisiondesc"/>
+               <xsd:element ref="blist"/>
+               <xsd:element ref="glist"/>
+            </xsd:choice>
+            <xsd:element ref="index" minOccurs="0"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="baseclass">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="issue"/>
+            <xsd:element ref="ednote"/>
+         </xsd:choice>
+
+         <xsd:attribute name="ref" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="bibl">
+      <xsd:complexType>
+         <xsd:choice maxOccurs="unbounded">
+            <xsd:group ref="CONTENT"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="href" type="xsd:string"/>
+         <xsd:attribute name="key" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="bibref">
+      <xsd:complexType>
+
+         <xsd:attribute name="idref" type="xsd:IDREF" use="required"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="blist">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="bibl" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="body">
+      <xsd:complexType>
+         <xsd:choice maxOccurs="unbounded">
+            <xsd:element ref="div1"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="businessrule">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:choice maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+         </xsd:sequence>
+         <xsd:attribute name="PermID" type="xsd:string" use="required"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="type" type="xsd:NMTOKEN"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="caption">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head"/>
+            <xsd:group ref="COMMENTS" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="code">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="emph"/>
+            <xsd:element ref="URL"/>
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+         <xsd:attribute ref="xml:space"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="codelist">
+      <xsd:complexType mixed="true">
+         <xsd:group ref="COMMENTS" minOccurs="0" maxOccurs="unbounded"/>
+
+         <xsd:attribute name="ref" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="codeval">
+      <xsd:complexType mixed="true">
+         <xsd:group ref="COMMENTS" minOccurs="0" maxOccurs="unbounded"/>
+
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="col">
+      <xsd:complexType>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="span" type="xsd:NMTOKEN" default="1"/>
+         <xsd:attribute name="width" type="xsd:string"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="colgroup">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="col" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="span" type="xsd:NMTOKEN" default="1"/>
+         <xsd:attribute name="width" type="xsd:string"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="copyright">
+      <xsd:complexType>
+         <xsd:choice maxOccurs="unbounded">
+            <xsd:element ref="p"/>
+            <xsd:group ref="COMMENTS"/>
+            <xsd:group ref="LISTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="datatype">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attribute name="ref" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="date">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="day">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div1">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div2" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div10">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div2">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div3" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div3">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div4" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div4">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div5" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div5">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div6" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div6">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div7" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div7">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div8" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div8">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div9" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="div9">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:choice>
+               <xsd:element ref="head"/>
+
+            </xsd:choice>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="CONTENT"/>
+            </xsd:choice>
+
+            <xsd:element ref="div10" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="label" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="docref">
+      <xsd:complexType>
+         <xsd:attribute name="idref" type="xsd:IDREF" use="required"/>
+
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ednote">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="name" minOccurs="0"/>
+            <xsd:element ref="date" minOccurs="0"/>
+            <xsd:element ref="edtext"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="edtext">
+      <xsd:complexType>
+         <xsd:choice maxOccurs="unbounded">
+            <xsd:group ref="CONTENT"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="el">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="att"/>
+            <xsd:element ref="attval"/>
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attribute name="ref" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="email">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="href" type="xsd:string" use="required"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="emph">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="ALL.ENTS"/>
+         </xsd:choice>
+
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ent">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attribute name="ref" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="example">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="faq">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:element ref="question" maxOccurs="unbounded"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="footnote">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="front">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="div1" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="gitem">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="term"/>
+            <xsd:element ref="termdef"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="glist">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="gitem" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="graphic">
+      <xsd:complexType>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="source" type="xsd:string" use="required"/>
+         <xsd:attribute name="alt" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="head">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="MISC"/>
+            <xsd:group ref="MARKUP"/>
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="header">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="title"/>
+            <xsd:element ref="subtitle" minOccurs="0"/>
+            <xsd:element ref="version" minOccurs="0"/>
+            <xsd:element ref="pubdate" minOccurs="0"/>
+            <xsd:element ref="notice" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="publoc" minOccurs="0"/>
+            <xsd:element ref="authlist" minOccurs="0"/>
+            <xsd:element ref="copyright" minOccurs="0"/>
+            <xsd:element ref="status" minOccurs="0"/>
+            <xsd:element ref="abstract" minOccurs="0"/>
+            <xsd:element ref="sourcedesc" minOccurs="0"/>
+            <xsd:element ref="revisiondesc" minOccurs="0"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="illustration">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:element ref="graphic"/>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+               <xsd:group ref="NOTES"/>
+               <xsd:group ref="COMMENTS"/>
+            </xsd:choice>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="index">
+      <xsd:complexType/>
+   </xsd:element>
+   <xsd:element name="issue">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:element ref="date" minOccurs="0"/>
+            <xsd:element ref="source" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+            <xsd:element ref="resolution" minOccurs="0"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="status" default="open">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="open"/>
+                  <xsd:enumeration value="closed"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="item">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="listings">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="div1" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="member">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="name"/>
+            <xsd:element ref="affiliation" minOccurs="0"/>
+            <xsd:element ref="role" minOccurs="0"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="month">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="name">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="key" type="xsd:string"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="note">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="notice">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:choice maxOccurs="unbounded">
+               <xsd:element ref="p"/>
+               <xsd:group ref="LISTS"/>
+               <xsd:group ref="COMMENTS"/>
+            </xsd:choice>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="olist">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="item" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="spacing">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="normal"/>
+                  <xsd:enumeration value="compact"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="orglist">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="member" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="other">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="p">
+      <xsd:complexType mixed="true">
+         <xsd:group ref="ALL.ENTS"/>
+         <xsd:attribute name="class" type="xsd:NMTOKEN"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="phrase">
+      <xsd:complexType mixed="true">
+         <xsd:group ref="ALL.ENTS" minOccurs="0" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="pubdate">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="day" minOccurs="0"/>
+            <xsd:element ref="month"/>
+            <xsd:element ref="year"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="publoc">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="URL"/>
+            <xsd:element ref="footnote"/>
+            <xsd:element ref="emph"/>
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="question">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head"/>
+            <xsd:element ref="answer" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="quote">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="ALL.ENTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="recommendation">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+         </xsd:sequence>
+         <xsd:attribute name="PermID" type="xsd:string" use="required"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="type" type="xsd:NMTOKEN"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ref">
+      <xsd:complexType>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="idref" type="xsd:IDREF" use="required"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="requirement">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="head" minOccurs="0"/>
+            <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+         </xsd:sequence>
+         <xsd:attribute name="PermID" type="xsd:string" use="required"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="type" type="xsd:NMTOKEN"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="resolution">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="revisiondesc">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" minOccurs="0" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="role">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="source">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="sourcedesc">
+      <xsd:complexType>
+         <xsd:choice maxOccurs="unbounded">
+            <xsd:element ref="p"/>
+            <xsd:element ref="URL"/>
+            <xsd:group ref="LISTS"/>
+            <xsd:group ref="COMMENTS"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="specref">
+      <xsd:complexType>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="idref" type="xsd:IDREF"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="status">
+      <xsd:complexType mixed="true">
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:group ref="LISTS"/>
+            <xsd:group ref="COMMENTS"/>
+            <xsd:group ref="NOTES"/>
+            <xsd:element ref="table"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="subtitle">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="table">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="caption" minOccurs="0"/>
+            <xsd:choice>
+               <xsd:element ref="col" minOccurs="0" maxOccurs="unbounded"/>
+               <xsd:element ref="colgroup" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:choice>
+            <xsd:element ref="thead" minOccurs="0"/>
+            <xsd:element ref="tfoot" minOccurs="0"/>
+            <xsd:element ref="tbody" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="width" type="xsd:string"/>
+         <xsd:attribute name="summary" type="xsd:string"/>
+         <xsd:attribute name="border" type="xsd:string"/>
+         <xsd:attribute name="frame">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="void"/>
+                  <xsd:enumeration value="above"/>
+                  <xsd:enumeration value="below"/>
+                  <xsd:enumeration value="hsides"/>
+                  <xsd:enumeration value="lhs"/>
+                  <xsd:enumeration value="rhs"/>
+                  <xsd:enumeration value="vsides"/>
+                  <xsd:enumeration value="box"/>
+                  <xsd:enumeration value="border"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="rules">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="none"/>
+                  <xsd:enumeration value="groups"/>
+                  <xsd:enumeration value="rows"/>
+                  <xsd:enumeration value="cols"/>
+                  <xsd:enumeration value="all"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="cellspacing" type="xsd:string"/>
+         <xsd:attribute name="cellpadding" type="xsd:string"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="tbody">
+      <xsd:complexType>
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="tr"/>
+            <xsd:element ref="td"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="td">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" minOccurs="0" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="abbr" type="xsd:string"/>
+         <xsd:attribute name="axis" type="xsd:string"/>
+         <xsd:attribute name="headers" type="xsd:IDREFS"/>
+         <xsd:attribute name="scope">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="row"/>
+                  <xsd:enumeration value="col"/>
+                  <xsd:enumeration value="rowgroup"/>
+                  <xsd:enumeration value="colgroup"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="rowspan" type="xsd:NMTOKEN" default="1"/>
+         <xsd:attribute name="colspan" type="xsd:NMTOKEN" default="1"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="term">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="termdef">
+      <xsd:complexType mixed="true">
+         <xsd:group ref="ALL.ENTS" minOccurs="0" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="term" type="xsd:string" use="required"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="termref">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="def" type="xsd:IDREF" use="required"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="tfoot">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="tr" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="th">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" minOccurs="0" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="abbr" type="xsd:string"/>
+         <xsd:attribute name="axis" type="xsd:string"/>
+         <xsd:attribute name="headers" type="xsd:IDREFS"/>
+         <xsd:attribute name="scope">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="row"/>
+                  <xsd:enumeration value="col"/>
+                  <xsd:enumeration value="rowgroup"/>
+                  <xsd:enumeration value="colgroup"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="rowspan" type="xsd:NMTOKEN" default="1"/>
+         <xsd:attribute name="colspan" type="xsd:NMTOKEN" default="1"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="thead">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="tr" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="title">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="titleref">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="href" type="xsd:string"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="toc">
+      <xsd:complexType/>
+   </xsd:element>
+   <xsd:element name="tr">
+      <xsd:complexType>
+         <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="th"/>
+            <xsd:element ref="td"/>
+         </xsd:choice>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="align">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="left"/>
+                  <xsd:enumeration value="center"/>
+                  <xsd:enumeration value="right"/>
+                  <xsd:enumeration value="justify"/>
+                  <xsd:enumeration value="char"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+         <xsd:attribute name="char" type="xsd:string"/>
+         <xsd:attribute name="charoff" type="xsd:string"/>
+         <xsd:attribute name="valign">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="top"/>
+                  <xsd:enumeration value="middle"/>
+                  <xsd:enumeration value="bottom"/>
+                  <xsd:enumeration value="baseline"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ulist">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element ref="item" maxOccurs="unbounded"/>
+         </xsd:sequence>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+         <xsd:attribute name="spacing">
+            <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                  <xsd:enumeration value="normal"/>
+                  <xsd:enumeration value="compact"/>
+               </xsd:restriction>
+            </xsd:simpleType>
+         </xsd:attribute>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="version">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="warning">
+      <xsd:complexType>
+         <xsd:group ref="CONTENT" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="xpathexpr">
+      <xsd:complexType mixed="true">
+         <xsd:group ref="COMMENTS" minOccurs="0" maxOccurs="unbounded"/>
+
+         <xsd:attributeGroup ref="LinkSupport"/>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="xspecref">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="href" type="xsd:string" use="required"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="xtermref">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+               <xsd:attribute name="href" type="xsd:string" use="required"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="year">
+      <xsd:complexType>
+         <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+
+               <xsd:attributeGroup ref="LinkSupport"/>
+            </xsd:extension>
+         </xsd:simpleContent>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

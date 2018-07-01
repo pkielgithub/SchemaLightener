@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: SyncAssessmentCatalog.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentCatalog.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="SyncAssessmentCatalog" type="SyncAssessmentCatalogType"/> 
+       	<xsd:complexType name="SyncAssessmentCatalogType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       SyncAssessmentCatalog is used when the owner of the data is passing or publishing that information or change in information to other software components. This is to be used when the receiver of the SyncAssessmentCatalog does not own the data. This verb is commonly used when mass changes are necessary or when a publish and subscribe mechanism is used in the integration architecture. The purposes of this verb include application integrity and ease of data entry for the business user by enabling a single point of input. 
+
+       AssessmentCatalog  Contains a set of information about assessment services or tests available to a customer. Enables the discovery of &quot;Package IDs&quot; which are necessary to place an order using HR-XML's assessment order specification. A &quot;Package&quot; may consist of one or more assessment instruments. An &quot;assessment package&quot; is the marketable unit of assessment or testing services that may be ordered. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="SyncAssessmentCatalogDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances.</xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="SyncAssessmentCatalogDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Sync"/> 
+       			<xsd:element ref="AssessmentCatalog" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

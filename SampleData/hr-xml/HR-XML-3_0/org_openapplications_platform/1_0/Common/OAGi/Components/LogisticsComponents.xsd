@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+
+
+
+   Schema agency: 	Open Applications Group 
+
+
+   OAGIS® Revision:    9.3  
+   Date:               11 August 2008 
+   Copyright 1997-2008, All Rights Reserved 
+
+  	
+   Copyright (C) Open Applications Group (1997-2008). All Rights Reserved.
+  
+  
+   This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+   License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+   For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+   XML Schema 
+     
+    Name: /OAGi-BPI-Platform/org_openapplications_platform/1_0/Common/OAGi/Components/LogisticsComponents.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="Components.xsd"/>
+        <xsd:complexType name="ShipmentHeaderBaseType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Warehouse Location identifies the place from where the goods are shipped</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ShipUnitQuantity" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Contains the quantity of units or things shipped. This represents the container(s), not the product shipped.  An example of this is "4 truck loads" or "2 wooden crates".</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="WarehouseLocation" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the storage facility for inventory.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the storage facility for inventory.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="CarrierRouteReference" minOccurs="0"/>
+                                        <xsd:element ref="BillOfLadingReference" minOccurs="0"/>
+                                        <xsd:element ref="ActualShipDateTime" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that is used to identify the actual date and time a shipment occurs.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the date that is used to identify the actual date and time a shipment occurs.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ScheduledDeliveryDateTime" minOccurs="0"/>
+                                        <xsd:element ref="ActualDeliveryDateTime" minOccurs="0"/>
+                                        <xsd:element ref="EstimatedWeightMeasure" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The estimated weight of an item or container.  An estimate is provided as a processing alternative when the actual weight of an item is not known or cannot be calculated exactly.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The estimated weight of an item or container.  An estimate is provided as a processing alternative when the actual weight of an item is not known or cannot be calculated exactly.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LoadingWeightMeasure" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the net weight at loading time of the container in which the materials are being shipped.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:group ref="ShippingWeightAndVolumeGroup" minOccurs="0"/>
+                                        <xsd:element ref="HazardousMaterialCodes" minOccurs="0"/>
+                                        <xsd:element ref="CountryOfOriginCode" minOccurs="0"/>
+                                        <xsd:element ref="DistributionCenterCode" minOccurs="0"/>
+                                        <xsd:element ref="TransportationMethodCode" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the general type of carrier transportation used to deliver goods.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="SpecialHandlingNote" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DockID" minOccurs="0"/>
+                                        <xsd:element ref="ShipFromParty" minOccurs="0"/>
+                                        <xsd:element ref="CarrierParty" minOccurs="0"/>
+                                        <xsd:element ref="FreightTermCode" minOccurs="0"/>
+                                        <xsd:element ref="Party" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DistributedCharge" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShipUnitBaseType">
+                <xsd:sequence>
+                        <xsd:group ref="TrackingIDGroup" minOccurs="0"/>
+                        <xsd:group ref="ContainerInstanceIDsGroup" minOccurs="0"/>
+                        <xsd:element ref="CarrierParty" minOccurs="0"/>
+                        <xsd:element ref="ShipFromParty" minOccurs="0"/>
+                        <xsd:element ref="DeclaredValueAmount" minOccurs="0"/>
+                        <xsd:element ref="ShipmentDateTime" minOccurs="0"/>
+                        <xsd:element ref="ExportLicenseRequiredIndicator" minOccurs="0"/>
+                        <xsd:element ref="ImportLicenseRequiredIndicator" minOccurs="0"/>
+                        <xsd:element ref="ScheduledDeliveryDateTime" minOccurs="0"/>
+                        <xsd:element ref="ActualDeliveryDateTime" minOccurs="0"/>
+                        <xsd:element ref="SpecialHandlingNote" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Status" minOccurs="0"/>
+                        <xsd:group ref="ShippingWeightAndVolumeGroup" minOccurs="0"/>
+                        <xsd:element ref="DistributedCharge" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="NormalizedStringType">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the type of container.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+        </xsd:complexType>
+        <xsd:complexType name="ShipItemBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="ItemInstanceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="CountryOfOriginCode" minOccurs="0"/>
+                                        <xsd:element ref="ImportLicenseRequiredIndicator" minOccurs="0"/>
+                                        <xsd:element ref="OrderQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ShippedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="OpenQuantity" minOccurs="0"/>
+                                        <xsd:element ref="BackOrderedQuantity" minOccurs="0"/>
+                                        <xsd:element ref="OwnershipCode" minOccurs="0"/>
+                                        <xsd:element ref="EstimatedWeightMeasure" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The estimated weight of an item or container.  An estimate is provided as a processing alternative when the actual weight of an item is not known or cannot be calculated exactly.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The estimated weight of an item or container.  An estimate is provided as a processing alternative when the actual weight of an item is not known or cannot be calculated exactly.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LoadingWeightMeasure" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the net weight at loading time of the container in which the materials are being shipped.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:group ref="ShippingWeightAndVolumeGroup"/>
+                                        <xsd:element ref="RequisitionReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="PurchaseOrderReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SalesOrderReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DocumentReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ItemSubLine" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ContainerBaseType">
+                <xsd:sequence>
+                        <xsd:group ref="ContainerInstanceIDsGroup" minOccurs="0"/>
+                        <xsd:element ref="ContainerGroupID" minOccurs="0"/>
+                        <xsd:element ref="PackingMaterial" minOccurs="0"/>
+                        <xsd:element ref="ShippingMaterial" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="NormalizedStringType">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the type of container.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+        </xsd:complexType>
+        <xsd:complexType name="ContainerType">
+                <xsd:complexContent>
+                        <xsd:extension base="ContainerBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ItemSubLineType">
+                <xsd:sequence>
+                        <xsd:group ref="ItemInstanceIDsGroup" minOccurs="0"/>
+                        <xsd:element ref="Quantity" minOccurs="0"/>
+                        <xsd:element ref="Status" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="ItemSubLine" type="ItemSubLineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the lot number and serial number details for a specific quantity of items. This can be used to identify either all the serial numbers within a given lot, or lot numbers and serial numbers independent of each other</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Container" type="ContainerType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Uniquely identifies a shipping container</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:group name="ContainerInstanceIDsGroup">
+                <xsd:sequence>
+                        <xsd:element ref="ContainerID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="RFID" minOccurs="0"/>
+                        <xsd:element ref="SealID" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:complexType name="ShipmentUnitType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Amount contains the total sales price for the contents of the shipping unit.
+
+
+The TotalAmount contains the sum of the FreightCharges and the Sales price (Amount) for the shipping unit.  If C.O.D. (Collect On Delivery) freight terms were specified for the transaction, this is monetary amount that the carrier is to collect as payment from the customer upon shipment of the shipping unit.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="ShipUnitBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="EstimatedFreightChargeAmount" minOccurs="0"/>
+                                        <xsd:element ref="FreightChargeAmount" minOccurs="0"/>
+                                        <xsd:element ref="SalePriceAmount" minOccurs="0"/>
+                                        <xsd:element ref="ShipmentTotalAmount" minOccurs="0"/>
+                                        <xsd:element ref="LoadingDateTime" minOccurs="0"/>
+                                        <xsd:element ref="EstimatedWeightMeasure" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The estimated weight of an item or container.  An estimate is provided as a processing alternative when the actual weight of an item is not known or cannot be calculated exactly.</xsd:documentation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The estimated weight of an item or container.  An estimate is provided as a processing alternative when the actual weight of an item is not known or cannot be calculated exactly.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LoadingWeightMeasure" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the net weight at loading time of the container in which the materials are being shipped.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="Dimensions" minOccurs="0"/>
+                                        <xsd:element ref="CountryOfOriginCode" minOccurs="0"/>
+                                        <xsd:element ref="DestinationCountryCode" minOccurs="0"/>
+                                        <xsd:element ref="TransportationMethodCode" minOccurs="0"/>
+                                        <xsd:element ref="ShipmentServiceLevelCode" minOccurs="0"/>
+                                        <xsd:element ref="PointOfStagingCode" minOccurs="0"/>
+                                        <xsd:element ref="TransportationTerm" minOccurs="0"/>
+                                        <xsd:element ref="ShipToLocation" minOccurs="0"/>
+                                        <xsd:element ref="PackingMaterial" minOccurs="0"/>
+                                        <xsd:element ref="ShippingMaterial" minOccurs="0"/>
+                                        <xsd:element ref="ShipmentUnitContainer" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ShipmentUnitItem" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ContainerQuantity" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShipmentUnitItemType">
+                <xsd:complexContent>
+                        <xsd:extension base="ShipItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UnitSalePriceAmount" minOccurs="0"/>
+                                        <xsd:element ref="ExtendedSalePriceAmount" minOccurs="0"/>
+                                        <xsd:group ref="FreightItemGroup" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShipmentUnitContainerType">
+                <xsd:complexContent>
+                        <xsd:extension base="ContainerBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ParentContainerID" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the identifier of the container that physically holds other subordinate containers.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                                        <xsd:element ref="ShipmentUnitItem" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="ShipmentUnit" type="ShipmentUnitType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The ShipmentUnit represents a single trackable, uniquely identifiable assembly or container containing a specific collection of goods inventory that is packaged by a supplier for carrier transportation to a customer business partner destination
+
+The ShipmentUnit component identifies and describes the physical shipping container(s) and internal packaging structure of the delivered goods.  The ShipmentUnit component is typically constructed to describe the result of an inventory picking and packing operation. 
+
+A ShipmentUnit is generally the smallest "thing" that can be individually moved and tracked throughout a carrier's transportation network.  The physical size, inventory, content and internal nested container complexity within a ShipUnit is arbitrary.  The ShipUnit component was specifically designed to be transportation mode independent.  It may be used to represent any uniquely identifiable and trackable assembly, container or vessel including, but not limited to: a parcel express package; a pallet of identical or mixed items; a truck trailer, rail car or an ocean cargo container.
+
+The ShipmentUnit complements the line-item oriented summary information provided in the Shipment's ShipmentItem and InventoryDetail component with detailed information to accurately describe complex shipping unit assemblies and item packaging.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShipmentUnitItem" type="ShipmentUnitItemType"/>
+        <xsd:element name="ShipmentUnitContainer" type="ShipmentUnitContainerType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The ShipmentUnitContainer represents information about an intermediate packaging level within the shipping unit.  A ShipmentUnitContainer may or may not have ShipmentUnitItem associated with it</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:group name="TrackingIDGroup">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Contains the TrackingID and the two optional elements that uniquely identify a ship unit</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="TrackingID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ShipUnitSequenceID" minOccurs="0"/>
+                        <xsd:element ref="ShipUnitTotalID" minOccurs="0"/>
+                        <xsd:element ref="ContainerGroupID" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="CatchWeightGroup">
+                <xsd:sequence>
+                        <xsd:element ref="CatchWeightQuantity" minOccurs="0"/>
+                        <xsd:element ref="CatchWeightConversionFactor" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:group name="FreightItemGroup">
+                <xsd:sequence>
+                        <xsd:element ref="FreightItemID" minOccurs="0"/>
+                        <xsd:element ref="FreightClassificationCode" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:group>
+</xsd:schema>

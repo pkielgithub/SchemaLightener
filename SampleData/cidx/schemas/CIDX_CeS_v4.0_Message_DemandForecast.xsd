@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd" />
+  <xsd:element name="DemandForecast" type="DemandForecastType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description />
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="Header" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandForecastBody" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+    <xsd:attribute name="Version" use="required" type="cidxToken" fixed="4.0" />
+  </xsd:complexType>
+  <xsd:element name="DemandForecastBody" type="DemandForecastBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>High level element containing demand forecast properties, partners, and details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastBodyType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="DemandForecastProperties" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandForecastPartners" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandForecastDetails" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandForecastDetails" type="DemandForecastDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Mid level element containing forecast line items including product, time horizon, and forecast details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastDetailsType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="ForecastLineItem" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandForecastPartners" type="DemandForecastPartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Defines the buyer and the seller between which the transaction takes place</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastPartnersType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="Buyer" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="Seller" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandForecastProperties" type="DemandForecastPropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Defines the properties of the DemandForecast and DemandForecastResponse transaction sets.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastPropertiesType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="LanguageCode" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="ForecastInformation" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="ContractInformation" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="MarketPlaceInformation" minOccurs="0" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

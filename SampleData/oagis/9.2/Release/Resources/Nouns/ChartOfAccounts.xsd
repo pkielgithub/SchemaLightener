@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/ChartOfAccounts.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Common/Components.xsd"/>
+        <xsd:element name="ChartOfAccounts" type="ChartOfAccountsType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Chart of Accounts represents the accounting structure of a business.   Each account represents a financial aspect of a business, such as its Accounts Payable, or the value of its inventory, or its office supply expenses.  Typically, each account consists of a character string representing various elements such as major account code and department code.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ChartOfAccountsType">
+                <xsd:sequence>
+                        <xsd:element ref="GLEntityID" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the primary balancing segment of the GL Account structure.  Typically, this is the owning entity for the transaction.  A G/L entity is the smallest organizational unit for which individual financial statements must be drawn up according to relevant commercial law.  P&amp;L statements are required at this level. </xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="GLNominalAccount" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the primary account classification within a chart of accounts. For example reveune, Fixed Asset, Land, Buildings, etc.</xsd:documentation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the primary account classification within a chart of accounts. For example reveune, Fixed Asset, Land, Buildings, etc.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">defines the date and time when a particular document or item takes effect or becomes valid.</xsd:documentation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">defines the date and time when a particular document or item takes effect or becomes valid.</xsd:documentation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">defines the date and time when a particular document or item takes effect or becomes valid.</xsd:documentation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">defines the date and time when a particular document or item takes effect or becomes valid.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="AccountType" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">AccountType is an account classification that specifies the use of this account.  Suggested examples of account type are Asset, Equity, Expense, Liability,
+Revenue</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="CurrencyCode" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

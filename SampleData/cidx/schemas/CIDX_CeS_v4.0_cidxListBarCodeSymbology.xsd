@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="cidxListBarCodeSymbology">
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="ANSI-MH10.8.2"/>
+      <xsd:enumeration value="Codabar"/>
+      <xsd:enumeration value="Code128"/>
+      <xsd:enumeration value="Code-3-of-9"/>
+      <xsd:enumeration value="Code39"/>
+      <xsd:enumeration value="Code49"/>
+      <xsd:enumeration value="Code93"/>
+      <xsd:enumeration value="DUN-14"/>
+      <xsd:enumeration value="EAN"/>
+      <xsd:enumeration value="GTIN"/>
+      <xsd:enumeration value="Interleaved-2-of-5"/>
+      <xsd:enumeration value="ISO-TC-122"/>
+      <xsd:enumeration value="ITF-14"/>
+      <xsd:enumeration value="MicroPDF417"/>
+      <xsd:enumeration value="MSI"/>
+      <xsd:enumeration value="SCC-14"/>
+      <xsd:enumeration value="SSCC-18"/>
+      <xsd:enumeration value="UCC-EAN-128"/>
+      <xsd:enumeration value="UPC"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

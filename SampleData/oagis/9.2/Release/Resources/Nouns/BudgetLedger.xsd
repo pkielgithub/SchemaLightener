@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/BudgetLedger.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="BudgetLedger" type="BudgetLedgerType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Ledger Budget represents budget amounts by account within ledger within company or business area.  Budget amounts may be generated in a source application and then loaded to a specific ledger within the enterprise general ledger or budget application.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BudgetLedgerHeader" type="BudgetLedgerHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Budget Header information</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BudgetLedgerLine" type="BudgetLedgerLineType"/>
+        <xsd:complexType name="BudgetLedgerType">
+                <xsd:sequence>
+                        <xsd:element ref="BudgetLedgerHeader" minOccurs="0"/>
+                        <xsd:element ref="BudgetLedgerLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="BudgetLedgerHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The JournalEntryID is the  ID in the source sub-ledger that generated the transaction
+
+The IncrementIndicator identifies if the amounts in the ledger budget lines are intended to increment or replace any existing amounts</xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="JournalEntryID" minOccurs="0"/>
+                                        <xsd:element ref="IncrementIndicator" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether the budget amounts are to replace the existing amounts or be summed into the existing budget amounts.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="LedgerID" minOccurs="0"/>
+                                        <xsd:element ref="GLEntityID" minOccurs="0"/>
+                                        <xsd:element ref="SourceDocumentReference" minOccurs="0"/>
+                                        <xsd:element ref="TransactionAnalysisCode" minOccurs="0"/>
+                                        <xsd:element ref="User" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="BudgetLedgerLineType">
+                <xsd:sequence>
+                        <xsd:group ref="LedgerEntryContent" minOccurs="0"/>
+                        <xsd:element ref="AccountingDate" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

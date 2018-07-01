@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:cidx:names:specification:ces:schema:all:4:0">
+  <xsd:simpleType name="cidxListPartnerAgencyAttribute">
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="AGIIS-EBID" />
+      <xsd:enumeration value="AGIIS-NAPD" />
+      <xsd:enumeration value="AssignedByBuyer" />
+      <xsd:enumeration value="AssignedByPapiNet" />
+      <xsd:enumeration value="AssignedBySeller" />
+      <xsd:enumeration value="AssignedByTestingLaboratory" />
+      <xsd:enumeration value="D-U-N-S" />
+      <xsd:enumeration value="EAN" />
+      <xsd:enumeration value="Other" />
+      <xsd:enumeration value="SCAC" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

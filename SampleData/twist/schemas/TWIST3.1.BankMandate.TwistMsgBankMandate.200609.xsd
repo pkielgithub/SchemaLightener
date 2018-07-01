@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Don Cuthbertson (private) -->
+<xs:schema xmlns="http://www.twiststandards.org/3.1/BankMandate" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.twiststandards.org/3.1/BankMandate" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Copyright 2006 TWIST Process Innovations, LTD. -->
+	<!--Working Draft-->
+	<!-- This schema is available for comment and the structure is subject to change -->
+	<!-- Version 3.1 September 2006-->
+	<!-- Specification Document: -->
+	<xs:include schemaLocation="TWIST3.1.TwistCore.TwistMsg.200609.xsd"/>
+	<xs:complexType name="Industry">
+		<xs:sequence>
+			<xs:element name="code" type="xs:string"/>
+			<xs:element name="value" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LegalEntity">
+		<xs:annotation>
+			<xs:documentation>A Legal Entity is a Legally Defined Entity which is recognized in law as having an ultimate legal responsibility by the governmental authority which authorized its creation. In any legally binding agreement or contract with Citigroup, it is a Legal Entity which must be named as the counterparty.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="emailAddress" type="xs:string"/>
+			<xs:element name="entityRiskRating" type="xs:int"/>
+			<xs:element name="uniqueDatabaseSequenceId" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>Uniquely identifies legal Entity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="clientUniqueDatabaseSequenceId" type="xs:int"/>
+			<xs:element name="jurisdictionOfIncorporation" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This Country where the legal entity is registered. A Legally Defined Entity is located in one Country. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="legalEntityName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Name of legal entity. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Primary phone number of the legal entity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxIdentificationNumber" type="xs:string"/>
+			<xs:element name="Industry" type="Industry"/>
+			<xs:element name="businessAddress" type="Address"/>
+			<xs:element name="legalAddress" type="Address">
+				<xs:annotation>
+					<xs:documentation>A Legally Defined Entity Address is an instance of the usage of a particular Address by a Legally Defined Entity. A Legally Defined Entity may have many Legally Defined Entity Addresses. Conversely, the same Address may be used by many Legally Defined Entities.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parentLegalEntity" type="LegalEntity">
+				<xs:annotation>
+					<xs:documentation>One Legal Entity can own - fully or partially - another Legal Entity, and a Legal Entity can have one or more owners. This model supports a simpler form of ownership designation, whereby every Legal Entity is said to have an ultimate legal parent. This information gives only a single level of ownership, and cannot cope with more complex structures such as joint ventures, but has provides a practical solution to historical problems concerning the quality, completeness and maintainability of recursive relationship.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountList" type="Account" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="invoiceAddress" type="Address"/>
+			<xs:element name="corporateSigner" type="User" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+	<xs:complexType name="Address">
+		<xs:annotation>
+			<xs:documentation>Representation of Address. TWIST already has a definition of this - commented out</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="addressLine" type="xs:string"/>
+			<xs:element name="addressLine2" type="xs:string"/>
+			<xs:element name="city" type="xs:string"/>
+			<xs:element name="country" type="xs:string"/>
+			<xs:element name="state" type="xs:string"/>
+			<xs:element name="zipCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>-->
+	<xs:complexType name="Branch">
+		<xs:annotation>
+			<xs:documentation>A branch is licensed by the local banking regulators to accept deposits and to enter into obligations with
+other banks. A Bank Branch is also required to provide financial statements on its operations to local authorities/regulators, and is responsible for holding to local liquidity and capital adequacy requirements.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="branchCode" type="xs:string"/>
+			<xs:element name="country" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="currencyList" type="Currency" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+	<xs:complexType name="Currency">
+	<xs:annotation>
+			<xs:documentation> TWIST already has a definition of this - commented out</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="xs:string"/>
+			<xs:element name="name" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+-->
+	<xs:complexType name="Account">
+		<xs:sequence>
+			<xs:element name="approvedExtendedCutOff" type="xs:boolean"/>
+			<xs:element name="approvedManualPayments" type="xs:boolean"/>
+			<xs:element name="country" type="xs:string"/>
+			<xs:element name="customerName" type="xs:string"/>
+			<xs:element name="uniqueDatabaseSequenceId" type="xs:string"/>
+			<xs:element name="number" type="xs:string"/>
+			<xs:element name="organization" type="xs:string"/>
+			<xs:element name="base" type="Base"/>
+			<xs:element name="swiftInformation" type="SWIFTInformation" minOccurs="0"/>
+			<xs:element name="electronicBankingEntitlementList" type="BankingEntitlement" minOccurs="0"/>
+			<xs:element name="paperStatementInformation" type="PaperStatementInformation"/>
+			<xs:element name="billingInformation" type="BillingInformation"/>
+			<xs:element name="eBSWIFTCode" type="EBSWIFTCode"/>
+			<xs:element name="currency" type="Currency"/>
+			<xs:element name="branch" type="Branch"/>
+			<xs:element name="accountSigner" type="User" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Base">
+		<xs:sequence>
+			<xs:element name="number" type="xs:string"/>
+			<xs:element name="billingAddress" type="Address"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="RequestType">
+		<xs:annotation>
+			<xs:documentation>Identifies the type of acocunt request. For example add signer, create account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AddAccount"/>
+			<xs:enumeration value="ModifyAccount"/>
+			<xs:enumeration value="DeleteAccount"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountRequestStatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RequestInitiated"/>
+			<xs:enumeration value="PendingClientApproval"/>
+			<xs:enumeration value="ClientApproved"/>
+			<xs:enumeration value="PendingClientAuthorization"/>
+			<xs:enumeration value="ClientAuthorized"/>
+			<xs:enumeration value="PendingBankReview"/>
+			<xs:enumeration value="BankReviewed"/>
+			<xs:enumeration value="PendingBankApproval"/>
+			<xs:enumeration value="BankApproved"/>
+			<xs:enumeration value="PendingBankImplementation"/>
+			<xs:enumeration value="RequestImplemented"/>
+			<xs:enumeration value="ClientNotified"/>
+			<xs:enumeration value="CompletedRequest"/>
+			<xs:enumeration value="Rejected"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EBSWIFTCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ElectronicBanking"/>
+			<xs:enumeration value="SWIFT"/>
+			<xs:enumeration value="BothSWIFTAndElectronicBanking"/>
+			<xs:enumeration value="None"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BillingInformation">
+		<xs:sequence>
+			<xs:element name="billingLevel" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Indicator whether the account billing is at base level or account level.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="epicBranch" type="xs:int"/>
+			<xs:element name="address" type="Address"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Customer">
+		<xs:sequence>
+			<xs:element name="uniqueDatabaseSequenceId" type="xs:int"/>
+			<xs:element name="name" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="BankingTypeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Application1"/>
+			<xs:enumeration value="Application2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccessLevelType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PaymentAndReporting"/>
+			<xs:enumeration value="Reporting"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Relationship">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="AccountRequest">
+		<xs:sequence>
+			<xs:element name="accountRequestID" type="xs:int"/>
+			<xs:element name="processID" type="xs:int"/>
+			<xs:element name="requestedDate" type="xs:date"/>
+			<xs:element name="account" type="Account"/>
+			<xs:element name="requestType" type="RequestType"/>
+			<xs:element name="currentStatus" type="AccountRequestStatusType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SWIFTStatementInformation">
+		<xs:sequence>
+			<xs:element name="swiftCode" type="xs:string"/>
+			<xs:element name="frequency" type="FrequencyType"/>
+			<xs:element name="swiftMsgType" type="SWIFTMessageType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BankingEntitlement">
+		<xs:sequence>
+			<xs:element name="uniqueDatabaseIdentifier" type="xs:int"/>
+			<xs:element name="applicationSpecificDefinition" type="xs:string"/>
+			<xs:element name="legalName" type="xs:string"/>
+			<xs:element name="bankingType" type="BankingTypeType"/>
+			<xs:element name="accessLevel" type="AccessLevelType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SWIFTAdviceInformation">
+		<xs:sequence>
+			<xs:element name="swiftCode" type="xs:string"/>
+			<xs:element name="swiftMsgType" type="SWIFTMessageType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaperStatementInformation">
+		<xs:sequence>
+			<xs:element name="requiredCDAdvice" type="xs:boolean"/>
+			<xs:element name="requiredIntrestStatment" type="xs:boolean"/>
+			<xs:element name="address" type="Address"/>
+			<xs:element name="frequency" type="FrequencyType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--
+	<xs:complexType name="User">
+	<xs:annotation>
+			<xs:documentation>TWIST already has a definition of this - commented out</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="certificateExpirationDate" type="xs:date"/>
+			<xs:element name="corporateTitle" type="xs:string"/>
+			<xs:element name="emailAddress" type="xs:string"/>
+			<xs:element name="name" type="Name"/>
+			<xs:element name="certificate" type="Certificate"/>
+		</xs:sequence>
+	</xs:complexType>
+-->
+	<xs:simpleType name="FrequencyType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Daily"/>
+			<xs:enumeration value="Weekly"/>
+			<xs:enumeration value="Monthly"/>
+			<xs:enumeration value="OnMovement"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SWIFTMessageType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MT940"/>
+			<xs:enumeration value="MT950"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Name">
+		<xs:sequence>
+			<xs:element name="distingushedName" type="xs:string"/>
+			<xs:element name="firstName" type="xs:string"/>
+			<xs:element name="lastName" type="xs:string"/>
+			<xs:element name="middleInitial" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Certificate">
+		<xs:sequence>
+			<xs:element name="x509CertificateData" type="xs:string"/>
+			<xs:element name="x509CertificateFormat" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The format for certificate data -for eg - pkcs7, der, base64.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SWIFTInformation">
+		<xs:sequence>
+			<xs:element name="accLinkedForDebitAuthAndDerivation" type="xs:boolean"/>
+			<xs:element name="accLinkedForDebitAuthOnly" type="xs:boolean"/>
+			<xs:element name="statementInformation" type="SWIFTStatementInformation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="adviceInformation" type="SWIFTAdviceInformation" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: ChangeAssessmentReport.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentReport.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="ChangeAssessmentReport" type="ChangeAssessmentReportType"/> 
+       	<xsd:complexType name="ChangeAssessmentReportType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Used to request a Change of a AssessmentReport previously communicated to the receiving application or party.  
+
+       AssessmentReport  Provides scores and other details to fulfill or respond to an assessment order. 
+
+       Change is an "Action Verb". ActionExpression(s) represent and communicate data management  
+       instructions.  Note that there are two implementation patterns: "Full Refresh" and "Delta." Under the 
+       Full Refresh pattern, the type of data management instruction (action code: add, update, delete) is ommitted since a 
+       full refresh of the noun or other defined scope is implied. Under the  Delta pattern, the action code would be specified 
+       to be applied to the selected fields presented in the noun portion of the ChangeAssessmentReport BOD. 
+       Choice of implementation pattern is something agreed upon by trading partners. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="ChangeAssessmentReportDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances. In the case of the ChangeAssessmentReport, the verb Change indicates the action to be performed on the noun AssessmentReport.</xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="ChangeAssessmentReportDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Change"/> 
+       			<xsd:element ref="AssessmentReport" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

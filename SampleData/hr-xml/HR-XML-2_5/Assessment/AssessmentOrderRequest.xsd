@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ns.hr-xml.org/2007-04-15" elementFormDefault="qualified" version="2007-04-15">
+	<xsd:annotation>
+		<xsd:documentation>
+"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org"
+Name: AssessmentOrderRequest.xsd
+Status: Recommendation
+Date this version: 2007-04-15
+Author(s): Assessment  Work Group
+Documentation: Assessments.html
+
+Terms of license can be found in license.txt.
+
+</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../W3C/xml.xsd"/>
+	<xsd:include schemaLocation="../Assessment/AssessmentTypes.xsd"/>
+	<xsd:element name="AssessmentOrderRequest" type="AssessmentOrderRequestType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentOrderRequest schema, which is designed to hold data necessary to initiate an assessment request.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AssessmentOrderRequestType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentOrderRequest schema, which is designed to hold data necessary to initiate an assessment request.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ClientId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies a client for the 3rd party vendor (assessor). It is up to the vendor to provide the client its identifier.The client id is mandatory for all messages going from a customer to an assessment vendor</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PackageId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>: Identifies the package of assessments being ordered for the Subject. PackageIds are supplied by the Assessment Vendor to the Client in a Trading Partner Agreement.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProviderId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies An assessment provider for the customer. It is up to the client to provide the provider its identifier</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ComparisonGroupId" type="EntityIdType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Indicates the group(s) this assessment should be included in when comparing assessment results.  For example, in recruiting this could be a Job Requisition identifier. The Client defines this field.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ClientOrderId" type="EntityIdType">
+				<xsd:annotation>
+					<xsd:documentation>A unique identifier, for the client, to identify the order.There can be multiple order id for one request (e.g. PO #, department)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentRequester" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>The individual that makes the request</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentSubject" type="AssessmentSubjectType">
+				<xsd:annotation>
+					<xsd:documentation>The person who will be the subject of the assessment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentLanguage" type="xsd:language" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The language in which the assessment is required. Note that  available lanaguages might be obtained from AssessmentLanguage within AssessmentCatalog.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ResultLanguage" type="xsd:language" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The language in which the assessment results are required. Note that  available lanaguages might be obtained from ResultLanguage within AssessmentCatalog.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+</xsd:schema>

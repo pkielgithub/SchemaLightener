@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: ShowAssessmentReport.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentReport.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="ShowAssessmentReport" type="ShowAssessmentReportType"/> 
+       	<xsd:complexType name="ShowAssessmentReportType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+        ShowAssessmentReport is used to send a specific piece of existing AssessmentReport data in response to a GetAssessmentReport request. 
+
+       AssessmentReport  Provides scores and other details to fulfill or respond to an assessment order. 
+
+       Show is an "Response Verb". The Show verb is used to send a specific instance of a business document or entity in response to a Get request. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="ShowAssessmentReportDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances.</xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="ShowAssessmentReportDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Show"/> 
+       			<xsd:element ref="AssessmentReport" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

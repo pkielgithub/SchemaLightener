@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: AcknowledgeAssessmentOrder.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentOrder.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="AcknowledgeAssessmentOrder" type="AcknowledgeAssessmentOrderType"/> 
+       	<xsd:complexType name="AcknowledgeAssessmentOrderType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       AcknowledgeAssessmentOrder conveys the result of a ProcessAssessmentOrder request. 
+
+       AssessmentOrder  Defines a set of information necessary to execute an order for an employment test or assessment. 
+
+       Acknowledge is a "Response Verb". Response Expressions represent and communicate actions taken by the receiver. 
+       XPath is the default expression language. The actionCode attribute (Accepted, Modified, Rejected  
+       specifies the action taken by the receiver. ChangeStatus allows detailed change and state information to be returned.
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="AcknowledgeAssessmentOrderDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances. </xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="AcknowledgeAssessmentOrderDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Acknowledge"/> 
+       			<xsd:element ref="AssessmentOrder" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/BOM.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="BOM" type="BOMType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">When included in a hierarchy, the Components are position dependent for their meaning and applicability to the Bill of Material.
+
+The Bill of Material structure is broken down into three classifications or ways to represent the Item.  An Item may be included by itself as in the first sub-grouping, or an Item may be represented as part of a set of options or as an option within a class of options.
+
+An example of an option would be CD-ROM for a laptop computer.  Then each of the types of CD-ROM's for the option would be a separate Item.
+
+An example of an option class would be memory for a laptop.  The options could then be 128, 256, or 512 megabytes of RAM.  Each of these options would then have separate Item identifiers for memory modules that makes up the appropriate amount of memory.  For 256 megabytes of RAM, this could be two 128 megabyte memory modules or one 256 megabyte.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BOMHeader" type="BOMHeaderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that generally describes the Bill of Material Structure and its contents.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BOMItemData" type="BOMItemDataType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The BOM view of an Item.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BOMOption" type="BOMOptionType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that describes the attributes of a specific Option within a classification.  </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="BOMOptionClass" type="BOMOptionClassType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information that describes the class of Option for a particular Product or Item</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="BOMType">
+                <xsd:sequence>
+                        <xsd:element ref="BOMHeader" minOccurs="0"/>
+                        <xsd:element ref="BOMItemData" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the Items that the Bill-Of-Material creates. There may be other items created as a by-product of this same process.
+
+The first occurance is the primary Item of this BOM.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="BOMOption" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="BOMOptionClass" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="BOMHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="AlternateBOMReference" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies Alternate BOM for the given BOM.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="ParentBOMReference" minOccurs="0"/>
+                                        <xsd:element ref="ChildBOMReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RouteReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Name" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UsageDescription" minOccurs="0"/>
+                                        <xsd:element ref="Type" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="EffectiveTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="Location" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="TrackingIndicator" minOccurs="0"/>
+                                        <xsd:element name="BatchSizeQuantity" type="QuantityType" minOccurs="0">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the number of items that can be produced in each run of the BOM.</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="BOMItemDataType">
+                <xsd:complexContent>
+                        <xsd:extension base="ManufacturingItemBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OperationReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="RouteReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ParentItemID" minOccurs="0"/>
+                                        <xsd:element ref="ChildItemID" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="BOMOptionType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="Name" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="DefaultIndicator" minOccurs="0"/>
+                        <xsd:element ref="ExclusiveIndicator" minOccurs="0"/>
+                        <xsd:element ref="BOMItemData" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="BOMOptionClassType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:element ref="Name" minOccurs="0"/>
+                        <xsd:element ref="ExclusiveIndicator" minOccurs="0"/>
+                        <xsd:element ref="MandatoryIndicator" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="BOMOption" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

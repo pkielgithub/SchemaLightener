@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+        ACORD XlifeBase Business Message/Transaction Specification
+        Revision: 2.09.00
+        Date: Thursday, December 18, 2003
+        (c) ACORD Corporation, 2000-2003 All Rights Reserved - www.acord.org
+        For Use Only by ACORD Members and parties obtaining written ACORD permission
+        under the ACORD Standards Terms and Conditions of Use
+        Produced by Blue Frog ADMServer - www.bluefrogsolutions.com
+
+-->
+<xsd:schema targetNamespace="http://ACORD.org/Standards/Life/2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ACORD.org/Standards/Life/2" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="2.9.00">
+	<xsd:element name="Criteria">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ObjectType"/>
+				<xsd:element ref="PropertyName"/>
+				<xsd:element ref="PropertyValue"/>
+				<xsd:element ref="Operation"/>
+				<xsd:element ref="KeyedValue" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="OLifEExtension" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="JurisdictionCC">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Jurisdiction" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="KeyedValue">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="KeyName"/>
+				<xsd:element ref="VendorCode" minOccurs="0"/>
+				<xsd:element ref="KeyValue" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:ID"/>
+			<xsd:attribute name="tc" type="OLI_LU_VARIANTATT"/>
+			<xsd:attribute name="DataRep" type="DATAREP_TYPES"/>
+			<xsd:attribute name="SystemCode" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OLifEExtension">
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:any processContents="skip" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="VendorCode" type="xsd:string" use="required"/>
+			<xsd:attribute name="ExtensionCode" type="xsd:string"/>
+			<xsd:attribute name="DataRep" type="DATAREP_TYPES"/>
+			<xsd:attribute name="SystemCode" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- ********** PROPERTIES ********** -->
+	<xsd:element name="CurrencyTypeCode" type="OLI_LU_CURRENCYTYPE"/>
+	<xsd:element name="EffDate" type="xsd:date"/>
+	<xsd:element name="EndDate" type="xsd:date"/>
+	<xsd:element name="ExclusionRatio" type="xsd:double"/>
+	<xsd:element name="Jurisdiction" type="OLI_LU_STATE"/>
+	<xsd:element name="KeyName" type="xsd:string"/>
+	<xsd:element name="KeyValue">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="xsd:anyType">
+					<xsd:attribute name="VendorTC" type="ACORD_TYPE_CODE" use="optional"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Mode" type="OLI_LU_PAYMODE" default="1"/>
+	<xsd:element name="Nation" type="OLI_LU_NATION"/>
+	<xsd:element name="ObjectType" type="OLI_LU_OBJECTTYPE"/>
+	<xsd:element name="Operation" type="OLI_LU_OPERATION"/>
+	<xsd:element name="PayoutAmt" type="xsd:decimal"/>
+	<xsd:element name="PolFee" type="xsd:decimal"/>
+	<xsd:element name="PropertyName" type="xsd:string"/>
+	<xsd:element name="PropertyValue">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="tc" type="OLI_LU_VARIANTATT" use="optional"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="StartDate" type="xsd:date"/>
+	<xsd:element name="VendorCode" type="xsd:string"/>
+	<!-- ********** LOOKUPS ********** -->
+	<xsd:complexType name="ACORD_OPEN_CODE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" type="ACORD_TYPE_CODE" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="ACORD_TYPE_CODE">
+		<xsd:restriction base="xsd:nonNegativeInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DATAREP_TYPES">
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:enumeration value="Full"/>
+			<xsd:enumeration value="Partial"/>
+			<xsd:enumeration value="Removed"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="OLI_LU_BOOLEAN">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_CURRENCYTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_DATATYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_NATION">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_OBJECTTYPE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_OPERATION">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_PAYMODE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_STATE">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="OLI_LU_TRANS_TYPE_CODES">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="tc" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="ACORD_TYPE_CODE"/>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="OLI_LU_VARIANTATT">
+		<xsd:restriction base="ACORD_TYPE_CODE"/>
+	</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Don Cuthbertson (private) -->
+<xs:schema xmlns="http://www.twiststandards.org/3.1/Payments" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:isth="urn:iso:std:iso:20022:tech:xsd:pain.001.001.02" xmlns:isthdd="urn:iso:std:iso:20022:tech:xsd:pain.008.001.01" xmlns:isthpr="urn:iso:std:iso:20022:tech:xsd:pain.007.001.01" xmlns:isthpcr="urn:iso:std:iso:20022:tech:xsd:pain.006.001.01" xmlns:isthpsr="urn:iso:std:iso:20022:tech:xsd:pain.002.001.02" targetNamespace="http://www.twiststandards.org/3.1/Payments" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Copyright 2006 TWIST Process Innovations, LTD. -->
+	<!--Status: Working Draft-->
+	<!-- This schema is available for comment and the structure is subject to change -->
+	<!-- Version 3.1 September 2006-->
+	<!-- Specification Document: -->
+	<xs:include schemaLocation="TWIST3.1.TWISTCore.TwistMsg.200609.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pain.001.001.02" schemaLocation="./pain.001.001.02.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pain.008.001.01" schemaLocation="./pain.008.001.01.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pain.007.001.01" schemaLocation="./pain.007.001.01.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pain.006.001.01" schemaLocation="./pain.006.001.01.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:20022:tech:xsd:pain.002.001.02" schemaLocation="./pain.002.001.02.xsd"/>
+	<xs:complexType name="PaymentMsg">
+		<xs:annotation>
+			<xs:documentation>Message for payment status - Payment is used in TwistShared</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="paymentMsg" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:choice>
+									<xs:element name="creditTransfer" type="CreditTransfer"/>
+									<xs:element name="directDebit" type="DirectDebit"/>
+								</xs:choice>
+								<xs:element name="batchReferenceCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="35"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="paymentSummarizedPostingIndicator" type="xs:boolean"/>
+								<xs:element name="paymentControlTotals" type="xs:decimal" minOccurs="0"/>
+								<xs:element name="authentication" type="Authentication"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PaymentStatusRequest">
+		<xs:annotation>
+			<xs:documentation>Message</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="RequestMessage">
+				<xs:sequence>
+					<xs:element name="paymentStatusRequest">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="batchRefNum" type="xs:decimal" minOccurs="0"/>
+								<xs:element name="paymentTransactionId" type="PaymentTransactionId"/>
+								<xs:element name="paymentAdditionalItems" type="PaymentAdditionalItems" minOccurs="0"/>
+								<xs:element name="authentication" type="Authentication"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PaymentStatusResponse">
+		<xs:annotation>
+			<xs:documentation>Message</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="paymentStatusResponse">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:choice>
+									<xs:element name="batchResponse" type="BatchResponse"/>
+									<xs:element name="transactionResponse" type="TransactionResponse"/>
+								</xs:choice>
+								<xs:element name="authentication" type="Authentication"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RemittanceAdvice">
+		<xs:annotation>
+			<xs:documentation>Message</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element name="remittanceAdvice" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="debtorParty" type="PartyContactInfo" minOccurs="0"/>
+								<xs:element name="creditorParty" type="PartyContactInfo" minOccurs="0"/>
+								<xs:element name="paymentTransactionId" type="PaymentTransactionId"/>
+								<xs:element name="paymentDate" type="PaymentDate"/>
+								<xs:element name="paymentAmount" type="PaymentAmount"/>
+								<xs:element name="paymentDebitAccountInfo" type="GenericAcctInfo" minOccurs="0"/>
+								<xs:element name="paymentCreditAccountInfo" type="GenericAcctInfo" minOccurs="0"/>
+								<xs:element name="paymentRemittanceDetailsListing" type="PaymentRemittanceDetailsListing"/>
+								<xs:element name="paymentTaxInformation" type="PaymentTaxInformation" minOccurs="0"/>
+								<!--changed from mandatory to optional (0606-12)-->
+								<xs:element name="paymentTransferType" type="PaymentTransferType" minOccurs="0"/>
+								<xs:element name="additionalInfo" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="128"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="authentication" type="Authentication" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="isthdd">
+		<xs:annotation>
+			<xs:documentation>Message direct debit [changed per 0906-3]</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element ref="isthdd:Document"/>
+					<xs:element name="authentication" type="Authentication"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="isth">
+		<xs:annotation>
+			<xs:documentation>Message Customer Credit Transfer Initiation [changed per 0906-2]</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element ref="isth:Document"/>
+					<xs:element name="authentication" type="Authentication"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="isthpr">
+		<xs:annotation>
+			<xs:documentation>Message for Payment Reversal [added per 0906-4]</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element ref="isthpr:Document"/>
+					<xs:element name="authentication" type="Authentication"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="isthpcr">
+		<xs:annotation>
+			<xs:documentation>Message for Payment Cancellation Request [added per 0906-5]</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element ref="isthpcr:Document"/>
+					<xs:element name="authentication" type="Authentication"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="isthpsr">
+		<xs:annotation>
+			<xs:documentation>Message for Payment Status Report [added per 0906-6]</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ResponseMessage">
+				<xs:sequence>
+					<xs:element ref="isthpsr:Document"/>
+					<xs:element name="authentication" type="Authentication"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Types-->
+	<xs:simpleType name="Authentication">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BatchResponse">
+		<xs:sequence>
+			<xs:element name="batchRefNum" type="xs:decimal"/>
+			<xs:element name="batchStatusCode" type="BatchStatusCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="BatchStatusCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="rejected"/>
+			<xs:enumeration value="accepted"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChkDeliveryMethod">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MLDB"/>
+			<xs:enumeration value="MLCD"/>
+			<xs:enumeration value="MLFA"/>
+			<xs:enumeration value="CRDB"/>
+			<xs:enumeration value="CRCD"/>
+			<xs:enumeration value="CRFA"/>
+			<xs:enumeration value="PUDB"/>
+			<xs:enumeration value="PUCD"/>
+			<xs:enumeration value="PUFA"/>
+			<xs:enumeration value="RGDB"/>
+			<xs:enumeration value="RGCD"/>
+			<xs:enumeration value="RGFA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChkInstructionPriorityCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HIGH"/>
+			<xs:enumeration value="NORM"/>
+			<xs:enumeration value="LOW"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChkType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CCHQ"/>
+			<xs:enumeration value="CCCH"/>
+			<xs:enumeration value="BCHQ"/>
+			<xs:enumeration value="DRFT"/>
+			<xs:enumeration value="ELDR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CreditCardNumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CreditCardVerificationValue">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CreditTransfer">
+		<xs:sequence>
+			<xs:element name="debtorParty" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="originatingParty" type="PartyContactInfo"/>
+			<xs:element name="initiatingParty" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="forwardingBank" type="BankInfo" minOccurs="0"/>
+			<xs:element name="paymentDate" type="PaymentDate"/>
+			<xs:element name="paymentDebitAccountInfo" type="GenericAcctInfo"/>
+			<xs:element name="paymentCreditTransaction" type="PaymentCreditTransaction"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DirectDebit">
+		<xs:sequence>
+			<xs:element name="creditorParty" type="PartyContactInfo"/>
+			<xs:element name="originatingParty" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="paymentDate" type="PaymentDate" minOccurs="0"/>
+			<xs:element name="paymentCreditAccountInfo" type="GenericAcctInfo"/>
+			<xs:element name="paymentDebitTransaction" type="PaymentDebitTransaction" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DirectDebitSequenceIndicator">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FIRST"/>
+			<xs:enumeration value="CONT"/>
+			<xs:enumeration value="LAST"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="OriginalInfo">
+		<xs:sequence>
+			<xs:element name="paymentMethodType" type="xs:string" minOccurs="0"/>
+			<xs:element name="paymentDate" type="PaymentDate" minOccurs="0"/>
+			<xs:element name="creditTransferType" type="xs:string" minOccurs="0"/>
+			<xs:element name="debtorParty" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="paymentDebitAccountInfo" type="GenericAcctInfo" minOccurs="0"/>
+			<xs:element name="creditorParty" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="paymentCreditAccountInfo" type="GenericAcctInfo" minOccurs="0"/>
+			<xs:element name="paymentAmount" type="PaymentAmount" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentAdditionalItems">
+		<xs:sequence>
+			<xs:element name="paymentDate" type="PaymentDate" minOccurs="0"/>
+			<xs:element name="paymentAmount" type="PaymentAmount" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentCheckInfo">
+		<xs:sequence>
+			<xs:element name="chkNum">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="chkType" type="ChkType"/>
+			<xs:element name="maturityDt" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>name change candidate to maturityDate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="memo">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="chkInstructionPriorityCode" type="ChkInstructionPriorityCode" minOccurs="0"/>
+			<xs:element name="chkDeliveryMethod" type="ChkDeliveryMethod" minOccurs="0"/>
+			<xs:element name="chkFormCode" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="clearingZone" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentCreditCardInfo">
+		<xs:sequence>
+			<xs:element name="creditCardNumber" type="CreditCardNumber"/>
+			<xs:element name="creditCardFullName">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="creditCardExpiryDate" type="xs:date"/>
+			<xs:element name="creditCardVerificationValue" type="CreditCardVerificationValue"/>
+			<xs:element name="creditCardPaymentAuthorizationDate" type="xs:date"/>
+			<xs:element name="creditCardBuyerParty" type="PartyContactInfo"/>
+			<xs:element name="creditCardSupplierParty" type="PartyContactInfo"/>
+			<xs:element name="creditCardBankParty" type="PartyContactInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentCreditTransaction">
+		<xs:sequence>
+			<xs:element name="paymentAmount" type="PaymentAmount"/>
+			<xs:element name="forexContractRef" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentTransactionId" type="PaymentTransactionId"/>
+			<xs:element name="creditorParty" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="finalPartyRef" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="paymentDescription">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentCharges" type="PaymentCharges" minOccurs="0"/>
+			<xs:element name="paymentRemittanceDetails" type="PaymentRemittanceDetails" minOccurs="0"/>
+			<xs:element name="paymentTaxInformation" type="PaymentTaxInformation" minOccurs="0"/>
+			<xs:element name="paymentWCFDetails" type="PaymentWCFDetails" minOccurs="0"/>
+			<xs:element name="paymentCreditAccountInfo" type="GenericAcctInfo"/>
+			<xs:element name="finalCreditAccountNumberInfo" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="intermediaryBank" type="GenericAcctInfo" minOccurs="0" maxOccurs="2"/>
+			<xs:element name="paymentTransferCrType" type="PaymentTransferCrType"/>
+			<!--			<xs:element ref="paymentCBRData" minOccurs="0"/>  -->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentDebitTransaction">
+		<xs:sequence>
+			<xs:element name="paymentAmount" type="PaymentAmount"/>
+			<xs:element name="forexContractRef" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentTransactionId" type="PaymentTransactionId"/>
+			<xs:element name="debtorParty" type="PartyContactInfo"/>
+			<xs:element name="finalPartyRef" type="PartyContactInfo" minOccurs="0"/>
+			<xs:element name="paymentDescription">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="paymentCharges" type="PaymentCharges" minOccurs="0"/>
+			<xs:element name="paymentRemittanceDetails" type="PaymentRemittanceDetails" minOccurs="0"/>
+			<xs:element name="paymentTaxInformation" type="PaymentTaxInformation" minOccurs="0"/>
+			<xs:element name="paymentWCFDetails" type="PaymentWCFDetails" minOccurs="0"/>
+			<xs:element name="paymentDebitAccountInfo" type="GenericAcctInfo"/>
+			<xs:element name="paymentTransferDrType" type="PaymentTransferDrType"/>
+			<!--			<xs:element ref="paymentCBRData" minOccurs="0"/> -->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentDirectDebitInfo">
+		<xs:sequence>
+			<xs:element name="directDebitScheme">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="directDebitSequenceIndicator" type="DirectDebitSequenceIndicator"/>
+			<xs:element name="directDebitContractNumber" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="directDebitMandateNumber" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="35"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentTransferCrType">
+		<xs:sequence>
+			<xs:element name="paymentTypeCP" type="PaymentTypeCP"/>
+			<xs:element name="paymentClearingHouseIndicator" type="PaymentClearingHouseIndicator" minOccurs="0"/>
+			<xs:element name="paymentGeographicalArea" type="PaymentGeographicalArea" minOccurs="0"/>
+			<xs:element name="settlementPriority" type="SettlementPriority" minOccurs="0"/>
+			<xs:element name="instructionPriority" type="InstructionPriority" minOccurs="0"/>
+			<xs:element name="paymentPurpose" type="PaymentPurpose" minOccurs="0"/>
+			<xs:choice minOccurs="0">
+				<xs:element name="paymentCheckInfo" type="PaymentCheckInfo"/>
+				<xs:element name="paymentCreditCardInfo" type="PaymentCreditCardInfo"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentTransferDrType">
+		<xs:sequence>
+			<xs:element name="paymentTypeCP" type="PaymentTypeCP"/>
+			<xs:element name="paymentClearingHouseIndicator" type="PaymentClearingHouseIndicator" minOccurs="0"/>
+			<xs:element name="paymentGeographicalArea" type="PaymentGeographicalArea" minOccurs="0"/>
+			<xs:element name="settlementPriority" type="SettlementPriority" minOccurs="0"/>
+			<xs:element name="instructionPriority" type="InstructionPriority" minOccurs="0"/>
+			<xs:element name="paymentPurpose" type="PaymentPurpose" minOccurs="0"/>
+			<xs:element name="paymentDirectDebitInfo" type="PaymentDirectDebitInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentTransferType">
+		<xs:sequence>
+			<xs:element name="paymentTypeCP" type="PaymentTypeCP"/>
+			<xs:element name="paymentClearingHouseIndicator" type="PaymentClearingHouseIndicator" minOccurs="0"/>
+			<xs:element name="paymentGeographicalArea" type="PaymentGeographicalArea" minOccurs="0"/>
+			<xs:element name="settlementPriority" type="SettlementPriority" minOccurs="0"/>
+			<xs:element name="instructionPriority" type="InstructionPriority" minOccurs="0"/>
+			<xs:element name="paymentPurpose" type="PaymentPurpose" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="RejectionCode">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value=""/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="RepairedData">
+		<xs:sequence>
+			<xs:element name="repairedField" type="xs:string"/>
+			<xs:element name="originalValue" type="xs:string"/>
+			<xs:element name="repairedValue" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="RsStatusInd">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="accepted"/>
+			<xs:enumeration value="rejected"/>
+			<xs:enumeration value="repaired"/>
+			<xs:enumeration value="returned"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TransactionResponse">
+		<xs:sequence>
+			<xs:element name="rsStatusInd" type="RsStatusInd"/>
+			<xs:element name="paymentTransactionId" type="PaymentTransactionId"/>
+			<xs:element name="originalInfo" type="OriginalInfo" minOccurs="0"/>
+			<xs:element name="repairedData" type="RepairedData" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="rejectionCode" type="RejectionCode" minOccurs="0"/>
+			<xs:element name="responseStatusTimeStamp" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Uuid">
+		<xs:annotation>
+			<xs:documentation>UUID elements strings with a maximum length of 36.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"/>
+			<xs:pattern value="([0-9]|[a-f]|[A-F]){8}(-([0-9]|[a-f]|[A-F]){4})(-([0-9]|[a-f]|[A-F]){4})(-([0-9]|[a-f]|[A-F]){4})(-([0-9]|[a-f]|[A-F]){12})"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

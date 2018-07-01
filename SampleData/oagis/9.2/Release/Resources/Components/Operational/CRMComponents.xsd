@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Components/Operational/CRMComponents.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Common/Components.xsd"/>
+        <xsd:complexType name="CRMHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Name" minOccurs="0"/>
+                                        <xsd:element ref="CloseReasonCode" minOccurs="0"/>
+                                        <xsd:element ref="Interests" minOccurs="0"/>
+                                        <xsd:element ref="TotalAmount" minOccurs="0"/>
+                                        <xsd:element ref="BudgetedAmount" minOccurs="0"/>
+                                        <xsd:element ref="ReceivedCode" minOccurs="0"/>
+                                        <xsd:element ref="SourceID" minOccurs="0"/>
+                                        <xsd:element ref="CustomerParty" minOccurs="0"/>
+                                        <xsd:element ref="OwnerParty" minOccurs="0"/>
+                                        <xsd:element ref="SalesContact" minOccurs="0"/>
+                                        <xsd:element ref="CompetitorParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="MarketingProgram" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="QuoteReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SalesActivity" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SalesTask" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="CRMLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Item" minOccurs="0"/>
+                                        <xsd:element ref="Amount" minOccurs="0"/>
+                                        <xsd:element ref="Quantity" minOccurs="0"/>
+                                        <xsd:element ref="CompetitorParty" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="CompetingItem" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="MarketingProgram" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SalesActivityType">
+                <xsd:complexContent>
+                        <xsd:extension base="SalesActivityBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="SalesActivityBaseType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Captures the Sales Activity.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="DateTime" minOccurs="0"/>
+                        <xsd:element ref="MaterialRequested" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="MaterialSent" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="EmailResultCode" minOccurs="0"/>
+                        <xsd:element ref="RequestContactIndicator" minOccurs="0"/>
+                        <xsd:element ref="Result" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="SalesActivityCodeContentType" use="optional"/>
+        </xsd:complexType>
+        <xsd:element name="SalesActivity" type="SalesActivityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">An associated sales activity as a result of the lead/opportunity.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SalesTask" type="SalesTaskType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This will tell all the associated Tasks which have been associated with this Opportunity. It should tell who created it, who owns it, what the status is, task Priority, Planned Start and End Date</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="SalesTaskType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Subject" minOccurs="0"/>
+                        <xsd:element ref="PriorityCode" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="Status" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Task status such as in plannig, in prorgress, completed</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="CategoryCodes" minOccurs="0"/>
+                        <xsd:element ref="PrivateIndicator" minOccurs="0"/>
+                        <xsd:element ref="ParentTaskID" minOccurs="0"/>
+                        <xsd:element ref="EscalationLevelCode" minOccurs="0"/>
+                        <xsd:element ref="PlannedTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="ScheduledTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="ActualTimePeriod" minOccurs="0"/>
+                        <xsd:element ref="OwnerParty" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Genreally the creator of task is the Owner, although in some cases the ownership could be transferred too.</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="AssignedToContact" minOccurs="0"/>
+                        <xsd:element ref="AssigneeType" minOccurs="0"/>
+                        <xsd:element ref="AssigneeStatus" minOccurs="0"/>
+                        <xsd:element ref="SourceID" minOccurs="0"/>
+                        <xsd:element ref="CustomerParty" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The task is about what type of Customer "Organization", "Person" or "RelationShips" etc. ??? This should be a Base type</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:element ref="SalesLeadReference" minOccurs="0"/>
+                        <xsd:element ref="OpportunityReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="ServiceRequestReference" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="CompletionPercent" minOccurs="0"/>
+                        <xsd:element ref="CompletedDuration" minOccurs="0"/>
+                        <xsd:element ref="PlannedEffortDuration" minOccurs="0"/>
+                        <xsd:element ref="ActualEffortDuration" minOccurs="0"/>
+                        <xsd:element ref="RepeatingFrequencyCode" minOccurs="0"/>
+                        <xsd:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:group ref="ReferencesGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="SalesTaskCodeContentType" use="optional"/>
+        </xsd:complexType>
+        <xsd:complexType name="AppointmentBaseType">
+                <xsd:sequence>
+                        <xsd:element ref="DateTime" minOccurs="0"/>
+                        <xsd:element ref="Location" minOccurs="0">
+                                <xsd:annotation>
+                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Location of the appointment... For example: Office; Home</xsd:documentation>
+                                </xsd:annotation>
+                        </xsd:element>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="AppointmentType">
+                <xsd:complexContent>
+                        <xsd:extension base="AppointmentBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="Appointment" type="AppointmentType"/>
+        <xsd:element name="Financing" type="FinancingType"/>
+        <xsd:complexType name="FinancingBaseType">
+                <xsd:sequence>
+                        <xsd:element ref="PaymentAmount" minOccurs="0"/>
+                        <xsd:element ref="BalanceAmount" minOccurs="0"/>
+                        <xsd:element ref="FinalAmount" minOccurs="0"/>
+                        <xsd:element ref="ResidualAmount" minOccurs="0"/>
+                        <xsd:element ref="Term" minOccurs="0"/>
+                        <xsd:element ref="MaturityDateTime" minOccurs="0"/>
+                        <xsd:element ref="FinancialParty" minOccurs="0"/>
+                        <xsd:element ref="DownPaymentAmount" minOccurs="0"/>
+                        <xsd:element ref="TotalAmount" minOccurs="0"/>
+                        <xsd:element ref="PaymentAuthorization" minOccurs="0"/>
+                        <xsd:element ref="CreditRatingCode" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="xsd:normalizedString" use="optional"/>
+        </xsd:complexType>
+        <xsd:complexType name="FinancingType">
+                <xsd:complexContent>
+                        <xsd:extension base="FinancingBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="MarketingProgram" type="MarketingProgramType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the Marketing Campaign that the Lead is eligible for</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="MarketingProgramBaseType">
+                <xsd:sequence>
+                        <xsd:element ref="ID" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="OfferDescription" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="OpportunityType" minOccurs="0"/>
+                        <xsd:element ref="OpportunityMethodCode" minOccurs="0"/>
+                        <xsd:element ref="Discount" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="MarketingProgramType">
+                <xsd:complexContent>
+                        <xsd:extension base="MarketingProgramBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

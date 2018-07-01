@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+The notices below are provided with respect to licensed content incorporated herein:
+Copyright The HR-XML Consortium. All Rights Reserved. http://www.hrxmlconsortium.org 
+Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved 
+-->
+<xsd:schema xmlns="http://www.hr-xml.org/3" xmlns:udt="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ccts="urn:un:unece:uncefact:documentation:1.1" xmlns:qdt="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" targetNamespace="http://www.hr-xml.org/3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+Name:  AssessmentOrder.xsd
+Status: DRAFT
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/QualifiedDataTypes.xsd"/>
+	<xsd:import namespace="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" schemaLocation="../../../../org_openapplications_platform/1_0/Common/UNCEFACT/ATG/CoreComponents/UnqualifiedDataTypes.xsd"/>
+	<xsd:include schemaLocation="../Common/Components.xsd"/>
+	<xsd:element name="AssessmentOrder" type="AssessmentOrderType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentOrder noun, a document carrying information necessary to open an order for a test or assessment. 
+			Within the context of human resource management, an assessment is a process by which a person (usually in the role of a job seeker, employee, learner, etc.) is tested
+or evaluated against expectations related to knowledge, skills, abilities, personality, or other characteristics relevant to deployment of such person as
+a human resoure.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AssessmentOrderType">
+		<xsd:annotation>
+			<xsd:documentation source="http://www.hr-xml.org" xml:lang="en">
+				<ccts:DictionaryEntryName>Assessment Order. Details</ccts:DictionaryEntryName>
+				<ccts:DefinitionText>Defines a set of information necessary to open an order for a test or assessment.</ccts:DefinitionText>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="DocumentIDGroup" minOccurs="0"/>
+			<xsd:element ref="DocumentSequence" minOccurs="0"/>
+			<xsd:element ref="CustomerPartyDetails" minOccurs="0"/>
+			<xsd:element ref="SupplierPartyDetails" minOccurs="0"/>
+			<xsd:element ref="PackageID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Identifies the package of assessments being ordered for the subject. PackageIDs are supplied by the assessment vendor to the client in a trading partner agreement and/or the vendor's catalog of assessments.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="ComparisonGroupID" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Indicates the group(s) applicable group for comparing or scoring assessment results.  For example, in the context of pre-hire assessments, this might be a Position Opening ID or Job Requisition Identifier. In the context of promotional or succession planning this might be an identifier for a position for which subjects are being considered or identifier for the grade or level of employees being tested. The client defines comparison groups.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AssessmentRequesterName" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The individual that makes the request</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="AssessmentSubject" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The person who will be the subject of the assessment</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="AssessmentLanguageCode" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The language in which the assessment is required. Note that  available lanaguages might be obtained from AssessmentLanguage within AssessmentCatalog.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="AssessmentResultLanguageCode" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>The language in which the assessment results are required. Note that  available lanaguages might be obtained from ResultLanguage within AssessmentCatalog.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="AssessmentAccessDetails" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="languageCode" type="LanguageCodeContentType" use="optional"/>
+		<xsd:attributeGroup ref="EffectiveDateAttributeGroup"/>
+	</xsd:complexType>
+</xsd:schema>

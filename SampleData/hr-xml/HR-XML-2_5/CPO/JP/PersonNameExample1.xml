@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PersonName xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15
+../PersonName.xsd">
+	<FormattedName>Taro Yamada</FormattedName>
+	<GivenName>Taro</GivenName>
+	<FamilyName>Yamada</FamilyName>
+	<AlternateScript script="Kana">
+		<FormattedName>ヤマダ　タロウ</FormattedName>
+		<GivenName>タロウ</GivenName>
+		<FamilyName>ヤマダ</FamilyName>
+	</AlternateScript>
+	<AlternateScript script="Hira">
+		<FormattedName>やまだ　たろう</FormattedName>
+		<GivenName>たろう</GivenName>
+		<FamilyName>やまだ</FamilyName>
+	</AlternateScript>
+	<AlternateScript script="Hani">
+		<FormattedName>山田　太郎</FormattedName>
+		<GivenName>太郎</GivenName>
+		<FamilyName>山田</FamilyName>
+	</AlternateScript>
+	<AlternateScript script="Romaji">
+		<FormattedName>Yamada Taro</FormattedName>
+		<GivenName>Taro</GivenName>
+		<FamilyName>Yamada</FamilyName>
+	</AlternateScript>
+</PersonName>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns1:asdf xmlns:ns1="dummy-ns-omit-from-result">
+    <!-- Flattener takes root element as input just like any other element,
+    but since it does not occur in the schema, it never occurs in the result.  -->
+    <ns6:SyncItemMaster
+        xmlns:ns2="http://www.openapplications.org/oagis/9/codelists"
+        xmlns:ns3="http://www.openapplications.org/oagis/9/currencycode/54217:2001"
+        xmlns:ns4="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1"
+        xmlns:ns5="http://www.openapplications.org/oagis/9/unitcode/66411:2001"
+        xmlns:ns6="http://www.openapplications.org/oagis/9"
+        xmlns:ns7="http://www.openapplications.org/oagis/9/IANAMIMEMediaTypes:2003"
+        xmlns:ns8="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1"
+        xmlns:ns9="http://www.openapplications.org/oagis/9/languagecode/5639:1988"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.openapplications.org/oagis/9   SyncItemMaster.xsd"
+        releaseID="releaseID0">
+        <ns6:ApplicationArea>
+            <ns6:CreationDateTime>2006-05-04</ns6:CreationDateTime>
+        </ns6:ApplicationArea>
+        <ns6:DataArea>
+            <ns6:Sync>
+                <!-- ns6:ActionCriteria is not in second instance, but will occur in result. -->
+                <ns6:ActionCriteria/>
+            </ns6:Sync>
+            <ns6:ItemMaster> </ns6:ItemMaster>
+            <ns6:ItemMaster> </ns6:ItemMaster>
+        </ns6:DataArea>
+    </ns6:SyncItemMaster>
+    <ns6:SyncItemMaster
+        xmlns:ns2="http://www.openapplications.org/oagis/9/codelists"
+        xmlns:ns3="http://www.openapplications.org/oagis/9/currencycode/54217:2001"
+        xmlns:ns4="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1"
+        xmlns:ns5="http://www.openapplications.org/oagis/9/unitcode/66411:2001"
+        xmlns:ns6="http://www.openapplications.org/oagis/9"
+        xmlns:ns7="http://www.openapplications.org/oagis/9/IANAMIMEMediaTypes:2003"
+        xmlns:ns8="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1"
+        xmlns:ns9="http://www.openapplications.org/oagis/9/languagecode/5639:1988"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.openapplications.org/oagis/9   SyncItemMaster.xsd"
+        releaseID="releaseID0">
+        <ns6:ApplicationArea>
+            <ns6:CreationDateTime>2006-05-04</ns6:CreationDateTime>
+        </ns6:ApplicationArea>
+        <ns6:DataArea>
+            <ns6:Sync> </ns6:Sync>
+            <ns6:ItemMaster>
+                <!-- ns6:ItemLocation is not in first instance, but will occur in result. -->
+                <ns6:ItemLocation/>
+            </ns6:ItemMaster>
+            <ns6:ItemMaster> </ns6:ItemMaster>
+        </ns6:DataArea>
+    </ns6:SyncItemMaster>
+
+</ns1:asdf>

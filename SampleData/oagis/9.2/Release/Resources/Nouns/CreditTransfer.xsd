@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/CreditTransfer.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Financial/Components.xsd"/>
+        <xsd:element name="CreditTransfer" type="CreditTransferType"/>
+        <xsd:element name="CreditTransferPayment" type="CreditTransferPaymentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Set of characteristics that applies to the debit sideof the payment transactions included in the payment initiation.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CreditTransferAgreement" type="TransferAgreementType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Set of elements that further identifies the type of credit transfer being requested by the initiating party.
+
+Business Rule: This component may be present if payment method is TRF. It must not be present if payment method is CHK.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CreditTransferHeader" type="CreditTransferHeaderType"/>
+        <xsd:complexType name="CreditTransferType">
+                <xsd:sequence>
+                        <xsd:element ref="CreditTransferHeader" minOccurs="0"/>
+                        <xsd:element ref="CreditTransferPayment" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="CreditTransferHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledHeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="AuthorizationID" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="BatchBookingIndicator" minOccurs="0"/>
+                                        <xsd:element ref="TotalTransactions" minOccurs="0"/>
+                                        <xsd:element ref="GroupingIndicator" minOccurs="0"/>
+                                        <xsd:element ref="InitiatingParty" minOccurs="0"/>
+                                        <xsd:element ref="ForwardingAgentParty" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="CreditTransferPaymentType">
+                <xsd:complexContent>
+                        <xsd:extension base="TransferPaymentType">
+                                <xsd:sequence>
+                                        <xsd:element ref="CreditTransferAgreement" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

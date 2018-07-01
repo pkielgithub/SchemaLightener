@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Don Cuthbertson (private) -->
+<xs:schema xmlns="http://www.twiststandards.org/3.1/WholesaleTrade" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.twiststandards.org/3.1/WholesaleTrade" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Copyright 2006 TWIST Process Innovations, LTD. -->
+	<!--Working Draft-->
+	<!-- This schema is available for comment and the structure is subject to change -->
+	<!-- Version 3.1 September 2006-->
+	<!-- Specification Document: -->
+	<xs:include schemaLocation="TWIST3.1.TWISTCore.Twist.200609.xsd"/>
+	<xs:include schemaLocation="TWIST3.1.WholesaleTrade.TwistTradeComponent.200609.xsd"/>
+	<xs:complexType name="TradeDocument">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type defining a content model that is backwards compatible old Twist versions that focused on a collection of trades</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Document">
+				<xs:sequence>
+					<xs:element name="party" type="Party" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The parties obligated to make payments from time to time during the term of the trade. This will include, at a minimum, the principal parties involved in the swap or forward rate agreement. Other parties paying or receiving fees, commissions etc. must also be specified if referenced in other party payments.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="trade" type="Trade" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The basic trade.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="tradeError" type="TradeError" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Trade">
+		<xs:sequence>
+			<xs:element name="tradeHeader" type="TradeHeader"/>
+			<xs:element name="originalTradeTerms" type="OriginalTradeTerms" minOccurs="0"/>
+			<xs:element ref="product"/>
+			<xs:element name="definedField" type="DefinedField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="otherPartyPayment" type="CurrencyFlow" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="calculationAgent" type="CalculationAgent" minOccurs="0"/>
+			<xs:element name="otherPrices" type="Prices" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID"/>
+	</xs:complexType>
+	<xs:element name="fxAverageRateOption" type="FxAverageRateOption" substitutionGroup="product"/>
+	<xs:element name="fxBarrierOption" type="FxBarrierOption" substitutionGroup="product"/>
+	<xs:element name="fxDigitalOption" type="FxDigitalOption" substitutionGroup="product"/>
+	<xs:element name="fxSimpleOption" type="FxSimpleOption" substitutionGroup="product"/>
+	<xs:element name="fxSingleLeg" type="FXSingleLeg" substitutionGroup="product"/>
+	<xs:element name="fxSwap" type="FxSwap" substitutionGroup="product"/>
+	<xs:element name="product" type="Product"/>
+	<xs:element name="strategy" type="Strategy" substitutionGroup="product">
+		<xs:annotation>
+			<xs:documentation>A strategy product.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="termDeposit" type="TermDeposit" substitutionGroup="product"/>
+</xs:schema>

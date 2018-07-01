@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Don Cuthbertson (private) -->
+<xs:schema xmlns="http://www.twiststandards.org/3.1/WholesaleTrade" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.twiststandards.org/3.1/WholesaleTrade" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Copyright 2006 TWIST Process Innovations, LTD. -->
+	<!--Working Draft-->
+	<!-- This schema is available for comment and the structure is subject to change -->
+	<!-- Version 3.1 September 2006-->
+	<!-- Specification Document: -->
+	<xs:include schemaLocation="TWIST3.1.TWISTCore.TwistShared.200609.xsd"/>
+	<xs:complexType name="FxAverageRateOption">
+		<xs:complexContent>
+			<xs:extension base="Product"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompetitivePrice">
+		<xs:annotation>
+			<xs:documentation>SHARE if remodeled to use extension for specific instruments</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="maker" type="PartyReference"/>
+			<xs:element name="winningPrice" type="xs:boolean" minOccurs="0"/>
+			<xs:choice>
+				<xs:element name="fxPrice" type="FxPrice"/>
+				<xs:element name="mmPrice" type="MmPrice"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CurrencyFlow">
+		<xs:annotation>
+			<xs:documentation>SHARE This represents a flow of currency from one party to another.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Payment">
+				<xs:sequence>
+					<xs:element name="settlementInformation" type="SettlementInformation" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DiscussionThread">
+		<xs:annotation>
+			<xs:documentation>SHARE</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="discussionElement" type="DiscussionElement" maxOccurs="unbounded"/>
+			<xs:choice>
+				<xs:element name="subject" type="Text"/>
+				<xs:element name="conversationName" type="xs:string"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxAmericanTrigger">
+		<xs:sequence>
+			<xs:element name="touchCondition" type="xs:string"/>
+			<xs:element name="quotedCurrencyPair" type="QuotedCurrencyPair"/>
+			<xs:element name="triggerRate" type="Rate"/>
+			<xs:element name="informationSource" type="InformationSource" maxOccurs="unbounded"/>
+			<xs:element name="observationStartDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="observationEndDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxBarrier">
+		<xs:sequence>
+			<xs:element name="fxBarrierType" type="xs:string" minOccurs="0"/>
+			<xs:element name="quotedCurrencyPair" type="QuotedCurrencyPair"/>
+			<xs:element name="triggerRate" type="Rate"/>
+			<xs:element name="informationSource" type="InformationSource" maxOccurs="unbounded"/>
+			<xs:element name="observationStartDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="observationEndDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxBarrierOption">
+		<xs:complexContent>
+			<xs:extension base="Product">
+				<xs:sequence>
+					<xs:element name="buyerPartyReference" type="PartyReference"/>
+					<xs:element name="sellerPartyReference" type="PartyReference"/>
+					<xs:element name="expiryDateTime" type="xs:dateTime"/>
+					<xs:element name="exerciseStyle" type="xs:string"/>
+					<xs:element name="fxOptionPremium" type="FxOptionPremium" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="valueDate" type="xs:date"/>
+					<xs:element name="cashSettlementTerms" type="FXCashSettlement" minOccurs="0"/>
+					<xs:element name="putCurrencyAmount" type="xs:decimal"/>
+					<xs:element name="callCurrencyAmount" type="xs:decimal"/>
+					<xs:element name="fxStrikePrice" type="xs:decimal"/>
+					<xs:element name="quotedAs" type="QuotedAs" minOccurs="0"/>
+					<xs:element name="spotRate" type="Rate" minOccurs="0"/>
+					<xs:element name="fxBarrier" type="FxBarrier" maxOccurs="unbounded"/>
+					<xs:element name="triggerPayout" type="FXOptionPayout" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FXCashSettlement">
+		<xs:sequence>
+			<xs:element name="settlementCurrency" type="Currency"/>
+			<xs:element name="fixing" type="FXFixing" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxDigitalOption">
+		<xs:complexContent>
+			<xs:extension base="Product">
+				<xs:sequence>
+					<xs:element name="buyerPartyReference" type="PartyReference"/>
+					<xs:element name="sellerPartyReference" type="PartyReference"/>
+					<xs:element name="expiryDateTime" type="xs:dateTime"/>
+					<xs:element name="exerciseStyle" type="xs:string"/>
+					<xs:element name="fxOptionPremium" type="FxOptionPremium" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="valueDate" type="xs:date"/>
+					<xs:element name="spotRate" type="Rate" minOccurs="0"/>
+					<xs:choice>
+						<xs:element name="fxEuropeanTrigger" type="FxEuropeanTrigger" maxOccurs="unbounded"/>
+						<xs:element name="fxAmericanTrigger" type="FxAmericanTrigger" maxOccurs="unbounded"/>
+					</xs:choice>
+					<xs:element name="triggerPayout" type="FXOptionPayout"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FxEuropeanTrigger">
+		<xs:sequence>
+			<xs:element name="triggerCondition" type="xs:string"/>
+			<xs:element name="quotedCurrencyPair" type="QuotedCurrencyPair"/>
+			<xs:element name="triggerRate" type="Rate"/>
+			<xs:element name="informationSource" type="InformationSource" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxLeg">
+		<xs:annotation>
+			<xs:documentation>A single leg  on a FX.  This contains two currencyFlows - one for each currency.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="exchangedCurrency1" type="CurrencyFlow"/>
+			<xs:element name="exchangedCurrency2" type="CurrencyFlow"/>
+			<xs:choice>
+				<xs:element name="valueDate" type="xs:date"/>
+				<xs:sequence>
+					<xs:element name="currency1ValueDate" type="xs:date"/>
+					<xs:element name="currency2ValueDate" type="xs:date"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="exchangeRate" type="ExchangeRate"/>
+			<xs:element name="nonDeliverableForward" type="FXCashSettlement" minOccurs="0"/>
+			<xs:element name="clsMethod" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="FXOptionPayout">
+		<xs:annotation>
+			<xs:documentation>A type that contains full details of a predefined fixed payout which may occur (or not) in a Barrier Option or
+Digital Option when a trigger event occurs (or not).
+			
+			
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="currency" type="Currency"/>
+			<xs:element name="amount" type="xs:decimal"/>
+			<xs:element name="payoutStyle" type="xs:string"/>
+			<xs:element name="settlementInformation" type="SettlementInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxOptionPremium">
+		<xs:sequence>
+			<xs:element name="payerPartyReference" type="PartyReference"/>
+			<xs:element name="receiverPartyReference" type="PartyReference"/>
+			<xs:element name="paymentAmount" type="Money"/>
+			<xs:element name="paymentDate" type="AdjustableDate" minOccurs="0"/>
+			<xs:element name="adjustedPaymentDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="settlementInformation" type="SettlementInformation" minOccurs="0"/>
+			<xs:element name="premiumQuote" type="PremiumQuote" minOccurs="0"/>
+			<xs:element name="informationOnly" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxPrice">
+		<xs:sequence>
+			<xs:element name="date" type="xs:date"/>
+			<xs:element name="effectiveRate">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="fxRate" type="Rate"/>
+						<xs:element name="farFxRate" type="Rate" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="fxBid" type="FxPriceDetail" minOccurs="0"/>
+			<xs:element name="fxOffer" type="FxPriceDetail" minOccurs="0"/>
+			<xs:element name="quotedCurrencyPair" type="QuotedCurrencyPair"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxPriceDetail">
+		<xs:sequence>
+			<xs:element name="spotRate" type="Rate"/>
+			<xs:element name="points" type="Rate" minOccurs="0"/>
+			<xs:element name="farPoints" type="Rate" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxSimpleOption">
+		<xs:complexContent>
+			<xs:extension base="Product">
+				<xs:sequence>
+					<xs:element name="buyerPartyReference" type="PartyReference"/>
+					<xs:element name="sellerPartyReference" type="PartyReference"/>
+					<xs:element name="expiryDateTime" type="xs:dateTime"/>
+					<xs:element name="exerciseStyle" type="xs:string"/>
+					<xs:element name="fxOptionPremium" type="FxOptionPremium" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="valueDate" type="xs:date"/>
+					<xs:element name="settlementType" type="xs:string"/>
+					<xs:element name="putCurrencyAmount" type="xs:decimal"/>
+					<xs:element name="callCurrencyAmount" type="xs:decimal"/>
+					<xs:element name="fxStrikePrice" type="xs:decimal"/>
+					<xs:element name="quotedAs" type="QuotedAs" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FXSingleLeg">
+		<xs:complexContent>
+			<xs:extension base="Product">
+				<xs:sequence>
+					<xs:element name="fxLeg" type="FxLeg"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FxSingleLegInstrument">
+		<xs:sequence>
+			<xs:element name="quotedCurrencyPair" type="QuotedCurrencyPair"/>
+			<xs:element name="tenor" type="FxTenor"/>
+			<xs:element name="valueDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FxSwap">
+		<xs:complexContent>
+			<xs:extension base="Product">
+				<xs:sequence>
+					<xs:element name="nearLeg" type="FxLeg"/>
+					<xs:element name="farLeg" type="FxLeg"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MmPrice">
+		<xs:sequence>
+			<xs:element name="date" type="xs:date"/>
+			<xs:element name="fixedRate" type="Rate"/>
+			<xs:element name="mmBid" type="Rate" minOccurs="0"/>
+			<xs:element name="mmOffer" type="Rate" minOccurs="0"/>
+			<xs:element name="currency" type="Currency"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OriginalTradeTerms">
+		<xs:sequence>
+			<xs:element name="requesterPartyReference" type="PartyReference" minOccurs="0"/>
+			<xs:element name="financialTerms" type="FinancialTerms"/>
+			<xs:element name="tradeComment" type="Text" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PremiumQuote">
+		<xs:sequence>
+			<xs:element name="premiumValue" type="xs:decimal"/>
+			<xs:element name="premiumQuoteBasis" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Prices">
+		<xs:sequence>
+			<xs:element name="competitivePrice" type="CompetitivePrice" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="indicativePrice" type="MarketQuote" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QuotedAs">
+		<xs:sequence>
+			<xs:element name="optionOnCurrencyReference" type="Reference"/>
+			<xs:element name="faceOnCurrencyReference" type="Reference"/>
+			<xs:element name="quotedTenor" type="FxTenor" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Strategy">
+		<xs:annotation>
+			<xs:documentation>A type defining a group of products making up a single trade.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Product">
+				<xs:sequence>
+					<xs:element name="premiumProductReference" type="Reference" minOccurs="0"/>
+					<xs:element name="product" type="Product" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TermDeposit">
+		<xs:complexContent>
+			<xs:extension base="Product">
+				<xs:sequence>
+					<xs:element name="initialReceiverReference" type="PartyReference"/>
+					<xs:element name="initialPayerReference" type="PartyReference"/>
+					<xs:element name="startDate" type="xs:date"/>
+					<xs:element name="maturityDate" type="xs:date"/>
+					<xs:element name="principal" type="Money"/>
+					<xs:element name="dayCountFraction" type="DayCountFraction"/>
+					<xs:element name="fixedRate" type="Rate"/>
+					<xs:element name="interest" type="Money" minOccurs="0"/>
+					<xs:element name="depositPayment" type="CurrencyFlow" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TradeError">
+		<xs:sequence>
+			<xs:element name="partyTradeIdentifier" type="PartyTradeIdentifier"/>
+			<xs:element name="tradeErrorMessage" type="Text"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TradeHeader">
+		<xs:annotation>
+			<xs:documentation>SHARE</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="partyTradeIdentifier" type="PartyTradeIdentifier" maxOccurs="unbounded"/>
+			<xs:element name="discussionThread" type="DiscussionThread" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="tradeDateTime" type="xs:dateTime"/>
+			<xs:element name="trader" type="User" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="tradeStatus" type="TradeStatus" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TradeStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEW"/>
+			<xs:enumeration value="EXECUTED"/>
+			<xs:enumeration value="CANCELLED"/>
+			<xs:enumeration value="CONFIRMED"/>
+			<xs:enumeration value="SETTLED"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

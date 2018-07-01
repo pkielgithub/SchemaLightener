@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Don Cuthbertson (private) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Copyright 2006 TWIST Process Innovations, LTD. -->
+	<!--Working Draft-->
+	<!-- This schema is available for comment and the structure is subject to change -->
+	<!-- Version 3.1 September 2006-->
+	<!-- Specification Document: -->
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+	<xs:include schemaLocation="TWIST3.1.TWISTCore.TwistShared.200609.xsd"/>
+	<xs:include schemaLocation="TWIST3.1.TWISTCore.Twist.200609.xsd"/>
+	<xs:complexType name="Message" abstract="true">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type defining the basic structure of all messages which is refined by its derived types.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Document">
+				<xs:sequence>
+					<xs:element name="header" type="MessageHeader">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The generic definition of header in the Message type contains all the possible header information items and is specialised by restriction in derived classes.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="messageType" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConversationId">
+		<xs:simpleContent>
+			<xs:extension base="xs:normalizedString">
+				<xs:attribute name="conversationIdScheme" type="xs:anyURI" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MessageHeader">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type defining the content model for a generic message header that is refined by its derived classes.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="messageType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">An optional element to include the message type.  This is primarily intended to support legacy applications that cannot take advantage of the type attribute in the root twist element.</xs:documentation>
+				</xs:annotation>
+				<!--added (0606-10)-->
+			</xs:element>
+			<xs:element name="conversationId" type="ConversationId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A unique identifier created by the initiator of a conversation allowing a group of message exchanges to be recognized as related.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="messageId" type="MessageId">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) assigned to the message by its creating party.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="inReplyTo" type="MessageId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A copy of the unique message identifier (within it own coding scheme) to which this message is responding.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sentBy" type="Party">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The unique identifier (within its coding scheme) for the originator of a message instance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sendTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) indicating an intended recipent of a message.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="copyTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">A unique identifier (within the specified coding scheme) giving the details of some party to whom a copy of this message will be sent for reference.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creationTimestamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance was created.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expiryTimestamp" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance will be considered expired.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="dsig:Signature" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">to hold digital signature information - added 06231</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MessageId">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The data type use for message identifiers.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:normalizedString">
+				<xs:attribute name="messageIdScheme" type="xs:anyURI" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+		<!-- BAL: resolve issues with examples -->
+	</xs:complexType>
+	<xs:complexType name="NotificationMessage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type defining the basic content for a message sent to inform another system that some 'business event' has occured. Notifications are not expected to be replied to.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="Message">
+				<xs:sequence>
+					<xs:element name="header" type="NotificationMessageHeader">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Overrides the definition of header in the Message type to make it specific to NotificationMessage instances.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NotificationMessageHeader">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type that refines the generic message header to match the requirements of a NotificationMessage.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="MessageHeader">
+				<xs:sequence>
+					<xs:element name="messageType" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">An optional element to include the message type.  This is primarily intended to support legacy applications that cannot take advantage of the type attribute in the root twist element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="conversationId" type="ConversationId" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier created by the initiator of a conversation allowing a group of message exchanges to be recognized as related.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="messageId" type="MessageId">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) assigned to the message by its creating party.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="inReplyTo" type="MessageId" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A copy of the unique message identifier (within it own coding scheme) to which this message is responding.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sentBy" type="Party">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The unique identifier (within its coding scheme) for the originator of a message instance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sendTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) indicating an intended recipent of a message.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="copyTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within the specified coding scheme) giving the details of some party to whom a copy of this message will be sent for reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="creationTimestamp" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance was created.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="expiryTimestamp" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance will be considered expired.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="dsig:Signature" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RequestMessage" abstract="true">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type defining the basic content of a message that requests the receiver to perform some business operation determined by the message type and its content.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="Message">
+				<xs:sequence>
+					<xs:element name="header" type="RequestMessageHeader">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Overrides the definition of header in the Message type to make it specific to RequestMessage instances.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RequestMessageHeader">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type refining the generic message header content to make it specific to request messages.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="MessageHeader">
+				<xs:sequence>
+					<xs:element name="messageType" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">An optional element to include the message type.  This is primarily intended to support legacy applications that cannot take advantage of the type attribute in the root twist element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="conversationId" type="ConversationId" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier created by the initiator of a conversation allowing a group of message exchanges to be recognized as related.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="messageId" type="MessageId">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) assigned to the message by its creating party.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sentBy" type="Party">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The unique identifier (within its coding scheme) for the originator of a message instance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sendTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) indicating an intended recipent of a message.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="copyTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within the specified coding scheme) giving the details of some party to whom a copy of this message will be sent for reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="creationTimestamp" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance was created.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="expiryTimestamp" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance will be considered expired.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="dsig:Signature" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResponseMessage">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type refining the generic message content model to make it specific to response messages.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="Message">
+				<xs:sequence>
+					<xs:element name="header" type="ResponseMessageHeader">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Overrides the definition of header in the Message type to make it specific to ResponseMessage instances.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ResponseMessageHeader">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A type refining the generic message header to make it specific to response messages.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="MessageHeader">
+				<xs:sequence>
+					<xs:element name="messageType" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">An optional element to include the message type.  This is primarily intended to support legacy applications that cannot take advantage of the type attribute in the root twist element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="conversationId" type="ConversationId" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier created by the initiator of a conversation allowing a group of message exchanges to be recognized as related.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="messageId" type="MessageId">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) assigned to the message by its creating party.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="inReplyTo" type="MessageId">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A copy of the unique message identifier (within it own coding scheme) to which this message is responding.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sentBy" type="Party">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The unique identifier (within its coding scheme) for the originator of a message instance.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="sendTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within its coding scheme) indicating an intended recipent of a message.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="copyTo" type="Party" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">A unique identifier (within the specified coding scheme) giving the details of some party to whom a copy of this message will be sent for reference.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="creationTimestamp" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance was created.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="expiryTimestamp" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">The date and time (on the source system) when this message instance will be considered expired.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="dsig:Signature" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssessmentCancelRequest xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentCancelRequest.xsd">
+	<ClientId idOwner="Provider Inc">
+		<IdValue name="ClientCode">OurClient-1342</IdValue>
+	</ClientId>
+	<ProviderId idOwner="Customer Inc">
+		<IdValue>ePredix</IdValue>
+	</ProviderId>
+	<ClientOrderId>
+		<IdValue name="PO Number">53RR20031618</IdValue>
+		<IdValue name="Department Name">Administration</IdValue>
+	</ClientOrderId>
+	<ReceiptId idOwner="AssessmentProvider Inc">
+		<IdValue>Seq-22345354</IdValue>
+	</ReceiptId>
+	<UserArea/>
+</AssessmentCancelRequest>

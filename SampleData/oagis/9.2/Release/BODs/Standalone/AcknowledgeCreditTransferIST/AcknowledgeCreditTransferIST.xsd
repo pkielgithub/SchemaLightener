@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/BODs/Standalone/AcknowledgeCreditTransferIST/AcknowledgeCreditTransferIST.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" xmlns:ist="urn:swift:xsd:$pain.001.001.01" xmlns:oacl="http://www.openapplications.org/oagis/9/codelists" xmlns:udt="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" xmlns:qdt="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/codelists" schemaLocation="www.openapplications.org_oagis_9_codelists/CodeLists.xsd"/>
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/unqualifieddatatypes/1.1" schemaLocation="www.openapplications.org_oagis_9_unqualifieddatatypes_1.1/UnqualifiedDataTypes.xsd"/>
+        <xsd:import namespace="urn:swift:xsd:$pain.001.001.01" schemaLocation="urn_swift_xsd_$pain.001.001.01/$pain.001.001.01.xsd"/>
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/qualifieddatatypes/1.1" schemaLocation="www.openapplications.org_oagis_9_qualifieddatatypes_1.1/QualifiedDataTypes.xsd"/>
+        <xsd:element name="AcknowledgeCreditTransferIST" type="AcknowledgeCreditTransferISTType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The purpose of the AcknowledgeCreditTransferIST is to enable an application to request specific CreditTransferIST information from another business application module.  The response to the AcknowledgeCreditTransferIST is the AcknowledgeCreditTransferIST.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="AcknowledgeCreditTransferISTType">
+                <xsd:complexContent>
+                        <xsd:extension base="BusinessObjectDocumentType">
+                                <xsd:sequence>
+                                        <xsd:element name="DataArea" type="AcknowledgeCreditTransferISTDataAreaType">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is where the information that the BOD message carries is provided, in this case AcknowledgeCreditTransferIST. The information consists of a Verb and one or more Nouns. The verb (Acknowledge) indicates the action to be performed on the Noun (CreditTransferIST).</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="BusinessObjectDocumentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is the schema based inheritance for all BODs. The logical model would also include the DataArea.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="ApplicationArea"/>
+                </xsd:sequence>
+                <xsd:attribute name="releaseID" type="NormalizedStringType" use="required">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">OAGIS Release this BOD Instances belongs or the OAGIS release that the derivative work is based on.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="versionID" type="NormalizedStringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the version of the given BOD definition.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="systemEnvironmentCode" type="SystemEnvironmentCodeContentType" use="optional" default="Production">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates whether this BOD is being sent in a "Test" or a "Production" mode. If the BOD is being sent in a test mode, it's information should not affect the business operation. However, if the BOD is sent in "Production" mode it is assumed that all test has been complete and the contents of the BOD are to affect the operation of the receiving business application(s).</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="languageCode" type="LanguageCodeContentType" use="optional" default="en-US">
+                        <xsd:annotation>
+                                <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates the language that the contents of the BOD is in unless otherwise stated.</xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+        </xsd:complexType>
+        <xsd:element name="ApplicationArea" type="ApplicationAreaType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides the information that an application may need to know in order to communicate in an integration of two or more business applications. The ApplicationArea is used at the applications layer of communication. While the integration frameworks web services and middleware provide the communication layer that OAGIS operates on top of.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ApplicationAreaType">
+                <xsd:sequence>
+                        <xsd:element ref="Sender" minOccurs="0"/>
+                        <xsd:element ref="CreationDateTime"/>
+                        <xsd:element ref="Signature" minOccurs="0"/>
+                        <xsd:element ref="BODID" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="Sender" type="SenderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies characteristics and control identifiers that relate to the application that created the Business Object Document.  The sender area can indicate the logical location of the application and/or database server, the application, and the task that was processing to create the BOD.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="SenderType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the sender of the given BOD instance</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="LogicalID" minOccurs="0"/>
+                        <xsd:element ref="ComponentID" minOccurs="0"/>
+                        <xsd:element ref="TaskID" minOccurs="0"/>
+                        <xsd:element ref="ReferenceID" minOccurs="0"/>
+                        <xsd:element ref="ConfirmationCode" minOccurs="0"/>
+                        <xsd:element ref="AuthorizationID" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="LogicalID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides the logical location of the server and applications from which the Business Object Document originated. It can be used to establish a logical to physical mapping, however its use is optional.
+
+Each system or combination of systems should maintain an external central reference table containing the logical names or logical addresses of the application systems in the integration configuration.  This enables the logical names to be mapped to the physical network addresses of the resources needed on the network.  
+
+Note:  The technical implementation of this Domain Naming Service is not dictated by this specification. 
+
+This logical to physical mapping may be done at execution time by the application itself or by a middleware transport mechanism, depending on the integration architecture used.
+
+This provides for a simple but effective directory access capability while maintaining application independence from the physical location of those resources on the network</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="IdentifierType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:IdentifierType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:element name="ComponentID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides a finer level of control than Logical Identifier and represents the business application that issued the Business Object Document.  Its use is optional.
+
+The Open Applications Group has not constructed the list of valid Component names.  A suggestion for naming is to use the application component names used in the scenario diagrams in section two of OAGIS. Example Components may be Inventory, or Payroll.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="TaskID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Describes the business event that initiated the need for the Business Object Document to be created. Its use is optional. Although the Task may differ depending on the specific implementation, it is important to enable drill back capability. Example Tasks may be Receipt or Adjustment.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReferenceID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Enables the sending application to indicate the instance identifier of the event or task that caused the BOD to be created. This allows drill back from the BOD message into the sending application. The may be required in environments where an audit trail must be maintained for all transactions.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ConfirmationCode" type="ConfirmationResponseCodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is an option controlled by the Sender business application.  It is a request to the receiving application to send back a confirmation BOD to the sender. The confirmation Business Object Document may indicate the successful processing of the original Business Object Document or return error conditions if the original Business Object Document was unsuccessful.
+
+The confirmation request has the following valid values:
+
+Never - No confirmation Business Object Document requested
+
+OnError - OnError send back a confirmation Business Object Document only if an error has occurred
+
+Always - Always send a confirmation Business Object Document regardless</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ConfirmationResponseCodeType">
+                <xsd:simpleContent>
+                        <xsd:extension base="ResponseCodeType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:complexType name="ResponseCodeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Response_ Code. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">1.0</ccts:VersionID>
+                                <ccts:DefinitionText xmlns:ccts="urn:un:unece:uncefact:documentation:1.1"/>
+                                <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Response</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="ResponseCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:simpleType name="ResponseCodeContentType">
+                <xsd:restriction base="oacl:ResponseCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:attributeGroup name="CodeListAttributeGroup">
+                <xsd:attribute name="listID" type="NormalizedStringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC2</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The identification of a list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identification</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listAgencyID" type="NormalizedStringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC3</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List. Agency. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">An agency that maintains one or more lists of codes.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Agency</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                        <ccts:UsageRule xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Defaults to the UN/EDIFACT data element 3055 code list.</ccts:UsageRule>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listAgencyName" type="StringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC4</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List. Agency Name. Text</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The name of the agency that maintains the list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Agency Name</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Text</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listName" type="StringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC5</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List. Name. Text</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The name of a list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Name</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Text</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listVersionID" type="NormalizedStringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC6</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List. Version. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The version of the list of codes.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Version</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="name" type="StringType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC7</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code. Name. Text</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The textual equivalent of the code content component.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Name</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Text</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="languageID" type="LanguageCodeContentType" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC8</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Language. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The identifier of the language used in the code name.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Language</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identification</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listURI" type="xsd:anyURI" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC9</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List. Uniform Resource. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The Uniform Resource Identifier that identifies where the code list is located.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Uniform Resource Identifier</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="listSchemeURI" type="xsd:anyURI" use="optional">
+                        <xsd:annotation>
+                                <xsd:documentation xml:lang="en">
+                                        <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">UNDT000007-SC10</ccts:UniqueID>
+                                        <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">SC</ccts:CategoryCode>
+                                        <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List Scheme. Uniform Resource. Identifier</ccts:DictionaryEntryName>
+                                        <ccts:Definition xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">The Uniform Resource Identifier that identifies where the code list scheme is located.</ccts:Definition>
+                                        <ccts:ObjectClass xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code List Scheme</ccts:ObjectClass>
+                                        <ccts:PropertyTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Uniform Resource Identifier</ccts:PropertyTermName>
+                                        <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Identifier</ccts:RepresentationTermName>
+                                        <ccts:PrimitiveType xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">string</ccts:PrimitiveType>
+                                </xsd:documentation>
+                        </xsd:annotation>
+                </xsd:attribute>
+        </xsd:attributeGroup>
+        <xsd:simpleType name="NormalizedStringType">
+                <xsd:restriction base="qdt:NormalizedStringType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="StringType">
+                <xsd:restriction base="qdt:StringType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="LanguageCodeContentType">
+                <xsd:restriction base="oacl:LanguageCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:element name="AuthorizationID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifyies the authorization level of the user or application that is sending the Business Object Document Message. This authorization level being recognized be the receiving system indicates what can be done on the receiving system(s).</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CreationDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">is the date time stamp that the given instance of the Business Object Document was created.  This date must not be modified during the life of the Business Object Document.
+</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:simpleType name="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Month_ Date. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">1.0</ccts:VersionID>
+                                <ccts:DefinitionText xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">A particular point in the progression of time together with the relevant supplementary information.  Provides the XML Schema simpleType that allows either just the Date or the Date and Time to be provided in the elements that are based on this type and/or types that use this as their base.</ccts:DefinitionText>
+                                <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Date</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Month</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:union memberTypes="udt:DateType udt:TimeType udt:DateTimeType"/>
+        </xsd:simpleType>
+        <xsd:element name="Signature" type="SignatureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">If the BOD is to be signed the signature element is included, otherwise it is not.
+Signature supports any digital signature that maybe used by an implementation of OAGIS. The qualifyingAgency identifies the agency that provided the format for the signature.
+
+This element supports any digital signature specification that is available today and in the future. This is accomplished by not actually defining the content but by allowing the implementation to specify the digital signature to be used via an external XML Schema namespace declaration. The Signature element is defined to have any content from any other namespace. 
+
+This allows the user to carry a digital signature in the xml instance of a BOD. The choice of which digital signature to use is left up to the user and their integration needs.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="SignatureType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Allows any digital Signatures to be added to the Instance of the BOD Instance in order to sign for any portion of the BOD content.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:any namespace="##any" minOccurs="0"/>
+                </xsd:sequence>
+                <xsd:attribute name="qualifyingAgencyId" type="NormalizedStringType" use="optional"/>
+        </xsd:complexType>
+        <xsd:element name="BODID" type="IdentifierType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The BODId provides a place to carry a Globally Unique Identifier (GUID) that will make each Business Object Document instance uniquely identifiable.
+
+This is a critical success factor to enable software developers to use the Globally Unique Identifier (GUID) to build the following services or capabilities:
+1. Legally binding transactions,
+2. Transaction logging,
+3. Exception handling,
+4. Re-sending,
+5. Reporting,
+6. Confirmations,
+7. Security.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="UserArea" type="UserAreaType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Allows the user of OAGIS to extend the specification in order to provide additional information that is not captured in OAGIS.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is done by defining the additional information in XML Schema and referencing the new schema in the xml instance document throught the use of namespaces. Once this is done the additional information defined there can be carried in the BOD XML instance document.</xsd:documentation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Open Applications Group will make best efforts to quickly consider all proposed submissions.The USERAREA is always the last element in all components, except where the component has been extended inline.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="UserAreaType" block="restriction">
+                <xsd:sequence>
+                        <xsd:any namespace="##any" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:simpleType name="SystemEnvironmentCodeContentType">
+                <xsd:restriction base="oacl:SystemEnvironmentCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:complexType name="AcknowledgeCreditTransferISTDataAreaType">
+                <xsd:sequence>
+                        <xsd:element ref="Acknowledge"/>
+                        <xsd:element ref="CreditTransferIST" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="Acknowledge" type="AcknowledgeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9.0">The Acknowledge verb is used to acknowledge the application receipt of a Process request.  This function conveys the result of the original request.  An example of this is Acknowledge PO, where a Process PO has been issued and the corresponding business application acknowledges the receipt of the PO and responds with an acceptance or a counter offer.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="AcknowledgeType">
+                <xsd:complexContent>
+                        <xsd:extension base="ResponseVerbType"/>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ResponseVerbType" abstract="true">
+                <xsd:complexContent>
+                        <xsd:extension base="VerbType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OriginalApplicationArea" minOccurs="0"/>
+                                        <xsd:element ref="ResponseCriteria" minOccurs="0" maxOccurs="unbounded">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">ResponseCriteria identifies the content that is returned, given a Get query success or the response from the Process. In essence, the expression here has the effect of filtering the part(s) of the found element(s) that are to be returned.
+
+ReturnCriteria plays no role in the query itself or the process. That is handled as a match against the request BOD's noun exemplar. 
+
+ReturnCriteria allows the sender of the BOD to indicate which information (down to the field level) is requested to be returned, given that the query has been successful in matching the exemplar to existing nouns. 
+
+That is, in a GetListPurchaseOrder, if one or more PurchaseOrders with a TotalPrice = $1M were found, ReturnCriteria tells the BOD recipient which parts of the PurchaseOrder should be populated with content when the response (ShowPurchaseOrder) is formulated.
+
+The expressionLanguage indicates the expression language being used. In order for the ReturnCriteria expression to be evaluable by the BOD recipient, the recipient must be capable of processing and interpreting the specified expression language. XPath is the default, due to its ubiquity among XML processing technologies. </xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="VerbType" abstract="true"/>
+        <xsd:element name="OriginalApplicationArea" type="ApplicationAreaType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A copy of the ApplicationArea for the original BOD that was processed. Present either as additional reference information, or for use in identifying the BOD in situations where a BODReference is not known.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ResponseCriteria" type="ResponseActionCriteriaType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">ResponseCriteria identifies the content that is to be returned, given query success. In essence, the expression here has the effect of filtering the part(s) of the found element(s) that are to be returned.
+
+ReturnCriteria plays no role in the query itself. That is handled as a match against the request BOD's noun exemplar. 
+
+ReturnCriteria allows the sender of the BOD to indicate which information (down to the field level) is requested to be returned, given that the query has been successful in matching the exemplar to existing nouns. 
+
+That is, in a GetListPurchaseOrder, if one or more PurchaseOrders with a TotalPrice = $1M were found, ReturnCriteria tells the BOD recipient which parts of the PurchaseOrder should be populated with content when the response (ShowPurchaseOrder) is formulated.
+
+The expressionLanguage indicates the expression language being used. In order for the ReturnCriteria expression to be evaluable by the BOD recipient, the recipient must be capable of processing and interpreting the specified expression language. XPath is the default, due to its ubiquity among XML processing technologies. </xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ResponseActionCriteriaType">
+                <xsd:sequence>
+                        <xsd:element ref="ResponseExpression" minOccurs="0"/>
+                        <xsd:element ref="ChangeStatus" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="ResponseExpression" type="ResponseExpressionType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">ResponseExpression identifies a pointer to the Component being provided as a response to a request. This point is provided using an appropriate value of the given expressionLanguage indicated. The actionCode is intended to indicate what has occured with the given component and/or instance of the given component.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="ResponseExpressionType">
+                <xsd:annotation>
+                        <xsd:documentation>ReturnCriteria identifies the content that is to be returned, given query success. In essence, the expression here has the effect of filtering the part(s) of the found element(s) that are to be returned.
+
+ReturnCriteria plays no role in the query itself. That is handled as a match against the request BOD's noun exemplar. 
+
+ReturnCriteria allows the sender of the BOD to indicate which information (down to the field level) is requested to be returned, given that the query has been successful in matching the exemplar to existing nouns. 
+
+That is, in a GetListPurchaseOrder, if one or more PurchaseOrders with a TotalPrice = $1M were found, ReturnCriteria tells the BOD recipient which parts of the PurchaseOrder should be populated with content when the response (ShowPurchaseOrder) is formulated.
+
+The expressionLanguage indicates the expression language being used. In order for the ReturnCriteria expression to be evaluable by the BOD recipient, the recipient must be capable of processing and interpreting the specified expression language. XPath is the default, due to its ubiquity among XML processing technologies. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="TokenType">
+                                <xsd:attribute name="actionCode" type="ResponseActionCodeContentType" use="required"/>
+                                <xsd:attribute name="expressionLanguage" type="TokenType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:simpleType name="TokenType">
+                <xsd:restriction base="qdt:TokenType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="ResponseActionCodeContentType">
+                <xsd:restriction base="oacl:ResponseActionCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:element name="ChangeStatus" type="ChangeStatusType"/>
+        <xsd:complexType name="ChangeStatusType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusBasisType">
+                                <xsd:sequence>
+                                        <xsd:element ref="StateChange" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="StatusBasisType">
+                <xsd:sequence>
+                        <xsd:element ref="Code" minOccurs="0"/>
+                        <xsd:element ref="Description" minOccurs="0"/>
+                        <xsd:element ref="EffectiveDateTime" minOccurs="0"/>
+                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                        <xsd:element ref="Reason" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="Code" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Element for the communication of all codes.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="CodeType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:CodeType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:element name="Description" type="DescriptionType"/>
+        <xsd:complexType name="DescriptionType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Description_ Text. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">1.0</ccts:VersionID>
+                                <ccts:DefinitionText xmlns:ccts="urn:un:unece:uncefact:documentation:1.1"/>
+                                <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Text</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Description</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:TextType">
+                                <xsd:attribute name="type" type="NormalizedStringType"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:element name="EffectiveDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This is the DateTime the associated object is made effective</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ReasonCode" type="CodeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Identifies the reason for an activity</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="Reason" type="TextType"/>
+        <xsd:complexType name="TextType">
+                <xsd:simpleContent>
+                        <xsd:extension base="udt:TextType"/>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:element name="StateChange" type="StateChangeType"/>
+        <xsd:complexType name="StateChangeType">
+                <xsd:sequence>
+                        <xsd:element ref="FromStateCode" minOccurs="0"/>
+                        <xsd:element ref="ToStateCode" minOccurs="0"/>
+                        <xsd:element ref="ChangeDateTime" minOccurs="0"/>
+                        <xsd:group ref="FreeFormTextGroup" minOccurs="0"/>
+                        <xsd:element ref="UserArea" minOccurs="0"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:element name="FromStateCode" type="StateCodeType"/>
+        <xsd:complexType name="StateCodeType">
+                <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                                <ccts:UniqueID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT000000</ccts:UniqueID>
+                                <ccts:CategoryCode xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">QDT</ccts:CategoryCode>
+                                <ccts:DictionaryEntryName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">State_ Code. Type</ccts:DictionaryEntryName>
+                                <ccts:VersionID xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">1.0</ccts:VersionID>
+                                <ccts:DefinitionText xmlns:ccts="urn:un:unece:uncefact:documentation:1.1"/>
+                                <ccts:RepresentationTermName xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">Code</ccts:RepresentationTermName>
+                                <ccts:QualifierTerm xmlns:ccts="urn:un:unece:uncefact:documentation:1.1">State</ccts:QualifierTerm>
+                        </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="StateCodeContentType">
+                                <xsd:attributeGroup ref="CodeListAttributeGroup"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:simpleType name="StateCodeContentType">
+                <xsd:restriction base="oacl:StateCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:element name="ToStateCode" type="StateCodeType"/>
+        <xsd:element name="ChangeDateTime" type="DateTimeType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Indicates when the status change occured.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:group name="FreeFormTextGroup">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Common Free Form Text elements that occur together.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                        <xsd:element ref="Description" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:group>
+        <xsd:element name="Note" type="NoteType"/>
+        <xsd:complexType name="NoteType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A free form note. The lang attribute identifies the language that the note is in. The author identifies the author of the note. The enrtyDate indicates the date the note was entered or last modified.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                        <xsd:extension base="DescriptionType">
+                                <xsd:attribute name="author" type="StringType" use="optional"/>
+                                <xsd:attribute name="entryDateTime" type="DateTimeType" use="optional"/>
+                                <xsd:attribute name="status" type="StringType" use="optional"/>
+                        </xsd:extension>
+                </xsd:simpleContent>
+        </xsd:complexType>
+        <xsd:element name="CreditTransferIST" type="ist:pain.001.001.01">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The Core Credit Transfer message is used to request movement of cash from a Debtor's account to a Creditor.   It can be sent by the Initiating Party to the Forwarding Agent or First Agent.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+</xsd:schema>

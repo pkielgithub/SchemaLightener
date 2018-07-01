@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.hr-xml.org/3"  xmlns:oa="http://www.openapplications.org/oagis/9"  targetNamespace="http://www.hr-xml.org/3"  elementFormDefault="qualified"  attributeFormDefault="unqualified"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       Copyright The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org  and its licensors: 
+       Copyright (c) 1997-2008 Open Applications Group, Inc. All Rights Reserved   
+       Name: GetAssessmentOrder.xsd 
+       Status:  
+       Date this version: 2009-01-08 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       	<xsd:include schemaLocation="../Nouns/AssessmentOrder.xsd"/> 
+       	<xsd:import namespace="http://www.openapplications.org/oagis/9" schemaLocation="../../../../org_openapplications_platform/1_0/Common/OAGi/Components/Meta.xsd"/> 
+       	<xsd:element name="GetAssessmentOrder" type="GetAssessmentOrderType"/> 
+       	<xsd:complexType name="GetAssessmentOrderType"> 
+       <xsd:annotation> 
+       <xsd:documentation> 
+       GetAssessmentOrder is used to request retrieval of existing AssessmentOrder data. 
+
+       AssessmentOrder  Defines a set of information necessary to execute an order for an employment test or assessment. 
+
+       Get is an "Action Verb". The purpose of the Get verb is to communicate to a business software  
+       component a request for an existing piece of information to be returned. Get is designed to  
+       retrieve a single piece of information by using that information's primary retrieval field  
+       (key field) or other significant property. Get provides two types of retrieval capabilities: 
+       Field-Based Selection and Data Type Selection. 
+       </xsd:documentation> 
+       </xsd:annotation> 
+       		<xsd:complexContent> 
+       			<xsd:extension base="oa:BusinessObjectDocumentType"> 
+       				<xsd:sequence> 
+       					<xsd:element name="DataArea" type="GetAssessmentOrderDataAreaType"> 
+       						<xsd:annotation> 
+       							<xsd:documentation>The DataArea is the part of the BOD that contains business information. This information consists of a verb and one or more noun instances.</xsd:documentation> 
+       						</xsd:annotation> 
+       					</xsd:element> 
+       				</xsd:sequence> 
+       			</xsd:extension> 
+       		</xsd:complexContent> 
+       	</xsd:complexType> 
+       	<xsd:complexType name="GetAssessmentOrderDataAreaType"> 
+       		<xsd:sequence> 
+       			<xsd:element ref="oa:Get"/> 
+       			<xsd:element ref="AssessmentOrder" maxOccurs="unbounded"/> 
+       		</xsd:sequence> 
+   </xsd:complexType> 
+</xsd:schema> 

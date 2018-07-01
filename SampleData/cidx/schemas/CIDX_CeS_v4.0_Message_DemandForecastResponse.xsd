@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd" />
+  <xsd:element name="DemandForecastResponse" type="DemandForecastResponseType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description />
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastResponseType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="Header" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandForecastResponseBody" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+    <xsd:attribute name="Version" use="required" type="cidxToken" fixed="4.0" />
+  </xsd:complexType>
+  <xsd:element name="DemandForecastResponseBody" type="DemandForecastResponseBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>DemandForecastResponseBody structure. Mid level element of the Demand Forecast Response transaction.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastResponseBodyType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="DemandForecastResponseProperties" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandForecastResponsePartners" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="DemandForecastResponseDetails" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandForecastResponseDetails" type="DemandForecastResponseDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Mid level element containing forecast line items including product, time horizon, and forecast details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastResponseDetailsType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="ForecastLineItem" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandForecastResponsePartners" type="DemandForecastResponsePartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Defines the buyer and the seller between which the transaction takes place</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastResponsePartnersType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="Buyer" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="Seller" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="DemandForecastResponseProperties" type="DemandForecastResponsePropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>Defines the properties of the DemandForecastResponse transaction</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="DemandForecastResponsePropertiesType">
+    <xsd:sequence minOccurs="1" maxOccurs="1">
+      <xsd:element ref="LanguageCode" minOccurs="1" maxOccurs="1" />
+      <xsd:element ref="ForecastInformation" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="ContractInformation" minOccurs="0" maxOccurs="1" />
+      <xsd:element ref="MarketPlaceInformation" minOccurs="0" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

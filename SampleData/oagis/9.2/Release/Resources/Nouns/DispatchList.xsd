@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/DispatchList.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="DispatchList" type="DispatchListType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">A dispatch list shows the manufacturing or production supervisor or foreman a prioritized detail status of orders and operations scheduled or in-process at a specific work center.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="DispatchListHeader" type="DispatchListHeaderType"/>
+        <xsd:element name="DispatchListLine" type="DispatchListLineType"/>
+        <xsd:element name="DispatchResource" type="DispatchResourceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This identifies information concerning the resources associated with a particular WIP operation</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="DispatchListType">
+                <xsd:sequence>
+                        <xsd:element ref="DispatchListHeader" minOccurs="0"/>
+                        <xsd:element ref="DispatchListLine" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="DispatchListHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="HeaderType">
+                                <xsd:sequence>
+                                        <xsd:element ref="Machine" minOccurs="0"/>
+                                        <xsd:element ref="Resource" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="WorkCenterID" minOccurs="0"/>
+                                        <xsd:element ref="Site" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="DispatchListLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OperationReference" minOccurs="0"/>
+                                        <xsd:element ref="ProductionOrderReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ItemQuantity" minOccurs="0"/>
+                                        <xsd:element ref="ResourceCodes" minOccurs="0"/>
+                                        <xsd:element ref="ForecastedTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="SetupTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="TearDownTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="Lot" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="DispatchResource" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="DispatchResourceType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ActivityCode" minOccurs="0"/>
+                                        <xsd:element ref="ForecastedTimePeriod" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="SetupTimePeriod" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="TearDownTimePeriod" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="ResourceCodes" minOccurs="0"/>
+                                        <xsd:element ref="Resources" minOccurs="0"/>
+                                        <xsd:element name="ResourcesNeededQuantity" type="QuantityType" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+</xsd:schema>

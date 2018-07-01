@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssessmentOrderRequest xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentOrderRequest.xsd ">
+	<ClientId idOwner="Provider Inc">
+		<IdValue name="ClientCode">OurClient-1342</IdValue>
+	</ClientId>
+	<PackageId validFrom="2003-01-24" idOwner="Provider Inc">
+		<IdValue name="PackageName">Acct.2002.r1</IdValue>
+	</PackageId>
+	<ProviderId idOwner="Customer Inc">
+		<IdValue>ePredix</IdValue>
+	</ProviderId>
+	<ComparisonGroupId>
+		<IdValue name="Requisition Contest Number">ACCT-1023-58</IdValue>
+	</ComparisonGroupId>
+	<ClientOrderId>
+		<IdValue name="PO Number">53RR20031618</IdValue>
+		<IdValue name="Department Name">Administration</IdValue>
+	</ClientOrderId>
+	<AssessmentRequester>Romuald Restout</AssessmentRequester>
+	<AssessmentSubject>
+		<SubjectId idOwner="Recruitsoft">
+			<IdValue name="Candidate No">12345</IdValue>
+		</SubjectId>
+		<PersonName>
+			<FormattedName>Drew Cox</FormattedName>
+			<LegalName>Cox</LegalName>
+			<GivenName>Drew</GivenName>
+		</PersonName>
+		<ContactMethod>
+			<Use>business</Use>
+			<InternetEmailAddress>drew.cox@epredix.com</InternetEmailAddress>
+		</ContactMethod>
+	</AssessmentSubject>
+	<AssessmentLanguage>EN-US</AssessmentLanguage>
+	<AssessmentLanguage>DE</AssessmentLanguage>
+	<ResultLanguage>en-US</ResultLanguage>
+	<UserArea/>
+</AssessmentOrderRequest>

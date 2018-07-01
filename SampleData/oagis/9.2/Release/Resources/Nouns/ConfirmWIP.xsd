@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/Resources/Nouns/ConfirmWIP.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../Components/Operational/ManufacturingComponents.xsd"/>
+        <xsd:element name="ConfirmWIP" type="ConfirmWIPType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Work-in-Progress confirmation represents confirmation of the movement of WIP materials. The noun refers to general information about the entire WIP transaction, as well as line item detail about the specific WIP operation or routing step.  This may apply to the movement of raw materials or finished products.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ConfirmWIPHeader" type="ConfirmWIPHeaderType"/>
+        <xsd:element name="ConfirmWIPLine" type="ShopFloorControlLineType"/>
+        <xsd:complexType name="ConfirmWIPType">
+                <xsd:sequence>
+                        <xsd:element ref="ConfirmWIPHeader" minOccurs="0"/>
+                        <xsd:element ref="ConfirmWIPLine" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element ref="Distribution" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+        <xsd:complexType name="ConfirmWIPHeaderType">
+                <xsd:complexContent>
+                        <xsd:extension base="WIPHeaderBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="TransferType" minOccurs="0"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShopFloorControlLineType">
+                <xsd:complexContent>
+                        <xsd:extension base="ShopFloorControlLineBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ProductionOrderReference" minOccurs="0"/>
+                                        <xsd:element ref="ShopFloorControlSubline" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShopFloorControlLineBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="StatusEnabledLineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="OperationReference" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="Item" minOccurs="0"/>
+                                        <xsd:element ref="Site" minOccurs="0"/>
+                                        <xsd:element ref="OperationTimePeriod" minOccurs="0"/>
+                                        <xsd:choice>
+                                                <xsd:element ref="CompletedQuantity" minOccurs="0"/>
+                                                <xsd:element ref="ReturnedQuantity" minOccurs="0"/>
+                                                <xsd:element ref="ScrapQuantity" minOccurs="0"/>
+                                        </xsd:choice>
+                                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                                        <xsd:element ref="KanbanNumber" minOccurs="0"/>
+                                        <xsd:element ref="ShopFloorControlResource" minOccurs="0" maxOccurs="unbounded"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShopFloorControlSublineType">
+                <xsd:complexContent>
+                        <xsd:extension base="ShopFloorControlLineBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShopFloorControlResourceBaseType">
+                <xsd:complexContent>
+                        <xsd:extension base="LineType">
+                                <xsd:sequence>
+                                        <xsd:element ref="AllocatedResources" minOccurs="0"/>
+                                        <xsd:element ref="ActualResources" minOccurs="0"/>
+                                        <xsd:element ref="ExecutionTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="LaborTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="ForecastedTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="SetupTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="TearDownTimePeriod" minOccurs="0"/>
+                                        <xsd:element ref="WorkCenterID" minOccurs="0"/>
+                                        <xsd:element ref="ReasonCode" minOccurs="0"/>
+                                        <xsd:element ref="PrintIndicator" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShopFloorControlResourceType">
+                <xsd:complexContent>
+                        <xsd:extension base="ShopFloorControlResourceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="ShopFloorControlActivity" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="ShopFloorControlActivityType">
+                <xsd:complexContent>
+                        <xsd:extension base="ShopFloorControlResourceBaseType">
+                                <xsd:sequence>
+                                        <xsd:element ref="UserArea" minOccurs="0"/>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:element name="ShopFloorControlResource" type="ShopFloorControlResourceType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information concerning the resources associated with a particular WIP operation or sub-operation within a routing.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShopFloorControlActivity" type="ShopFloorControlActivityType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Provides information about the steps or tasks that a resource performs during an operation.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ShopFloorControlSubline" type="ShopFloorControlSublineType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Information concerning a sub operation within a routing</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+</xsd:schema>

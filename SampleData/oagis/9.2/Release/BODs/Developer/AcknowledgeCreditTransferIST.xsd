@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/BODs/Developer/AcknowledgeCreditTransferIST.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9" xmlns:ist="urn:swift:xsd:$pain.001.001.01" targetNamespace="http://www.openapplications.org/oagis/9" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:include schemaLocation="../../Resources/Nouns/CreditTransferIST.xsd"/>
+        <xsd:element name="AcknowledgeCreditTransferIST" type="AcknowledgeCreditTransferISTType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The purpose of the AcknowledgeCreditTransferIST is to enable an application to request specific CreditTransferIST information from another business application module.  The response to the AcknowledgeCreditTransferIST is the AcknowledgeCreditTransferIST.</xsd:documentation>
+                </xsd:annotation>
+        </xsd:element>
+        <xsd:complexType name="AcknowledgeCreditTransferISTType">
+                <xsd:complexContent>
+                        <xsd:extension base="BusinessObjectDocumentType">
+                                <xsd:sequence>
+                                        <xsd:element name="DataArea" type="AcknowledgeCreditTransferISTDataAreaType">
+                                                <xsd:annotation>
+                                                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Is where the information that the BOD message carries is provided, in this case AcknowledgeCreditTransferIST. The information consists of a Verb and one or more Nouns. The verb (Acknowledge) indicates the action to be performed on the Noun (CreditTransferIST).</xsd:documentation>
+                                                </xsd:annotation>
+                                        </xsd:element>
+                                </xsd:sequence>
+                        </xsd:extension>
+                </xsd:complexContent>
+        </xsd:complexType>
+        <xsd:complexType name="AcknowledgeCreditTransferISTDataAreaType">
+                <xsd:sequence>
+                        <xsd:element ref="Acknowledge"/>
+                        <xsd:element ref="CreditTransferIST" maxOccurs="unbounded"/>
+                </xsd:sequence>
+        </xsd:complexType>
+</xsd:schema>

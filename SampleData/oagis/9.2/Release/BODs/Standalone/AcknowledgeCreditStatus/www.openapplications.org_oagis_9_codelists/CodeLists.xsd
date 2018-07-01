@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    ** OAGIS® Revision:    9.2   **
+    ** Date:               01 February 2008 **
+    ** Copyright 1997-2008, All Rights Reserved **
+
+    This is an OAGIS® BOD XML Schema (XSD) Definition.
+
+    License information for this file is provided in the file **OAGi License Agreement.txt** that is provided with this download package.
+
+    For support, more information, or to report implementation bugs, please contact the Open Applications Group at oagis@openapplications.org.
+    
+    XML Schema 
+     
+    Name: /OAGIS/9_2/BODs/Standalone/AcknowledgeCreditStatus/www.openapplications.org_oagis_9_codelists/CodeLists.xsd
+-->
+		
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.openapplications.org/oagis/9/codelists" xmlns:clm5639="http://www.openapplications.org/oagis/9/languagecode/5639:1988" xmlns:clm54217="http://www.openapplications.org/oagis/9/currencycode/54217:2001" xmlns:clmIANAMIMEMediaTypes="http://www.openapplications.org/oagis/9/IANAMIMEMediaTypes:2003" xmlns:clm66411="http://www.openapplications.org/oagis/9/unitcode/66411:2001" targetNamespace="http://www.openapplications.org/oagis/9/codelists" elementFormDefault="qualified" attributeFormDefault="unqualified">
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/IANAMIMEMediaTypes:2003" schemaLocation="../www.openapplications.org_oagis_9_IANAMIMEMediaTypes_2003/CodeList_MIMEMediaTypeCode_IANA_7_04.xsd"/>
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/languagecode/5639:1988" schemaLocation="../www.openapplications.org_oagis_9_languagecode_5639_1988/CodeList_LanguageCode_ISO_7_04.xsd"/>
+        <xsd:import namespace="http://www.openapplications.org/oagis/9/unitcode/66411:2001" schemaLocation="../www.openapplications.org_oagis_9_unitcode_66411_2001/CodeList_UnitCode_UNECE_7_04.xsd"/>
+        <xsd:simpleType name="ResponseCodeContentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Allows the user to use any of the codes that OAGi defines or add additional values.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:union memberTypes="ResponseCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="ResponseCodeEnumerationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The acknowledge values that OAGi defines for OAGIS.  </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:normalizedString">
+                        <xsd:enumeration value="Always"/>
+                        <xsd:enumeration value="OnError"/>
+                        <xsd:enumeration value="Never"/>
+                </xsd:restriction>
+        </xsd:simpleType>
+        <xsd:simpleType name="LanguageCodeContentType">
+                <xsd:union memberTypes="xsd:normalizedString clm5639:LanguageCodeContentType"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="SystemEnvironmentCodeContentType">
+                <xsd:union memberTypes="SystemEnvironmentCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="SystemEnvironmentCodeEnumerationType">
+                <xsd:restriction base="xsd:normalizedString">
+                        <xsd:enumeration value="Production"/>
+                        <xsd:enumeration value="Test"/>
+                </xsd:restriction>
+        </xsd:simpleType>
+        <xsd:simpleType name="ResponseActionCodeContentType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">Allows the user to use any of the codes that OAGi defines or add additional values.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:union memberTypes="ResponseActionCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="ResponseActionCodeEnumerationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">The action values that OAGi defines for OAGIS.  </xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:normalizedString">
+                        <xsd:enumeration value="Accepted"/>
+                        <xsd:enumeration value="Modified"/>
+                        <xsd:enumeration value="Rejected"/>
+                </xsd:restriction>
+        </xsd:simpleType>
+        <xsd:simpleType name="StateCodeContentType">
+                <xsd:union memberTypes="StateCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="StateCodeEnumerationType">
+                <xsd:restriction base="xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="UnitCodeContentType">
+                <xsd:union memberTypes="clm66411:UnitCodeContentType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="DeliveryPointCodeContentType">
+                <xsd:union memberTypes="DeliveryPointCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="DeliveryPointCodeEnumerationType">
+                <xsd:restriction base="xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="CountrySubdivisionCodeContentType">
+                <xsd:union memberTypes="CountrySubdivisionCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="CountrySubdivisionCodeEnumerationType">
+                <xsd:restriction base="xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="CountryCodeContentType">
+                <xsd:union memberTypes="CountryCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="CountryCodeEnumerationType">
+                <xsd:restriction base="xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="PartyCategoryCodeContentType">
+                <xsd:union memberTypes="PartyCategoryCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="PartyCategoryCodeEnumerationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This list of Party Categories.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:normalizedString">
+                        <xsd:enumeration value="Organization"/>
+                        <xsd:enumeration value="Individual"/>
+                </xsd:restriction>
+        </xsd:simpleType>
+        <xsd:simpleType name="PartyRoleCodeContentType">
+                <xsd:union memberTypes="PartyRoleCodeEnumerationType xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="PartyRoleCodeEnumerationType">
+                <xsd:annotation>
+                        <xsd:documentation source="http://www.openapplications.org/oagis/9">This list is the agreed to Party Roles.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:normalizedString"/>
+        </xsd:simpleType>
+        <xsd:simpleType name="MIMECodeContentType">
+                <xsd:union memberTypes="clmIANAMIMEMediaTypes:BinaryObjectMimeCodeContentType xsd:normalizedString"/>
+        </xsd:simpleType>
+</xsd:schema>

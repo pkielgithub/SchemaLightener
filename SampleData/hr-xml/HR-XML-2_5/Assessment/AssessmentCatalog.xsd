@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ns.hr-xml.org/2007-04-15" targetNamespace="http://ns.hr-xml.org/2007-04-15" elementFormDefault="qualified" version="2007-04-15">
+	<xsd:annotation>
+		<xsd:documentation>
+"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org"
+Name: AssessmentCatalog.xsd
+Status: Recommendation
+Date this version: 2007-04-15
+Author(s): Assessment  Work Group
+Documentation: Assessments.html
+
+Terms of license can be found in license.txt.
+</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../W3C/xml.xsd"/>
+	<xsd:include schemaLocation="../CPO/EntityIdType.xsd"/>
+	<xsd:include schemaLocation="../CPO/ISOUtilities.xsd"/>
+	<xsd:include schemaLocation="../CPO/UserArea.xsd"/>
+	<xsd:include schemaLocation="../CPO/xStringPatternExtensionType.xsd"/>
+	<xsd:include schemaLocation="../Assessment/AssessmentTypes.xsd"/>
+	<xsd:element name="AssessmentCatalog" type="AssessmentCatalogType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for the description of an assessment vendors assessment package catalog.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AssessmentCatalogType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentCatalogQuery.  The extensions hold the original query if there was one for this Catalog Listing. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ClientId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identified the end client to the assessment provider.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProviderId" type="EntityIdType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A value that uniquely identifies an assessment provider to the recipient.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CatalogQueryStatus">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Status">
+							<xsd:annotation>
+								<xsd:documentation>The name of the Catalog Query status.</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:enumeration value="Match Found"/>
+									<xsd:enumeration value="No Match Found"/>
+									<xsd:enumeration value="Error"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Details" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AssessmentPackage" type="AssessmentPackageType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>A collection of elements that define and specify an AssessmentPackage that can be ordered for a Subject from an AssessmentVendor. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+	<xsd:complexType name="AssessmentJobInfoType">
+		<xsd:annotation>
+			<xsd:documentation>Information about the job the assessment is related to or designed to assess.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence/>
+	</xsd:complexType>
+</xsd:schema>

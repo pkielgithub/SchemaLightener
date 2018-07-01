@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PersonName xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15
+../PersonName.xsd">
+	<FormattedName>Hanako Yamada</FormattedName>
+	<GivenName>Hanako</GivenName>
+	<FamilyName>Yamada</FamilyName>
+	<AlternateScript script="Kana">
+		<FormattedName>ヤマダ　ハナコ</FormattedName>
+		<GivenName>ハナコ</GivenName>
+		<FamilyName>ヤマダ</FamilyName>
+	</AlternateScript>
+	<AlternateScript script="Hani">
+		<FormattedName>山田　はな子</FormattedName>
+		<GivenName>はな子</GivenName>
+		<FamilyName>山田</FamilyName>
+	</AlternateScript>
+</PersonName>

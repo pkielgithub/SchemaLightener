@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssessmentResult xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentResult.xsd   http://purl.org/dc/elements/1.1/  ../StandAlone/simpledc20021212.xsd">
+  <ClientId idOwner="Provider Inc">
+    <IdValue name="ClientCode">OurClient-1342</IdValue>
+  </ClientId>
+  <ProviderId idOwner="Customer Inc">
+    <IdValue>ePredix</IdValue>
+  </ProviderId>
+  <ClientOrderId>
+    <IdValue name="PO Number">53RR20031618</IdValue>
+    <IdValue name="Department Name">Administration</IdValue>
+  </ClientOrderId>
+  <Results xml:lang="en-US">
+    <Profile>Customer Service</Profile>
+    <SupportingMaterials>
+      <Id idOwner="ePredix Inc">
+        <IdValue name="ReportId">DR-12343-1</IdValue>
+      </Id>
+      <EffectiveDate>
+        <StartDate>2004-03-08</StartDate>
+        <EndDate>2005-03-08</EndDate>
+      </EffectiveDate>
+      <dc:title>Assessment Detailed Narrative Report</dc:title>
+      <dc:format>text/html</dc:format>
+      <ExtendedMetadata>
+        <dc:subject>Robert Jones</dc:subject>
+        <dc:publisher>ePredix Inc</dc:publisher>
+        <dc:date>2004-03-08</dc:date>
+      </ExtendedMetadata>
+      <ReferenceInfo>
+        <InternetWebAddress>https://integrate.epredix.com/hrxml/report/detail?sk=197e23sa</InternetWebAddress>
+      </ReferenceInfo>
+      <AccessInfo>
+        <AccessCredential type="UserName">partner25</AccessCredential>
+        <AccessCredential type="Password">4sure8yut</AccessCredential>
+        <Instructions>Request the referenced report from the included URL.  Use the supplied username and password credentials.</Instructions>
+      </AccessInfo>
+      <UsageRestrictions>ePredix Client confidential.  Access restructed to authorized parties only.</UsageRestrictions>
+      <Comments>The referenced HTML report may be displayed in a frameset.</Comments>
+    </SupportingMaterials>
+    <OverallResult>
+      <Description>Executive Manager</Description>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="notKnown" validTo="notKnown" idOwner="TBD">
+          <IdValue name="TBD">TBD</IdValue>
+          <IdValue name="TBD">TBD</IdValue>
+        </CompetencyId>
+      </CompetencyAssessed>
+      <Score type="raw score">51</Score>
+      <Score type="percentile">65</Score>
+      <Scale>40-60</Scale>
+      <Band>A</Band>
+      <Comments>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." </Comments>
+    </OverallResult>
+    <DetailResult>
+      <Description>Education and Work Experience</Description>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="notKnown" validTo="notKnown" idOwner="TBD">
+          <IdValue name="TBD">TBD</IdValue>
+          <IdValue name="TBD">TBD</IdValue>
+        </CompetencyId>
+      </CompetencyAssessed>
+      <Score type="percentile">80</Score>
+      <Scale>1-100</Scale>
+      <Band>High</Band>
+      <Comments>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." </Comments>
+    </DetailResult>
+    <DetailResult>
+      <Description>Conscientiousness</Description>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="notKnown" validTo="notKnown" idOwner="TBD">
+          <IdValue name="TBD">TBD</IdValue>
+          <IdValue name="TBD">TBD</IdValue>
+        </CompetencyId>
+      </CompetencyAssessed>
+      <Score type="raw score">62</Score>
+      <Scale>1-140</Scale>
+      <Band>Med</Band>
+      <Comments>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." </Comments>
+    </DetailResult>
+  </Results>
+  <Results xml:lang="en-US">
+    <Profile>Operations</Profile>
+    <SupportingMaterials>
+      <Id idOwner="Sterling Testing Systems">
+        <IdValue name="OrderNumber">1380001</IdValue>
+      </Id>
+      <Id idOwner="ABC Company">
+        <IdValue name="CandidateId">123456789</IdValue>
+      </Id>
+      <EffectiveDate>
+        <StartDate>2004-05-04</StartDate>
+        <EndDate>2004-06-04</EndDate>
+      </EffectiveDate>
+      <dc:title>123456789.tif</dc:title>
+      <dc:format>image/tiff</dc:format>
+      <ExtendedMetadata>
+        <dc:creator>Sterling Testing Systems</dc:creator>
+        <dc:subject>Consent and Disclosure Form for Mark Smith</dc:subject>
+        <dc:date>2004-05-04</dc:date>
+      </ExtendedMetadata>
+      <AttachmentInfo>
+        <AttachmentId>
+          <IdValue>1</IdValue>
+        </AttachmentId>
+        <OriginalFileName>123456789.tif</OriginalFileName>
+      </AttachmentInfo>
+      <UsageRestrictions>This Consent and Disclosure form is only to be used for the candidate within this transaction</UsageRestrictions>
+      <Comments>Consent and Disclosure form required for Education Verification</Comments>
+    </SupportingMaterials>
+    <OverallResult>
+      <Description>Executive Manager</Description>
+      <CompetencyAssessed>
+        <CompetencyId validFrom="notKnown" validTo="notKnown" idOwner="TBD">
+          <IdValue name="TBD">TBD</IdValue>
+          <IdValue name="TBD">TBD</IdValue>
+        </CompetencyId>
+      </CompetencyAssessed>
+      <Score type="raw score">51</Score>
+      <Score type="percentile">80</Score>
+      <Scale>40-60</Scale>
+    </OverallResult>
+  </Results>
+  <AssessmentStatus>
+    <Status>In Progress</Status>
+    <Details>Remains: "GAAP Basic Knowledge"</Details>
+    <StatusDate>2003-04-05</StatusDate>
+  </AssessmentStatus>
+  <AssessmentLanguage>en-US</AssessmentLanguage>
+  <UserArea/>
+</AssessmentResult>

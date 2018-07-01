@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Twist xmlns="http://www.twiststandards.org/3.1/FinancialSupplyChain" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.twiststandards.org/3.1/FinancialSupplyChain
+../schemas/TWIST3.1.FinancialSupplyChain.TWISTMsgSupplyChain.200609.xsd" xsi:type="FinanceRequest">
+		<header>
+			<messageId>normalizedString</messageId>
+			<inReplyTo>normalizedString</inReplyTo>
+			<sentBy id="ID000000">
+				<typedPartyId>
+					<partyId>String</partyId>
+					<partyIdType>String</partyIdType>
+				</typedPartyId>
+			</sentBy>
+			<creationTimestamp>2001-12-17T09:30:47.0Z</creationTimestamp>
+		</header>
+		<financeRequestHeader>
+			<requestForFinanceNumber>String</requestForFinanceNumber>
+			<requestForFinanceDate>1967-08-13</requestForFinanceDate>
+			<requestForFinanceType/>
+			<financeRequestInvoiceDetail>
+				<sequenceNumber>String</sequenceNumber>
+				<invoiceStatus/>
+				<invoiceTotalAmount>
+					<amount>3.1415926535897932384626433832795</amount>
+					<currency>AED</currency>
+				</invoiceTotalAmount>
+			</financeRequestInvoiceDetail>
+			<creditor>
+				<name>String</name>
+				<legalName>String</legalName>
+				<contactInfo>
+					<postAddress>
+						<city>String</city>
+						<country>String</country>
+					</postAddress>
+				</contactInfo>
+			</creditor>
+			<debtor>
+				<name>String</name>
+				<legalName>String</legalName>
+				<contactInfo>
+					<postAddress>
+						<city>String</city>
+						<country>String</country>
+					</postAddress>
+				</contactInfo>
+			</debtor>
+		</financeRequestHeader>
+	</Twist>
+

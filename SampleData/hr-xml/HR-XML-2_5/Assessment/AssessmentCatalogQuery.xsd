@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ns.hr-xml.org/2007-04-15" elementFormDefault="qualified" version="2007-04-15">
+	<xsd:annotation>
+		<xsd:documentation>
+"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org"
+Name: AssessmentCatalogQuery.xsd
+Status: Recommendation
+Date this version: 2007-04-15
+Author(s): Assessment  Work Group
+Documentation: Assessments.html
+
+Terms of license can be found in license.txt.
+
+</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../W3C/xml.xsd"/>
+	<xsd:include schemaLocation="../CPO/EntityIdType.xsd"/>
+	<xsd:include schemaLocation="../CPO/UserArea.xsd"/>
+	<xsd:include schemaLocation="../CPO/xStringPatternExtensionType.xsd"/>
+	<xsd:element name="AssessmentCatalogQuery" type="AssessmentCatalogQueryType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for the query of an assessment vendor's catalog of assessment packages.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="AssessmentCatalogQueryType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentCatalogQuery</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ClientId" type="EntityIdType" minOccurs="0"/>
+			<xsd:element name="Filter" type="FilterType">
+				<xsd:annotation>
+					<xsd:documentation>Used to restrict the AssessmentPackages included in a catalog.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProviderId" type="EntityIdType" minOccurs="0"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+	<xsd:complexType name="FilterType">
+		<xsd:annotation>
+			<xsd:documentation>The FilterType contains either a FilterString or collection of SimpleExpressions to filter a catalog query.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="FilterString">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Type" type="FilterStringTypeType"/>
+						<xsd:element name="Value" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SimpleExpression" type="SimpleExpressionType" maxOccurs="unbounded"/>
+			<xsd:element name="Unfiltered">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="true"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="SimpleExpressionType">
+		<xsd:sequence>
+			<xsd:element name="ElementName" type="xsd:string"/>
+			<xsd:element name="Operator" type="SimpleExpressionOperatorType"/>
+			<xsd:element name="ElementValue" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="SimpleExpressionOperatorEnumType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="equals"/>
+			<xsd:enumeration value="not equals"/>
+			<xsd:enumeration value="greater than"/>
+			<xsd:enumeration value="less than"/>
+			<xsd:enumeration value="like"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="SimpleExpressionOperatorType">
+		<xsd:choice>
+			<xsd:element name="StandardValue" type="SimpleExpressionOperatorEnumType"/>
+			<xsd:element name="NonStandardValue" type="xsd:string"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:simpleType name="FilterStringTypeEnumType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="xpath"/>
+			<xsd:enumeration value="xquery"/>
+			<xsd:enumeration value="sql"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="FilterStringTypeType">
+		<xsd:choice>
+			<xsd:element name="StandardValue" type="FilterStringTypeEnumType"/>
+			<xsd:element name="NonStandardValue" type="xsd:string"/>
+		</xsd:choice>
+	</xsd:complexType>
+</xsd:schema>

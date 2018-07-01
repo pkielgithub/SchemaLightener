@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssessmentOrderAcknowledgement xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ns.hr-xml.org/2007-04-15 ../StandAlone/AssessmentOrderAcknowledgement.xsd">
+	<ClientId idOwner="Provider Inc">
+		<IdValue name="ClientCode">OurClient-1342</IdValue>
+	</ClientId>
+	<ProviderId idOwner="Customer Inc">
+		<IdValue>ePredix</IdValue>
+	</ProviderId>
+	<ReceiptId idOwner="Provider Inc">
+		<IdValue>Seq-22345354</IdValue>
+	</ReceiptId>
+	<ClientOrderId idOwner="Customer Inc">
+		<IdValue name="PO Number">53RR20031618</IdValue>
+		<IdValue name="Department Name">Administration</IdValue>
+	</ClientOrderId>
+	<AccessPoint>
+		<Use>business</Use>
+		<InternetWebAddress>http://test.vendor.com/start?id=22345354</InternetWebAddress>
+		<Description>URL for subject to access assessment.</Description>
+		<Login>
+			<UserName>subject@client.com</UserName>
+			<Password>just4fun!</Password>
+		</Login>
+	</AccessPoint>
+	<AssessmentStatus>
+		<Status>Acknowledged</Status>
+		<Details>The assessment order has been processed.  Please have the subject access the provided URL with the specified login credentials.</Details>
+		<StatusDate>2003-04-24</StatusDate>
+	</AssessmentStatus>
+	<UserArea/>
+</AssessmentOrderAcknowledgement>

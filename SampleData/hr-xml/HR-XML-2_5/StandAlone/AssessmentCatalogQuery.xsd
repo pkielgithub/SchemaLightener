@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2006 rel. 3 sp1 (http://www.altova.com) by Chuck Allen (HR-XML Consortium, Inc.) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ns.hr-xml.org/2007-04-15" xmlns:oa="http://www.openapplications.org/oagis" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://ns.hr-xml.org/2007-04-15" elementFormDefault="qualified" version="2007-04-15">
+	<xsd:annotation>
+		<xsd:documentation>"Copyright  The HR-XML Consortium. All Rights Reserved. http://www.hr-xml.org"
+
+Terms of license can be found in license.txt.
+</xsd:documentation>
+		<xsd:documentation>Stand alone (but non-normative) version of schema, with all "includes" inserted explicitly.  This file is auto-generated.  It should be considered a "convenience" alternative to the normative versions.</xsd:documentation>
+		<xsd:documentation>After merging all includes, the result is passed through a stylesheet which deletes any duplicative global components as well as any unused global types.  Finally, it sorts by component name.  Be sure to check the Xml Namespaces to ensure this result is what you requested.</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xsd:element name="AssessmentCatalogQuery" type="AssessmentCatalogQueryType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for the query of an assessment vendor's catalog of assessment packages.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:simpleType name="AnyDateTimeNkNaType">
+		<xsd:union memberTypes="LocalDateType DateType LocalDateTimeType DateTimeType NotKnownLiteral NotApplicableLiteral"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DateTimeType">
+		<xsd:restriction base="xsd:dateTime">
+			<xsd:pattern value="\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(Z|(\+|-)\d\d:\d\d)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DateType">
+		<xsd:restriction base="xsd:date">
+			<xsd:pattern value="\d\d\d\d-\d\d-\d\d(Z|(\+|-)\d\d:\d\d)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="FilterStringTypeEnumType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="xpath"/>
+			<xsd:enumeration value="xquery"/>
+			<xsd:enumeration value="sql"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LocalDateTimeType">
+		<xsd:restriction base="xsd:dateTime">
+			<xsd:pattern value="\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LocalDateType">
+		<xsd:restriction base="xsd:date">
+			<xsd:pattern value="\d\d\d\d-\d\d-\d\d"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LocalTimeType">
+		<xsd:restriction base="xsd:time">
+			<xsd:pattern value="\d\d:\d\d:\d\d"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="NotApplicableLiteral">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="notApplicable"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="NotKnownLiteral">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="notKnown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SimpleExpressionOperatorEnumType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="equals"/>
+			<xsd:enumeration value="not equals"/>
+			<xsd:enumeration value="greater than"/>
+			<xsd:enumeration value="less than"/>
+			<xsd:enumeration value="like"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TimeType">
+		<xsd:restriction base="xsd:time">
+			<xsd:pattern value="\d\d:\d\d:\d\d(Z|(\+|-)\d\d:\d\d)"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="AssessmentCatalogQueryType">
+		<xsd:annotation>
+			<xsd:documentation>Root element for AssessmentCatalogQuery</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ClientId" type="EntityIdType" minOccurs="0"/>
+			<xsd:element name="Filter" type="FilterType">
+				<xsd:annotation>
+					<xsd:documentation>Used to restrict the AssessmentPackages included in a catalog.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProviderId" type="EntityIdType" minOccurs="0"/>
+			<xsd:element ref="UserArea" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute ref="xml:lang"/>
+	</xsd:complexType>
+	<xsd:complexType name="EntityIdType">
+		<xsd:sequence>
+			<xsd:element name="IdValue" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="name" type="xsd:string" use="optional"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="validFrom" type="AnyDateTimeNkNaType" use="optional"/>
+		<xsd:attribute name="validTo" type="AnyDateTimeNkNaType" use="optional"/>
+		<xsd:attribute name="idOwner" type="xsd:string" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="FilterStringTypeType">
+		<xsd:choice>
+			<xsd:element name="StandardValue" type="FilterStringTypeEnumType"/>
+			<xsd:element name="NonStandardValue" type="xsd:string"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="FilterType">
+		<xsd:annotation>
+			<xsd:documentation>The FilterType contains either a FilterString or collection of SimpleExpressions to filter a catalog query.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="FilterString">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Type" type="FilterStringTypeType"/>
+						<xsd:element name="Value" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SimpleExpression" type="SimpleExpressionType" maxOccurs="unbounded"/>
+			<xsd:element name="Unfiltered">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="true"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="SimpleExpressionOperatorType">
+		<xsd:choice>
+			<xsd:element name="StandardValue" type="SimpleExpressionOperatorEnumType"/>
+			<xsd:element name="NonStandardValue" type="xsd:string"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="SimpleExpressionType">
+		<xsd:sequence>
+			<xsd:element name="ElementName" type="xsd:string"/>
+			<xsd:element name="Operator" type="SimpleExpressionOperatorType"/>
+			<xsd:element name="ElementValue" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="UserAreaType">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:annotation>
+				<xsd:documentation>In order to prevent a possible "ambiguous content model" errors in an instance, unbounded sequences were either eliminated from or deprecated in all HR-XML schemas. Removing unbounded sequences ensures that ambiguous errors are not found in an instance.  The unbounded sequence here is officially deprecated and will be changed to a single sequence.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:any namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="UserArea" type="UserAreaType">
+		<xsd:annotation>
+			<xsd:documentation>HR-XML Technical Steering Committee endorsed extension element.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

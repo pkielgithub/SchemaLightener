@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright © 2004 Chemical Industry Data Exchange. All rights reserved.
+  This schema and its use are subject to the statement appearing on
+  Page 1 of the Chem eStandards v4.0 Introduction, and to the license
+  agreement available during the Chem eStandards download process.
+-->
+<xsd:schema targetNamespace="urn:cidx:names:specification:ces:schema:all:4:0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:cidx:names:specification:ces:schema:all:4:0">
+  <xsd:include schemaLocation="CIDX_CeS_v4.0_CommonComponents.xsd"/>
+  <xsd:element name="CostSupportResponse" type="CostSupportResponseType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description/>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportResponseType">
+    <xsd:sequence>
+      <xsd:element ref="Header"/>
+      <xsd:element ref="CostSupportResponseBody"/>
+    </xsd:sequence>
+    <xsd:attribute name="Version" type="cidxToken" use="required" fixed="4.0"/>
+  </xsd:complexType>
+  <xsd:element name="CostSupportResponseBody" type="CostSupportResponseBodyType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandard Body Structure. Contains the message-specific metadata in up-to three sections: Properties, Partners, and Details.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportResponseBodyType">
+    <xsd:sequence>
+      <xsd:element ref="CostSupportResponseProperties"/>
+      <xsd:element ref="CostSupportResponsePartners"/>
+      <xsd:element ref="CostSupportResponseDetails"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportResponseDetails" type="CostSupportResponseDetailsType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Details Structure. It contains the remainder of the message data which was not covered under "Properties" (which is the message 'metadata' or 'common data') and "Partners" (which is the information about the parties involved).</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportResponseDetailsType">
+    <xsd:sequence>
+      <xsd:element ref="CostSupportResponseStatusInformation"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportResponsePartners" type="CostSupportResponsePartnersType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Partners Structure. It contains the information about the parties involved in the data exchange.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportResponsePartnersType">
+    <xsd:sequence>
+      <xsd:element ref="Distributor"/>
+      <xsd:element ref="SoldBy"/>
+      <xsd:element ref="Supplier"/>
+      <xsd:element ref="ShipTo" maxOccurs="unbounded"/>
+      <xsd:element ref="SoldTo"/>
+      <xsd:element ref="OtherPartner" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportResponseProperties" type="CostSupportResponsePropertiesType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>eStandards Properties Structure. It contains the message 'metadata' or 'common data'.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportResponsePropertiesType">
+    <xsd:sequence>
+      <xsd:element ref="CostSupportRequestNumber"/>
+      <xsd:element ref="LanguageCode"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CostSupportResponseStatusInformation" type="CostSupportResponseStatusInformationType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The acceptance or rejection status of a response to a cost support.</Description>
+          <Comments>There is an existing Status Information structure that could be used for this. It would have to be expanded to include a date time and the sematics describing how to interpret it would have to be included.</Comments>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="CostSupportResponseStatusInformationType">
+    <xsd:sequence>
+      <xsd:element ref="Status"/>
+      <xsd:element ref="CostSupportAgreementNumber" minOccurs="0"/>
+      <xsd:element ref="ExpirationDate" minOccurs="0"/>
+      <xsd:element ref="ContactInformation" minOccurs="0"/>
+      <xsd:element ref="StatusReason" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ExpirationDate" type="ExpirationDateType">
+    <xsd:annotation>
+      <xsd:documentation>
+        <Documentation>
+          <Description>The date and/or time when an agreement, offer or request expires.</Description>
+        </Documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:complexType name="ExpirationDateType">
+    <xsd:sequence>
+      <xsd:element ref="DateTime"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
